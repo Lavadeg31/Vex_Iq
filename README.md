@@ -23,8 +23,8 @@
 </ul>
 
 <h2>🛠️ Code Changes</h2>
-<img src="https://drive.google.com/uc?export=view&id=1lLHsCRge37VqNAeLUzrfINSX6MapjgZA" alt="Alt Text" width="640" height="480">
 
+<center><h2>Version 1.0.1</h2></center>
 <ul>
   <li>⏳ Added timer</li>
   <li>⚙️ Added automatic lowering and detection when the catapult is lowered</li>
@@ -36,7 +36,8 @@
   <li>🛠️ Added clearer motor names (launcher, tensioning, launcher_detector, intake)</li>
   <li>📝 Added comments to make the code clear</li>
 </ul>
-
+<
+<img src="https://drive.google.com/uc?export=view&id=1lLHsCRge37VqNAeLUzrfINSX6MapjgZA" alt="Alt Text" width="640" height="480">
 <p>
     Full Changelog: 
     <a href="https://github.com/Lavadeg31/Vex_Iq/commits/Code">Code V1.0.1 Changelog</a>
