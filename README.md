@@ -15,14 +15,14 @@
     <ul>
       <li>🧰 Added distance sensor to detect when the catapult is lowered.</li>
       <li>🎯 Added forks to auto-align with the goal.</li>
-      <img src="https://drive.google.com/uc?export=view&id=1ZNG2jHQ961ZELO_ajBjYdYBAcSXll_pN" width="640" height="480" alt="Forks auto-aligning with the goal">
+      <img src="https://drive.google.com/uc?export=view&id=1ZNG2jHQ961ZELO_ajBjYdYBAcSXll_pN" width="320" height="240" alt="Forks auto-aligning with the goal">
       <li>🔩 Added more spacers to stop the catapult from snapping.</li>
-      <img src="https://drive.google.com/uc?export=view&id=1ZKGmLjjbHSQrlEYexskxUADkgNdorwI1" width="640" height="480" alt="Added more spacers">
+      <img src="https://drive.google.com/uc?export=view&id=1ZKGmLjjbHSQrlEYexskxUADkgNdorwI1" width="320" height="240" alt="Added more spacers">
     </ul>
   </li>
   <li>💡 <strong>October 17, 2024:</strong> Added LED's and partial autonomous support.</li>
-  <img src="https://drive.google.com/uc?export=view&id=1ZIPiKen6hNFqtu9KZxp5RYmaBFwr8djo" width="640" height="480" alt="Added LEDs and partial autonomous support">
-  <img src="https://drive.google.com/uc?export=view&id=1Z3xB95rD8FSyWe5R6VnV6L_ka7s4RHF7" width="640" height="480" alt="Added LEDs">
+  <img src="https://drive.google.com/uc?export=view&id=1ZIPiKen6hNFqtu9KZxp5RYmaBFwr8djo" width="320" height="240" alt="Added LEDs and partial autonomous support">
+  <img src="https://drive.google.com/uc?export=view&id=1Z3xB95rD8FSyWe5R6VnV6L_ka7s4RHF7" width="320" height="240" alt="Added LEDs">
 </ul>
 
 <h2>🛠️ Code Changes</h2>
@@ -46,7 +46,7 @@
   <li>📝 Added comments to make the code clear</li>
 </ul>
 
-<img src="https://drive.google.com/uc?export=view&id=10YiGo5kJg9R6v5dYBrejcqZxZJ4yqYhf" width="640" height="480" alt="Image of recent robot changes">
+<img src="https://drive.google.com/uc?export=view&id=10YiGo5kJg9R6v5dYBrejcqZxZJ4yqYhf" width="320" height="240" alt="Image of recent robot changes">
 
 <p>
     Full Changelog: 
@@ -57,6 +57,6 @@
 <ul>
   <li><strong>Patch V1.0.1 (October 16, 2024):</strong> Integrated distance sensor to halt movement when the catapult is in the lowered position.
       
-  <img src="https://drive.google.com/uc?export=view&id=1DFVyXuCuYE1jloaBbeH7jvf7zQaiYeNb" width="500" height="480" alt="Catapult sensor integration">
+  <img src="https://drive.google.com/uc?export=view&id=1DFVyXuCuYE1jloaBbeH7jvf7zQaiYeNb" width="320" height="240" alt="Catapult sensor integration">
   </li>
 </ul>
