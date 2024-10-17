@@ -1,0 +1,5 @@
+Robot
+Notes
+-Added distance sensor to detect when catapult is lowered
+-Added forks to auto align with the goal
+-Added more spacers to stop the catapult from snapping
