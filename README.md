@@ -28,6 +28,13 @@
   <li><strong>October 14, 2024:</strong> Finished robot, now working on quality of life improvements.</li>
   <li><strong>October 15, 2024:</strong> Added distance sensor to detect when the catapult is lowered and to stop movement.</li>
   <li><strong>October 16, 2024:</strong> Added code to use this distance sensor (Patch V1.0.1).</li>
+  <li><strong>October 16, 2024:</strong> Robot Patch - Added the following improvements:
+    <ul>
+      <li>Added distance sensor to detect when the catapult is lowered.</li>
+      <li>Added forks to auto-align with the goal.</li>
+      <li>Added more spacers to stop the catapult from snapping.</li>
+    </ul>
+  </li>
   <li><strong>October 17, 2024:</strong> Added stronger catapult arms to prevent snapping.</li>
   <li><strong>October 17, 2024:</strong> Working on autonomous functionality.</li>
 </ul>
