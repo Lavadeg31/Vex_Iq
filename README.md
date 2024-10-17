@@ -40,6 +40,7 @@
 </ul>
 
 <h2>🛠️ Code Changes</h2>
+<img src="https://drive.google.com/uc?export=view&id=1lLHsCRge37VqNAeLUzrfINSX6MapjgZA" alt="Alt Text" width="640" height="480">
 
 <ul>
   <li>Added timer</li>
@@ -60,5 +61,7 @@
 
 <h2>Patch Notes</h2>
 <ul>
-  <li><strong>Patch V1.0.1 (October 16, 2024):</strong> Integrated distance sensor to halt movement when the catapult is in the lowered position.</li>
+  <li><strong>Patch V1.0.1 (October 16, 2024):</strong> Integrated distance sensor to halt movement when the catapult is in the lowered position.
+  <img src="https://drive.google.com/uc?export=view&id=1DFVyXuCuYE1jloaBbeH7jvf7zQaiYeNb" alt="Alt Text" width="500" height="480">
+  </li>
 </ul>
