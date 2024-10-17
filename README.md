@@ -1,6 +1,3 @@
-<center><h1>🚀 45557A Engineering Notebook</h2></center>
-Welcome to vex iq 2024-2025 in ISP This is our engineering notebook for team 45557A and robots here can be used with the Creative Commons CC-BY conditions.
-<center><h2>🎉 News</h2></center>
 <center>
     Started to build a drivetrain based on 
     <a href="https://www.youtube.com/watch?v=s7D9m8zyjXw">this</a> 
@@ -17,6 +14,10 @@ Welcome to vex iq 2024-2025 in ISP This is our engineering notebook for team 455
     <h2> 📄 Notes</h2>
 </center>
 
+<center>
+    Finished the drivetrain and now moving on to the tensioning system (Oct 8, 2024)
+</center>
+
 <h1>VEX IQ Engineering Progress</h1>
 
 <h2>Timeline of Robot Development</h2>
@@ -30,6 +31,25 @@ Welcome to vex iq 2024-2025 in ISP This is our engineering notebook for team 455
   <li><strong>October 17, 2024:</strong> Added stronger catapult arms to prevent snapping.</li>
   <li><strong>October 17, 2024:</strong> Working on autonomous functionality.</li>
 </ul>
+
+<h2>🛠️ Code Changes</h2>
+
+<ul>
+  <li>Added timer</li>
+  <li>Added automatic lowering and detection when the catapult is lowered</li>
+  <li>Added 1 button to both wind-up catapult and to release</li>
+  <li>Preset wind back strength changed up by around 0.3 rotations to make it go in</li>
+  <li>L3 now starts a 1-minute timer with a sound at 35, 25, and 0 seconds remaining</li>
+  <li>Also stops all movement after the timer is finished</li>
+  <li>R3 does not reset movement from being stopped after the timer finishes</li>
+  <li>Added clearer motor names (launcher, tensioning, launcher_detector, intake)</li>
+  <li>Added comments to make the code clear</li>
+</ul>
+
+<p>
+    Full Changelog: 
+    <a href="https://github.com/Lavadeg31/Vex_Iq/commits/Code">Code V1.0.1 Changelog</a>
+</p>
 
 <h2>Patch Notes</h2>
 <ul>
