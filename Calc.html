@@ -146,7 +146,8 @@
   </div>
 
   <div id="timer-section" class="hidden">
-    <button class="reset-button" onclick="startTimer()">Start Timer</button>
+    <button class="reset-button" id="startPauseButton" onclick="startPauseTimer()">Start Timer</button>
+    <button class="reset-button" onclick="resetTimer()">Reset Timer</button>
     <div class="timer" id="timer">3</div>
     <audio id="timerAudio" src="Timer.mp3"></audio>
   </div>
@@ -189,109 +190,135 @@
 
   <script>
     let mode = 'teamwork'; // default mode
+    let isPaused = false;
+    let timerInterval, countdownInterval, countdown = 3, timeLeft = 60;
 
-        function toggleTimer() {
-            const timerSection = document.getElementById("timer-section");
-            timerSection.classList.toggle("hidden");
-        }
+    function toggleTimer() {
+      const timerSection = document.getElementById("timer-section");
+      timerSection.classList.toggle("hidden");
+    }
 
-        function startTimer() {
-            let countdown = 3;
-            let timerDisplay = document.getElementById("timer");
-            let audio = document.getElementById("timerAudio");
+    function startPauseTimer() {
+      let timerDisplay = document.getElementById("timer");
+      let audio = document.getElementById("timerAudio");
+      let startPauseButton = document.getElementById("startPauseButton");
 
-            // Play the audio immediately when the button is pressed
-            audio.play();
-
-            // Countdown before the timer starts
-            let countdownInterval = setInterval(() => {
-                countdown--;
-                timerDisplay.innerHTML = countdown;
-                if (countdown === 0) {
-                    clearInterval(countdownInterval);
-                    startMinuteTimer(); // Start the 1-minute timer after countdown
-                }
-            }, 1000);
-        }
-
-        function startMinuteTimer() {
-            let timeLeft = 60;
-            let timerDisplay = document.getElementById("timer");
-
-            let timerInterval = setInterval(() => {
-                timeLeft--;
-                timerDisplay.innerHTML = timeLeft;
-                if (timeLeft === 0) {
-                    clearInterval(timerInterval);
-                    timerDisplay.innerHTML = "Time's up!";
-                }
-            }, 1000);
-        }
-
-        function selectMode(selectedMode) {
-            mode = selectedMode;
-
-            document.getElementById('teamwork-button').classList.remove('active');
-            document.getElementById('skills-button').classList.remove('active');
-            document.getElementById(selectedMode + '-button').classList.add('active');
-
-            if (mode === 'teamwork') {
-                document.getElementById('passes-group').classList.remove('hidden');
-            } else if (mode === 'skills') {
-                document.getElementById('passes-group').classList.add('hidden');
+      if (!isPaused) {
+        if (countdown > 0) {
+          // Start countdown
+          countdownInterval = setInterval(() => {
+            countdown--;
+            timerDisplay.innerHTML = countdown;
+            if (countdown === 0) {
+              clearInterval(countdownInterval);
+              startMinuteTimer();
+              audio.play(); // Start playing the audio when countdown ends
             }
-
-            calculatePoints();
+          }, 1000);
+        } else {
+          // Resume timer if already counting
+          startMinuteTimer();
+          audio.play();
         }
+        startPauseButton.innerText = 'Pause Timer';
+      } else {
+        clearInterval(timerInterval);
+        clearInterval(countdownInterval);
+        audio.pause();
+        startPauseButton.innerText = 'Resume Timer';
+      }
+      isPaused = !isPaused;
+    }
 
-        function adjustValue(id, adjustment) {
-            let currentValue = parseInt(document.getElementById(id + '-display').value);
-            let newValue = Math.max(0, currentValue + adjustment);
-            if (id === 'switches') newValue = Math.min(4, newValue);
-            document.getElementById(id + '-display').value = newValue;
-            calculatePoints();
+    function startMinuteTimer() {
+      let timerDisplay = document.getElementById("timer");
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        timerDisplay.innerHTML = timeLeft;
+        if (timeLeft === 0) {
+          clearInterval(timerInterval);
+          timerDisplay.innerHTML = "Time's up!";
+          document.getElementById("timerAudio").pause();
         }
+      }, 1000);
+    }
 
-        function calculatePoints() {
-            let passes = parseInt(document.getElementById('passes-display').value) || 0;
-            let goals = parseInt(document.getElementById('goals-display').value) || 0;
-            let switches = Math.min(parseInt(document.getElementById('switches-display').value) || 0, 4);
-            
-            let totalPoints = 0;
+    function resetTimer() {
+      clearInterval(timerInterval);
+      clearInterval(countdownInterval);
+      countdown = 3;
+      timeLeft = 60;
+      document.getElementById("timer").innerHTML = 3;
+      document.getElementById("startPauseButton").innerText = 'Start Timer';
+      isPaused = false;
+      document.getElementById("timerAudio").pause();
+      document.getElementById("timerAudio").currentTime = 0; // Reset the audio
+    }
 
-            if (mode === 'teamwork') {
-                totalPoints = (passes * 2) + (goals * 5) + (switches * 3);
-            } else if (mode === 'skills') {
-                totalPoints = switches * 1; // 1 point per switch
-                switch (switches) {
-                    case 1:
-                        totalPoints += goals * 4;
-                        break;
-                    case 2:
-                        totalPoints += goals * 8;
-                        break;
-                    case 3:
-                        totalPoints += goals * 10;
-                        break;
-                    case 4:
-                        totalPoints += goals * 12;
-                        break;
-                }
-            }
+    function selectMode(selectedMode) {
+      mode = selectedMode;
 
-            document.getElementById('result').textContent = 'Total Points: ' + totalPoints;
+      document.getElementById('teamwork-button').classList.remove('active');
+      document.getElementById('skills-button').classList.remove('active');
+      document.getElementById(selectedMode + '-button').classList.add('active');
+
+      if (mode === 'teamwork') {
+        document.getElementById('passes-group').classList.remove('hidden');
+      } else if (mode === 'skills') {
+        document.getElementById('passes-group').classList.add('hidden');
+      }
+
+      calculatePoints();
+    }
+
+    function adjustValue(id, adjustment) {
+      let currentValue = parseInt(document.getElementById(id + '-display').value);
+      let newValue = Math.max(0, currentValue + adjustment);
+      if (id === 'switches') newValue = Math.min(4, newValue);
+      document.getElementById(id + '-display').value = newValue
+      calculatePoints();
+    }
+
+    function calculatePoints() {
+      let passes = parseInt(document.getElementById('passes-display').value) || 0;
+      let goals = parseInt(document.getElementById('goals-display').value) || 0;
+      let switches = Math.min(parseInt(document.getElementById('switches-display').value) || 0, 4);
+
+      let totalPoints = 0;
+
+      if (mode === 'teamwork') {
+        totalPoints = (passes * 2) + (goals * 5) + (switches * 3);
+      } else if (mode === 'skills') {
+        totalPoints = switches * 1; // 1 point per switch
+        switch (switches) {
+          case 1:
+            totalPoints += goals * 4;
+            break;
+          case 2:
+            totalPoints += goals * 8;
+            break;
+          case 3:
+            totalPoints += goals * 10;
+            break;
+          case 4:
+            totalPoints += goals * 12;
+            break;
         }
+      }
 
-        function resetValues() {
-            document.getElementById('passes-display').value = 0;
-            document.getElementById('goals-display').value = 0;
-            document.getElementById('switches-display').value = 0;
-            calculatePoints();
-            }
-            
-            calculatePoints(); // Initialize points
-            </script>
-            
-            </body>
-            
-            </html>
+      document.getElementById('result').textContent = 'Total Points: ' + totalPoints;
+    }
+
+    function resetValues() {
+      document.getElementById('passes-display').value = 0;
+      document.getElementById('goals-display').value = 0;
+      document.getElementById('switches-display').value = 0;
+      calculatePoints();
+    }
+
+    calculatePoints(); // Initialize points
+  </script>
+
+</body>
+</html>
+      
