@@ -187,7 +187,6 @@
 
     <div class="result" id="result">Total Points: 0</div>
 
-    <!-- Added Reset Points Button -->
     <button class="reset-button" onclick="resetValues()">Reset Points</button>
   </div>
 
@@ -247,41 +246,42 @@
         }
       }, 1000);
     }
+function resetTimer() {
+  if (countdown > 0) {
+    clearInterval(countdownInterval);  // Only clear countdown if it's still running
+  } else {
+    clearInterval(timerInterval);  // Clear the minute timer if it's running
+  }
+  countdown = 3;
+  timeLeft = 60;
+  document.getElementById("timer").innerHTML = 3;
+  document.getElementById("startPauseButton").innerText = 'Start Timer';
+  isPaused = false;
+  document.getElementById("timerAudio").pause();
+  document.getElementById("timerAudio").currentTime = 0; // Reset the audio
+}
 
-    function resetTimer() {
-      clearInterval(timerInterval);
-      clearInterval(countdownInterval);
-      countdown = 3;
-      timeLeft = 60;
-      document.getElementById("timer").innerHTML = 3;
-      document.getElementById("startPauseButton").innerText = 'Start Timer';
-      isPaused = false;
-      document.getElementById("timerAudio").pause();
-      document.getElementById("timerAudio").currentTime = 0; // Reset the audio
-    }
+function selectMode(selectedMode) { // Line 100
+  mode = selectedMode;
 
-    function selectMode(selectedMode) {
-      mode = selectedMode;
+  document.getElementById('teamwork-button').classList.remove('active');
+  document.getElementById('skills-button').classList.remove('active');
+  document.getElementById(selectedMode + '-button').classList.add('active');
 
-      document.getElementById('teamwork-button').classList.remove('active');
-      document.getElementById('skills-button').classList.remove('active');
-      document.getElementById(selectedMode + '-button').classList.add('active');
+  if (mode === 'teamwork') {
+    document.getElementById('passes-group').classList.remove('hidden');
+  } else if (mode === 'skills') {
+    document.getElementById('passes-group').classList.add('hidden');
+  }
 
-      if (mode === 'teamwork') {
-        document.getElementById('passes-group').classList.remove('hidden');
-      } else if (mode === 'skills') {
-        document.getElementById('passes-group').classList.add('hidden');
-      }
-
-      calculatePoints();
-    }
-
+  calculatePoints();
+}
     function adjustValue(id, adjustment) {
-      let currentValue = parseInt(document.getElementById(id + '-display
+      let currentValue = parseInt(document.getElementById(id + '-display').value);
       let newValue = Math.max(0, currentValue + adjustment);
-      if (id === 'switches') newValue = Math.min(4, newValue);
+      if (id === 'switches') newValue = Math.min(4, newValue); // Ensure switches don't exceed 4
       document.getElementById(id + '-display').value = newValue;
-      calculatePoints();
+      calculatePoints(); // Recalculate points after adjustment
     }
 
     function calculatePoints() {
@@ -321,9 +321,8 @@
       calculatePoints();
     }
 
-    calculatePoints(); // Initialize points
+    calculatePoints(); // Initialize points when the page loads
   </script>
 
 </body>
 </html>
-                                                          
