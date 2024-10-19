@@ -60,3 +60,12 @@
   <img src="https://drive.google.com/uc?export=view&id=1DFVyXuCuYE1jloaBbeH7jvf7zQaiYeNb" width="320" height="240" alt="Catapult sensor integration">
   </li>
 </ul>
+
+<h2>⏲️ Timer Notes</h2>
+<ul>
+  <li>⏳ We implemented a timer that starts with a 3-second countdown and then runs for 1 minute.</li>
+  <li>🎵 During the countdown, an audio file (`Timer.mp3`) plays a beep at each second: 3, 2, 1.</li>
+  <li>⌛ The timer can be controlled using a start button.</li>
+  <li>🔄 You can toggle the visibility of the timer using the "Timer On/Off" toggle.</li>
+  <li>🖱️ <a href="https://lavadeg31.github.io/Vex_Iq/Calc.html">Try the Timer Here!</a></li>
+</ul>
