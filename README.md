@@ -1,51 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VEX IQ Engineering Progress</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 10px;
-            background-color: #1a1a1a;
-            color: #fff;
-        }
-        h1, h2 {
-            text-align: center;
-            color: #ffcc00;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        ul li {
-            margin-bottom: 10px;
-            font-size: 18px;
-        }
-        img {
-            display: block;
-            margin: 10px auto;
-        }
-        a {
-            color: #ffcc00;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
-<body>
-
 <h1>🤖 VEX IQ Engineering Progress</h1>
 
 <h2>🗓️ Timeline of Robot Development</h2>
 
 <ul>
-  <li>🛠️ <strong>October 1, 2024:</strong> Started to build a drivetrain based on <a href="https://www.youtube.com/watch?v=s7D9m8zyjXw">this</a> design.</li>
-  <li>🎯 <strong>October 7, 2024:</strong> Started building the catapult based on <a href="https://www.youtube.com/watch?v=s7D9m8zyjXw">this</a> design.</li>
+  <li>🛠️ <strong>October 1, 2024:</strong> Started to build a drivetrain based on <a href="https://www.youtube.com/watch?v=s7D9m8zyjXw">this design</a>.</li>
+  <li>🎯 <strong>October 7, 2024:</strong> Started building the catapult based on <a href="https://www.youtube.com/watch?v=s7D9m8zyjXw">this design</a>.</li>
   <li>🔧 <strong>October 8, 2024:</strong> Finished the drivetrain and now moving on to the tensioning system.</li>
   <li>⚙️ <strong>October 11, 2024:</strong> Finished tensioning system, now moving onto the catapult.</li>
   <li>📦 <strong>October 13, 2024:</strong> Finished catapult, now making intake rollers.</li>
@@ -67,14 +26,15 @@
 </ul>
 
 <h2>🛠️ Code Changes</h2>
-<center><h2>Version 1.0.2</h2></center>
+
+<h3 style="text-align: center;">Version 1.0.2</h3>
 <ul>
   <li>🎮 Added partial autonomous support</li>
   <li>⏳ Changed the amount of time the tensioner rotates to improve accuracy</li>
   <li>💡 Added LED support on ports 12 and 9</li>
 </ul>
 
-<center><h2>Version 1.0.1</h2></center>
+<h3 style="text-align: center;">Version 1.0.1</h3>
 <ul>
   <li>⏳ Added timer</li>
   <li>⚙️ Added automatic lowering and detection when the catapult is lowered</li>
@@ -89,10 +49,7 @@
 
 <img src="https://drive.google.com/uc?export=view&id=10YiGo5kJg9R6v5dYBrejcqZxZJ4yqYhf" width="320" height="240" alt="Image of recent robot changes">
 
-<p>
-    Full Changelog: 
-    <a href="https://github.com/Lavadeg31/Vex_Iq/commits/Code">Code V1.0.1 Changelog</a>
-</p>
+<p>Full Changelog: <a href="https://github.com/Lavadeg31/Vex_Iq/commits/Code">Code V1.0.1 Changelog</a></p>
 
 <h2>📄 Patch Notes</h2>
 <ul>
@@ -108,6 +65,3 @@
   <li>🔄 You can toggle the visibility of the timer using the "Timer On/Off" toggle.</li>
   <li>🖱️ <a href="https://lavadeg31.github.io/Vex_Iq/Calc.html">Try the Timer Here!</a></li>
 </ul>
-
-</body>
-</html>
