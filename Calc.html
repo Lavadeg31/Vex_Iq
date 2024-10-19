@@ -186,6 +186,9 @@
     </div>
 
     <div class="result" id="result">Total Points: 0</div>
+
+    <!-- Added Reset Points Button -->
+    <button class="reset-button" onclick="resetValues()">Reset Points</button>
   </div>
 
   <script>
@@ -240,7 +243,7 @@
         if (timeLeft === 0) {
           clearInterval(timerInterval);
           timerDisplay.innerHTML = "Time's up!";
-          document.getElementById("timerAudio").pause();
+          // Do not stop the audio, let it finish
         }
       }, 1000);
     }
@@ -274,7 +277,7 @@
     }
 
     function adjustValue(id, adjustment) {
-      let currentValue = parseInt(document.getElementById(id + '-display').value);
+      let currentValue = parseInt(document.getElementById(id + '-display
       let newValue = Math.max(0, currentValue + adjustment);
       if (id === 'switches') newValue = Math.min(4, newValue);
       document.getElementById(id + '-display').value = newValue;
@@ -323,3 +326,4 @@
 
 </body>
 </html>
+                                                          
