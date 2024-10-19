@@ -67,6 +67,6 @@
 </ul>
 <h2>New Rule Summary!</h2>
 <ul>
-  <li>📕 <a herf="https://lavadeg31.github.io/Vex_Iq/Rules.html">Read It!</li>
+  <li>📕 <a href="https://lavadeg31.github.io/Vex_Iq/Rules.html">Read It!</a></li>
 </ul>
 
