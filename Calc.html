@@ -206,19 +206,19 @@
       if (!isPaused) {
         if (countdown > 0) {
           // Start countdown
+          audio.play(); // Play audio immediately
           countdownInterval = setInterval(() => {
             countdown--;
             timerDisplay.innerHTML = countdown;
             if (countdown === 0) {
               clearInterval(countdownInterval);
               startMinuteTimer();
-              audio.play(); // Start playing the audio when countdown ends
             }
           }, 1000);
         } else {
           // Resume timer if already counting
           startMinuteTimer();
-          audio.play();
+          audio.play(); // Resume playing the audio when resumed
         }
         startPauseButton.innerText = 'Pause Timer';
       } else {
@@ -275,12 +275,13 @@
       let currentValue = parseInt(document.getElementById(id + '-display').value);
       let newValue = Math.max(0, currentValue + adjustment);
       if (id === 'switches') newValue = Math.min(4, newValue);
-      document.getElementById(id + '-display').value = newValue
+      document.getElementById(id + '-display').value = newValue;
       calculatePoints();
     }
 
     function calculatePoints() {
       let passes = parseInt(document.getElementById('passes-display').value) || 0;
+      let goals
       let goals = parseInt(document.getElementById('goals-display').value) || 0;
       let switches = Math.min(parseInt(document.getElementById('switches-display').value) || 0, 4);
 
@@ -321,4 +322,3 @@
 
 </body>
 </html>
-      
