@@ -65,3 +65,8 @@
   <li>🔄 You can toggle the visibility of the timer using the "Timer On/Off" toggle.</li>
   <li>🖱️ <a href="https://lavadeg31.github.io/Vex_Iq/Calc.html">Try the Timer Here!</a></li>
 </ul>
+<h2>New Rule Summary!</h2>
+<ul>
+  <li>📕 <a herf="https://lavadeg31.github.io/Vex_Iq/Rules.html</li>
+</ul>
+
