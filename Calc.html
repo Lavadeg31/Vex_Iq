@@ -191,7 +191,9 @@
   <script>
     let mode = 'teamwork'; // default mode
     let isPaused = false;
-    let timerInterval, countdownInterval, countdown = 3, timeLeft = 60;
+    let timerInterval, countdownInterval;
+    let countdown = 3;
+    let timeLeft = 60;
 
     function toggleTimer() {
       const timerSection = document.getElementById("timer-section");
@@ -281,7 +283,6 @@
 
     function calculatePoints() {
       let passes = parseInt(document.getElementById('passes-display').value) || 0;
-      let goals
       let goals = parseInt(document.getElementById('goals-display').value) || 0;
       let switches = Math.min(parseInt(document.getElementById('switches-display').value) || 0, 4);
 
