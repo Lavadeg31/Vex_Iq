@@ -70,7 +70,7 @@
 
     /* Input Fields */
     input[type="number"] {
-      width: 50px;
+      width: 60px;
       height: 50px;
       text-align: center;
       font-size: 24px;
@@ -234,14 +234,14 @@
   <div id="timer-section" class="hidden">
     <div id="timer-container">
       <!-- Pause/Play Button -->
-      <button id="startPauseButton" onclick="startPauseTimer()">▶️</button>
+      <button id="startPauseButton" onclick="startPauseTimer()" aria-label="Start or Pause Timer">▶️</button>
       <!-- Timer Display -->
       <div class="timer" id="timer">3</div>
       <!-- Reset Button -->
-      <button id="restartButton" onclick="resetTimer()">🔄</button>
+      <button id="restartButton" onclick="resetTimer()" aria-label="Reset Timer">🔄</button>
     </div>
-    <!-- Include your audio file if needed -->
-    <!-- <audio id="timerAudio" src="Timer.mp3"></audio> -->
+    <!-- Include your audio file -->
+    <audio id="timerAudio" src="Timer.mp3"></audio>
   </div>
 
   <!-- Calculator Section -->
@@ -314,11 +314,12 @@
   <!-- JavaScript Code -->
   <script>
     let mode = 'teamwork';
-    let isPaused = false;
+    let isRunning = false; // Changed from isPaused to isRunning
     let timerInterval, countdownInterval;
     let countdown = 3;
     let timeLeft = 60;
     let scores = [];
+    let timerAudio = document.getElementById("timerAudio"); // Get the audio element
 
     // Base64 encoding and decoding helper functions
     function encodeBase64(data) {
@@ -399,8 +400,18 @@
       let timerDisplay = document.getElementById("timer");
       let startPauseButton = document.getElementById("startPauseButton");
 
-      if (!isPaused) {
+      if (!isRunning) {
+        // Start the timer
+        startPauseButton.innerText = '⏸️';
+        isRunning = true;
+
+        // Start audio playback from the beginning
+        timerAudio.currentTime = 0;
+        timerAudio.play();
+
         if (countdown > 0) {
+          // Start the countdown
+          timerDisplay.innerHTML = countdown;
           countdownInterval = setInterval(() => {
             countdown--;
             timerDisplay.innerHTML = countdown;
@@ -410,26 +421,28 @@
             }
           }, 1000);
         } else {
+          // Start the minute timer
           startMinuteTimer();
         }
-        startPauseButton.innerText = '⏸️';
       } else {
+        // Pause the timer
         clearInterval(timerInterval);
         clearInterval(countdownInterval);
+        timerAudio.pause(); // Pause audio
         startPauseButton.innerText = '▶️';
+        isRunning = false;
       }
-      isPaused = !isPaused;
     }
 
     function startMinuteTimer() {
       let timerDisplay = document.getElementById("timer");
-      timeLeft = 60; // Reset to 60 seconds each time
       timerInterval = setInterval(() => {
         timeLeft--;
         timerDisplay.innerHTML = timeLeft;
         if (timeLeft === 0) {
           clearInterval(timerInterval);
           timerDisplay.innerHTML = "Time's up!";
+          // Do not stop the audio here; let it play until the end
         }
       }, 1000);
     }
@@ -439,9 +452,13 @@
       clearInterval(timerInterval);
       countdown = 3;
       timeLeft = 60;
-      document.getElementById("timer").innerHTML = 3;
+      document.getElementById("timer").innerHTML = countdown;
       document.getElementById("startPauseButton").innerText = '▶️';
-      isPaused = false;
+      isRunning = false;
+
+      // Stop and reset the audio
+      timerAudio.pause();
+      timerAudio.currentTime = 0;
     }
 
     // Function to calculate scores based on the scoring criteria
