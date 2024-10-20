@@ -136,7 +136,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 20px; /* Adjust spacing between elements */
+      gap: 20px;
       margin-top: 20px;
     }
 
@@ -230,6 +230,11 @@
     <input type="checkbox" id="timer-toggle" onclick="toggleTimer()"> On/Off
   </div>
 
+  <div class="toggle-group">
+    <label for="countdown-toggle">Countdown:</label>
+    <input type="checkbox" id="countdown-toggle" checked> Display Countdown
+  </div>
+
   <!-- Timer Section -->
   <div id="timer-section" class="hidden">
     <div id="timer-container">
@@ -240,8 +245,9 @@
       <!-- Reset Button -->
       <button id="restartButton" onclick="resetTimer()" aria-label="Reset Timer">🔄</button>
     </div>
-    <!-- Include your audio file -->
+    <!-- Include your audio files -->
     <audio id="timerAudio" src="Timer.mp3"></audio>
+    <audio id="timerAudioNoCountdown" src="Timer2.mp3"></audio>
   </div>
 
   <!-- Calculator Section -->
@@ -314,12 +320,13 @@
   <!-- JavaScript Code -->
   <script>
     let mode = 'teamwork';
-    let isRunning = false; // Changed from isPaused to isRunning
+    let isRunning = false;
     let timerInterval, countdownInterval;
     let countdown = 3;
     let timeLeft = 60;
     let scores = [];
-    let timerAudio = document.getElementById("timerAudio"); // Get the audio element
+    let timerAudio = document.getElementById("timerAudio");
+    let timerAudioNoCountdown = document.getElementById("timerAudioNoCountdown");
 
     // Base64 encoding and decoding helper functions
     function encodeBase64(data) {
@@ -342,13 +349,13 @@
       scores.push(totalPoints);
       updateTable();
       calculateAverage();
-      resetValues(); // Reset scoring values after adding to table
+      resetValues();
     }
 
     // Update Scores Table
     function updateTable() {
       const tableBody = document.getElementById("scoresTable").querySelector('tbody');
-      tableBody.innerHTML = ""; // Clear table before repopulating
+      tableBody.innerHTML = "";
       scores.forEach((score, index) => {
         let row = `<tr><td>${index + 1}</td><td>${score}</td></tr>`;
         tableBody.innerHTML += row;
@@ -388,7 +395,7 @@
       reader.onload = function(event) {
         const base64Data = event.target.result;
         const jsonData = decodeBase64(base64Data);
-        scores = JSON.parse(jsonData); // Parse JSON back to array
+        scores = JSON.parse(jsonData);
         updateTable();
         calculateAverage();
       };
@@ -399,18 +406,21 @@
     function startPauseTimer() {
       let timerDisplay = document.getElementById("timer");
       let startPauseButton = document.getElementById("startPauseButton");
+      const displayCountdown = document.getElementById("countdown-toggle").checked;
 
       if (!isRunning) {
-        // Start the timer
         startPauseButton.innerText = '⏸️';
         isRunning = true;
 
-        // Start audio playback from the beginning
-        timerAudio.currentTime = 0;
-        timerAudio.play();
+        if (displayCountdown) {
+          timerAudio.currentTime = timerAudio.currentTime || 0;
+          timerAudio.play();
+        } else {
+          timerAudioNoCountdown.currentTime = timerAudioNoCountdown.currentTime || 0;
+          timerAudioNoCountdown.play();
+        }
 
-        if (countdown > 0) {
-          // Start the countdown
+        if (displayCountdown && countdown > 0) {
           timerDisplay.innerHTML = countdown;
           countdownInterval = setInterval(() => {
             countdown--;
@@ -421,14 +431,16 @@
             }
           }, 1000);
         } else {
-          // Start the minute timer
           startMinuteTimer();
         }
       } else {
-        // Pause the timer
         clearInterval(timerInterval);
         clearInterval(countdownInterval);
-        timerAudio.pause(); // Pause audio
+        if (displayCountdown) {
+          timerAudio.pause();
+        } else {
+          timerAudioNoCountdown.pause();
+        }
         startPauseButton.innerText = '▶️';
         isRunning = false;
       }
@@ -442,7 +454,6 @@
         if (timeLeft === 0) {
           clearInterval(timerInterval);
           timerDisplay.innerHTML = "Time's up!";
-          // Do not stop the audio here; let it play until the end
         }
       }, 1000);
     }
@@ -456,9 +467,10 @@
       document.getElementById("startPauseButton").innerText = '▶️';
       isRunning = false;
 
-      // Stop and reset the audio
       timerAudio.pause();
       timerAudio.currentTime = 0;
+      timerAudioNoCountdown.pause();
+      timerAudioNoCountdown.currentTime = 0;
     }
 
     // Function to calculate scores based on the scoring criteria
@@ -466,30 +478,23 @@
       let score = 0;
       let scoreInvalid = false;
 
-      // Get values from elements
       let balls = document.getElementById('goals-display').value;
       let switches = document.getElementById('switches-display').value;
       let passes = document.getElementById('passes-display').value;
 
-      // Mode is stored in variable 'mode' ('teamwork' or 'skills')
-      // We'll map 'teamwork' to 0 and 'skills' to 1 for matchType
       let matchType = (mode === 'teamwork') ? 0 : 1;
 
-      // Parse values to integers, defaulting to 0
       balls = (balls == "") ? 0 : parseInt(balls);
       switches = (switches == "") ? 0 : parseInt(switches);
       passes = (passes == "") ? 0 : parseInt(passes);
 
-      // Adjust passes based on switches and balls
       if(switches == 0 && passes > 4 && matchType == 0) {
         passes = 4;
       }
       else if(passes > balls && matchType == 0 && switches != 0) {
         passes = balls;
-        console.log(passes);
       }
 
-      // Scoring keys
       const switchKey = [1,4,8,10,12,12,12,12,12];
       let scoreKey = (matchType == 0) ? [1,1,switchKey[switches]] : [switchKey[switches],1,0];
 
@@ -498,19 +503,16 @@
         return currentElement == "" ? 0 : parseInt(currentElement);
       });
 
-      // Calculate score
       for(let i=0; i<3; i++) {
         score += matchData[i] * scoreKey[i];
       }
 
-      // Show/hide passes input based on mode
       if(matchType == 0) {
         document.getElementById('passes-group').style.display = "block";
       } else {
         document.getElementById('passes-group').style.display = "none";
       }
 
-      // Validate score
       scoreInvalid = (Math.min.apply(Math, matchData) < 0 || matchData[1] > 4);
       let resultElement = document.getElementById('result');
       if(scoreInvalid) {
@@ -521,7 +523,7 @@
         resultElement.innerHTML = "Total Points: " + score.toString();
       }
 
-      return score; // Return the calculated score for table updates
+      return score;
     }
 
     // Reset Values Function
@@ -530,7 +532,7 @@
       document.getElementById('goals-display').value = 0;
       document.getElementById('switches-display').value = 0;
       document.getElementById('result').textContent = 'Total Points: 0';
-      calculateScores(); // Recalculate points after reset
+      calculateScores();
     }
 
     // Select Mode Function
@@ -555,15 +557,14 @@
       let currentValue = parseInt(inputField.value) || 0;
       let newValue = currentValue + adjustment;
 
-      // Ensure values are within valid ranges
       if (id === 'switches') {
-        newValue = Math.min(Math.max(newValue, 0), 4); // Switches between 0 and 4
+        newValue = Math.min(Math.max(newValue, 0), 4);
       } else {
-        newValue = Math.max(newValue, 0); // No negative values
+        newValue = Math.max(newValue, 0);
       }
 
       inputField.value = newValue;
-      calculateScores(); // Recalculate points after adjustment
+      calculateScores();
     }
 
     // Initialize Points When the Page Loads
