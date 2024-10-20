@@ -214,7 +214,7 @@
     <input type="file" id="fileInput" style="display:none;" onchange="handleFile(event)">
   </div>
 
-  <script>
+<script>
     let mode = 'teamwork';
     let isPaused = false;
     let timerInterval, countdownInterval;
@@ -274,6 +274,64 @@
       reader.readAsText(file);
     }
 
+    function startPauseTimer() {
+      let timerDisplay = document.getElementById("timer");
+      let audio = document.getElementById("timerAudio");
+      let startPauseButton = document.getElementById("startPauseButton");
+
+      if (!isPaused) {
+        if (countdown > 0) {
+          audio.play(); // Play audio immediately
+          countdownInterval = setInterval(() => {
+            countdown--;
+            timerDisplay.innerHTML = countdown;
+            if (countdown === 0) {
+              clearInterval(countdownInterval);
+              startMinuteTimer();
+            }
+          }, 1000);
+        } else {
+          startMinuteTimer();
+          audio.play(); // Resume playing the audio when resumed
+        }
+        startPauseButton.innerText = 'Pause Timer';
+      } else {
+        clearInterval(timerInterval);
+        clearInterval(countdownInterval);
+        audio.pause();
+        startPauseButton.innerText = 'Resume Timer';
+      }
+      isPaused = !isPaused;
+    }
+
+    function startMinuteTimer() {
+      let timerDisplay = document.getElementById("timer");
+      timeLeft = 60; // Reset to 60 seconds each time
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        timerDisplay.innerHTML = timeLeft;
+        if (timeLeft === 0) {
+          clearInterval(timerInterval);
+          timerDisplay.innerHTML = "Time's up!";
+        }
+      }, 1000);
+    }
+
+    function resetTimer() {
+      if (countdown > 0) {
+        clearInterval(countdownInterval);  // Only clear countdown if it's still running
+      } else {
+        clearInterval(timerInterval);  // Clear the minute timer if it's running
+      }
+      countdown = 3;
+      timeLeft = 60;
+      document.getElementById("timer").innerHTML = 3;
+      document.getElementById("startPauseButton").innerText = 'Start Timer';
+      isPaused = false;
+      document.getElementById("timerAudio").pause();
+      document.getElementById("timerAudio").currentTime = 0; // Reset the audio
+    }
+
     function calculatePoints() {
       let passes = parseInt(document.getElementById('passes-display').value) || 0;
       let goals = parseInt(document.getElementById('goals-display').value) || 0;
@@ -303,21 +361,6 @@
 
       document.getElementById('result').textContent = 'Total Points: ' + totalPoints;
       return totalPoints; // Return the calculated points for table updates
-    }
-
-    function resetTimer() {
-      if (countdown > 0) {
-        clearInterval(countdownInterval);  // Only clear countdown if it's still running
-      } else {
-        clearInterval(timerInterval);  // Clear the minute timer if it's running
-      }
-      countdown = 3;
-      timeLeft = 60;
-      document.getElementById("timer").innerHTML = 3;
-      document.getElementById("startPauseButton").innerText = 'Start Timer';
-      isPaused = false;
-      document.getElementById("timerAudio").pause();
-      document.getElementById("timerAudio").currentTime = 0; // Reset the audio
     }
 
     function selectMode(selectedMode) {
@@ -352,7 +395,7 @@
     }
 
     calculatePoints(); // Initialize points when the page loads
-  </script>
+</script>
 
 </body>
 
