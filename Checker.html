@@ -31,7 +31,8 @@
       border-collapse: collapse;
     }
 
-    th, td {
+    th,
+    td {
       border: 1px solid #fff;
       padding: 10px;
       text-align: center;
@@ -86,6 +87,11 @@
   <script>
     let scores = [];
 
+    // Base64 decoding helper function
+    function decodeBase64(data) {
+      return decodeURIComponent(escape(window.atob(data)));
+    }
+
     function importScores() {
       document.getElementById('fileInput').click();
     }
@@ -94,8 +100,9 @@
       const file = event.target.files[0];
       const reader = new FileReader();
       reader.onload = function (event) {
-        const text = event.target.result;
-        scores = text.split('\n').map(Number).filter(Boolean); // Parse and remove empty lines
+        const base64Data = event.target.result.trim(); // Get the base64 data and remove any whitespace
+        const decodedText = decodeBase64(base64Data); // Decode base64 to text
+        scores = decodedText.split('\n').map(Number).filter(score => !isNaN(score)); // Parse and remove invalid entries
         updateTable();
         calculateAverage();
       };
