@@ -12,17 +12,23 @@
       padding: 10px;
       background-color: #1a1a1a;
       color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      flex-direction: column;
     }
 
     h1 {
       text-align: center;
       color: #ffcc00;
+      margin-bottom: 20px;
     }
 
     .calculator {
       max-width: 600px;
-      margin: 0 auto;
       padding: 20px;
+      text-align: center;
     }
 
     .input-group {
@@ -58,6 +64,7 @@
       border-radius: 4px;
       font-size: 14px;
       cursor: pointer;
+      margin: 5px 0;
     }
 
     button:hover {
@@ -79,41 +86,18 @@
       text-align: center;
     }
 
-    .mode-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 15px;
-    }
-
-    .mode-buttons button {
-      background-color: #333;
+    table {
+      width: 100%;
+      margin-top: 20px;
       color: #fff;
+      border-collapse: collapse;
     }
 
-    .mode-buttons button.active {
-      background-color: #007bff;
-      color: #fff;
-    }
-
-    .plus-minus {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .plus-minus button {
-      width: 40px;
-      height: 40px;
-      font-size: 20px;
-      background-color: #ffcc00;
-      color: #1a1a1a;
-      border: none;
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    th,
+    td {
+      border: 1px solid #fff;
+      padding: 10px;
+      text-align: center;
     }
 
     .hidden {
@@ -121,7 +105,7 @@
     }
 
     .timer {
-      font-size: 48px;
+      font-size: 80px;
       text-align: center;
       margin-top: 20px;
     }
@@ -132,6 +116,30 @@
       align-items: center;
       margin-bottom: 15px;
       gap: 10px;
+    }
+
+    /* Adjusted plus-minus buttons */
+    .plus-minus {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .plus-minus button {
+      width: 30px;
+      /* Smaller width */
+      height: 30px;
+      /* Smaller height */
+      font-size: 18px;
+      /* Smaller font size */
+      background-color: #ffcc00;
+      color: #1a1a1a;
+      border: none;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   </style>
 </head>
@@ -186,102 +194,84 @@
     </div>
 
     <div class="result" id="result">Total Points: 0</div>
+    <button class="reset-button" onclick="addToTable()">Add to Table</button>
 
-    <button class="reset-button" onclick="resetValues()">Reset Points</button>
+    <h2>Scores</h2>
+    <table id="scoresTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+
+    <p id="averageScore">Average Score: 0</p>
+    <button class="reset-button" onclick="exportScores()">Export Scores</button>
+    <button class="reset-button" onclick="importScores()">Import Scores</button>
+    <input type="file" id="fileInput" style="display:none;" onchange="handleFile(event)">
   </div>
 
   <script>
-    let mode = 'teamwork'; // default mode
+    let mode = 'teamwork';
     let isPaused = false;
     let timerInterval, countdownInterval;
     let countdown = 3;
     let timeLeft = 60;
+    let scores = [];
 
     function toggleTimer() {
       const timerSection = document.getElementById("timer-section");
       timerSection.classList.toggle("hidden");
     }
 
-    function startPauseTimer() {
-      let timerDisplay = document.getElementById("timer");
-      let audio = document.getElementById("timerAudio");
-      let startPauseButton = document.getElementById("startPauseButton");
-
-      if (!isPaused) {
-        if (countdown > 0) {
-          // Start countdown
-          audio.play(); // Play audio immediately
-          countdownInterval = setInterval(() => {
-            countdown--;
-            timerDisplay.innerHTML = countdown;
-            if (countdown === 0) {
-              clearInterval(countdownInterval);
-              startMinuteTimer();
-            }
-          }, 1000);
-        } else {
-          // Resume timer if already counting
-          startMinuteTimer();
-          audio.play(); // Resume playing the audio when resumed
-        }
-        startPauseButton.innerText = 'Pause Timer';
-      } else {
-        clearInterval(timerInterval);
-        clearInterval(countdownInterval);
-        audio.pause();
-        startPauseButton.innerText = 'Resume Timer';
-      }
-      isPaused = !isPaused;
+    function addToTable() {
+      let totalPoints = calculatePoints();
+      scores.push(totalPoints);
+      updateTable();
+      calculateAverage();
     }
 
-    function startMinuteTimer() {
-      let timerDisplay = document.getElementById("timer");
-      timerInterval = setInterval(() => {
-        timeLeft--;
-        timerDisplay.innerHTML = timeLeft;
-        if (timeLeft === 0) {
-          clearInterval(timerInterval);
-          timerDisplay.innerHTML = "Time's up!";
-          // Do not stop the audio, let it finish
-        }
-      }, 1000);
+    function updateTable() {
+      const tableBody = document.getElementById("scoresTable").querySelector('tbody');
+      tableBody.innerHTML = ""; // Clear table before repopulating
+      scores.forEach((score, index) => {
+        let row = `<tr><td>${index + 1}</td><td>${score}</td></tr>`;
+        tableBody.innerHTML += row;
+      });
     }
-function resetTimer() {
-  if (countdown > 0) {
-    clearInterval(countdownInterval);  // Only clear countdown if it's still running
-  } else {
-    clearInterval(timerInterval);  // Clear the minute timer if it's running
-  }
-  countdown = 3;
-  timeLeft = 60;
-  document.getElementById("timer").innerHTML = 3;
-  document.getElementById("startPauseButton").innerText = 'Start Timer';
-  isPaused = false;
-  document.getElementById("timerAudio").pause();
-  document.getElementById("timerAudio").currentTime = 0; // Reset the audio
-}
 
-function selectMode(selectedMode) { // Line 100
-  mode = selectedMode;
+    function calculateAverage() {
+      if (scores.length === 0) return;
+      const total = scores.reduce((acc, curr) => acc + curr, 0);
+      const average = total / scores.length;
+      document.getElementById("averageScore").innerText = `Average Score: ${average.toFixed(2)}`;
+    }
 
-  document.getElementById('teamwork-button').classList.remove('active');
-  document.getElementById('skills-button').classList.remove('active');
-  document.getElementById(selectedMode + '-button').classList.add('active');
+    function exportScores() {
+      const blob = new Blob([scores.join("\n")], { type: 'text/plain' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = "scores.txt";
+      link.click();
+    }
 
-  if (mode === 'teamwork') {
-    document.getElementById('passes-group').classList.remove('hidden');
-  } else if (mode === 'skills') {
-    document.getElementById('passes-group').classList.add('hidden');
-  }
+    function importScores() {
+      document.getElementById('fileInput').click();
+    }
 
-  calculatePoints();
-}
-    function adjustValue(id, adjustment) {
-      let currentValue = parseInt(document.getElementById(id + '-display').value);
-      let newValue = Math.max(0, currentValue + adjustment);
-      if (id === 'switches') newValue = Math.min(4, newValue); // Ensure switches don't exceed 4
-      document.getElementById(id + '-display').value = newValue;
-      calculatePoints(); // Recalculate points after adjustment
+    function handleFile(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        const text = event.target.result;
+        scores = text.split('\n').map(Number).filter(Boolean); // Parse and remove empty lines
+        updateTable();
+        calculateAverage();
+      };
+      reader.readAsText(file);
     }
 
     function calculatePoints() {
@@ -294,7 +284,7 @@ function selectMode(selectedMode) { // Line 100
       if (mode === 'teamwork') {
         totalPoints = (passes * 2) + (goals * 5) + (switches * 3);
       } else if (mode === 'skills') {
-        totalPoints = switches * 1; // 1 point per switch
+        totalPoints = switches * 1; 
         switch (switches) {
           case 1:
             totalPoints += goals * 4;
@@ -312,6 +302,46 @@ function selectMode(selectedMode) { // Line 100
       }
 
       document.getElementById('result').textContent = 'Total Points: ' + totalPoints;
+      return totalPoints; // Return the calculated points for table updates
+    }
+
+    function resetTimer() {
+      if (countdown > 0) {
+        clearInterval(countdownInterval);  // Only clear countdown if it's still running
+      } else {
+        clearInterval(timerInterval);  // Clear the minute timer if it's running
+      }
+      countdown = 3;
+      timeLeft = 60;
+      document.getElementById("timer").innerHTML = 3;
+      document.getElementById("startPauseButton").innerText = 'Start Timer';
+      isPaused = false;
+      document.getElementById("timerAudio").pause();
+      document.getElementById("timerAudio").currentTime = 0; // Reset the audio
+    }
+
+    function selectMode(selectedMode) {
+      mode = selectedMode;
+
+      document.getElementById('teamwork-button').classList.remove('active');
+      document.getElementById('skills-button').classList.remove('active');
+      document.getElementById(selectedMode + '-button').classList.add('active');
+
+      if (mode === 'teamwork') {
+        document.getElementById('passes-group').classList.remove('hidden');
+      } else if (mode === 'skills') {
+        document.getElementById('passes-group').classList.add('hidden');
+      }
+
+      calculatePoints();
+    }
+
+    function adjustValue(id, adjustment) {
+      let currentValue = parseInt(document.getElementById(id + '-display').value);
+      let newValue = Math.max(0, currentValue + adjustment);
+      if (id === 'switches') newValue = Math.min(4, newValue); // Ensure switches don't exceed 4
+      document.getElementById(id + '-display').value = newValue;
+      calculatePoints(); // Recalculate points after adjustment
     }
 
     function resetValues() {
@@ -325,4 +355,5 @@ function selectMode(selectedMode) { // Line 100
   </script>
 
 </body>
+
 </html>
