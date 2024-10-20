@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VEX IQ Rapid Relay Point Calculator</title>
   <style>
+    /* Body Styling */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -13,26 +12,31 @@
       background-color: #1a1a1a;
       color: #fff;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
       min-height: 100vh;
-      flex-direction: column;
     }
 
+    /* Heading */
     h1 {
       text-align: center;
       color: #ffcc00;
       margin-bottom: 20px;
     }
 
+    /* Calculator Container */
     .calculator {
       max-width: 600px;
+      width: 100%;
       padding: 20px;
       text-align: center;
+      background-color: #2e2e2e;
+      border-radius: 10px;
     }
 
+    /* Input Groups */
     .input-group {
-      margin-bottom: 10px;
+      margin-bottom: 20px;
     }
 
     .input-group label {
@@ -41,51 +45,68 @@
       color: #fff;
     }
 
-    .input-group input,
-    .input-group .plus-minus {
-      padding: 8px;
-      font-size: 16px;
-      border: none;
-      background-color: rgba(255, 255, 255, 0);
-      color: #fff;
+    /* Plus-Minus Buttons */
+    .plus-minus {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
     }
 
-    .input-group input[type="number"] {
-      max-width: 60px;
-      text-align: center;
-    }
-
-    button {
-      width: 150px;
-      padding: 5px;
+    .plus-minus button {
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
       background-color: #ffcc00;
       color: #1a1a1a;
       border: none;
-      border-radius: 4px;
-      font-size: 14px;
+      border-radius: 10px;
       cursor: pointer;
-      margin: 5px 0;
+    }
+
+    .plus-minus button:hover {
+      background-color: #e6b800;
+    }
+
+    /* Input Fields */
+    input[type="number"] {
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      font-size: 24px;
+      background-color: #3a3a3a;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      outline: none;
+    }
+
+    /* Result Display */
+    .result {
+      margin-top: 20px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    /* Buttons */
+    button {
+      width: 150px;
+      padding: 10px;
+      background-color: #ffcc00;
+      color: #1a1a1a;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 5px;
     }
 
     button:hover {
       background-color: #e6b800;
     }
 
-    .reset-button {
-      margin-bottom: 10px;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .result {
-      margin-top: 20px;
-      font-size: 24px;
-      font-weight: bold;
-      color: #fff;
-      text-align: center;
-    }
-
+    /* Table Styling */
     table {
       width: 100%;
       margin-top: 20px;
@@ -93,109 +114,184 @@
       border-collapse: collapse;
     }
 
-    th,
-    td {
+    th, td {
       border: 1px solid #fff;
       padding: 10px;
       text-align: center;
     }
 
+    /* Hidden Class */
     .hidden {
       display: none;
     }
 
+    /* Timer Styling */
     .timer {
       font-size: 80px;
       text-align: center;
+    }
+
+    /* Timer Container */
+    #timer-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px; /* Adjust spacing between elements */
       margin-top: 20px;
     }
 
-    .toggle-group {
+    /* Timer Controls */
+    #startPauseButton, #restartButton {
+      width: 80px;
+      height: 80px;
+      font-size: 40px;
+      border-radius: 50%;
       display: flex;
-      justify-content: center;
       align-items: center;
-      margin-bottom: 15px;
-      gap: 10px;
-    }
-
-    /* Adjusted plus-minus buttons */
-    .plus-minus {
-      display: flex;
       justify-content: center;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .plus-minus button {
-      width: 30px;
-      /* Smaller width */
-      height: 30px;
-      /* Smaller height */
-      font-size: 18px;
-      /* Smaller font size */
       background-color: #ffcc00;
       color: #1a1a1a;
       border: none;
-      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    #startPauseButton:hover, #restartButton:hover {
+      background-color: #e6b800;
+    }
+
+    /* Mode Buttons */
+    .mode-buttons {
       display: flex;
-      align-items: center;
       justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .mode-buttons button {
+      flex: 1;
+      margin: 0 10px;
+    }
+
+    .mode-buttons .active {
+      background-color: #e6b800;
+    }
+
+    /* Clear Inputs Button Styling */
+    #clearButton {
+      width: 150px;
+      padding: 10px;
+      background-color: #ff5733;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 20px auto;
+      display: block;
+    }
+
+    #clearButton:hover {
+      background-color: #e14c2a;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      .plus-minus {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .plus-minus button {
+        width: 100%;
+      }
+
+      input[type="number"] {
+        width: 100%;
+      }
+
+      #timer-container {
+        flex-direction: column;
+      }
+
+      #startPauseButton, #restartButton {
+        width: 60px;
+        height: 60px;
+        font-size: 30px;
+      }
     }
   </style>
 </head>
 
 <body>
-
   <h1>VEX IQ Rapid Relay Point Calculator</h1>
 
+  <!-- Timer Toggle -->
   <div class="toggle-group">
-    <label for="timer-toggle">Timer: </label>
+    <label for="timer-toggle">Timer:</label>
     <input type="checkbox" id="timer-toggle" onclick="toggleTimer()"> On/Off
   </div>
 
+  <!-- Timer Section -->
   <div id="timer-section" class="hidden">
-    <button class="reset-button" id="startPauseButton" onclick="startPauseTimer()">Start Timer</button>
-    <button class="reset-button" onclick="resetTimer()">Reset Timer</button>
-    <div class="timer" id="timer">3</div>
-    <audio id="timerAudio" src="Timer.mp3"></audio>
+    <div id="timer-container">
+      <!-- Pause/Play Button -->
+      <button id="startPauseButton" onclick="startPauseTimer()">▶️</button>
+      <!-- Timer Display -->
+      <div class="timer" id="timer">3</div>
+      <!-- Reset Button -->
+      <button id="restartButton" onclick="resetTimer()">🔄</button>
+    </div>
+    <!-- Include your audio file if needed -->
+    <!-- <audio id="timerAudio" src="Timer.mp3"></audio> -->
   </div>
 
+  <!-- Calculator Section -->
   <div class="calculator">
+    <!-- Mode Selection Buttons -->
     <div class="mode-buttons">
       <button id="teamwork-button" class="active" onclick="selectMode('teamwork')">Teamwork Scoring</button>
       <button id="skills-button" onclick="selectMode('skills')">Robot Skills Scoring</button>
     </div>
 
+    <!-- Passes Input Group (Hidden in Skills Mode) -->
     <div class="input-group" id="passes-group">
       <label for="passes-display">Number of Successful Passes:</label>
       <div class="plus-minus">
         <button onclick="adjustValue('passes', -1)">-</button>
-        <input type="number" id="passes-display" value="0" oninput="calculatePoints()">
+        <input type="number" id="passes-display" value="0" min="0" oninput="calculateScores()">
         <button onclick="adjustValue('passes', 1)">+</button>
       </div>
     </div>
 
+    <!-- Goals Input Group -->
     <div class="input-group">
       <label for="goals-display">Number of Goals Scored:</label>
       <div class="plus-minus">
         <button onclick="adjustValue('goals', -1)">-</button>
-        <input type="number" id="goals-display" value="0" oninput="calculatePoints()">
+        <input type="number" id="goals-display" value="0" min="0" oninput="calculateScores()">
         <button onclick="adjustValue('goals', 1)">+</button>
       </div>
     </div>
 
+    <!-- Switches Input Group -->
     <div class="input-group">
       <label for="switches-display">Number of Switches Cleared (max 4):</label>
       <div class="plus-minus">
         <button onclick="adjustValue('switches', -1)">-</button>
-        <input type="number" id="switches-display" value="0" min="0" max="4" oninput="calculatePoints()">
+        <input type="number" id="switches-display" value="0" min="0" max="4" oninput="calculateScores()">
         <button onclick="adjustValue('switches', 1)">+</button>
       </div>
     </div>
 
-    <div class="result" id="result">Total Points: 0</div>
-    <button class="reset-button" onclick="addToTable()">Add to Table</button>
+    <!-- Clear Inputs Button -->
+    <button id="clearButton" onclick="resetValues()">Clear Inputs</button>
 
+    <!-- Result Display -->
+    <div class="result" id="result">Total Points: 0</div>
+
+    <!-- Add Score Button -->
+    <button onclick="addToTable()">Add Score</button>
+
+    <!-- Scores Table -->
     <h2>Scores</h2>
     <table id="scoresTable">
       <thead>
@@ -208,13 +304,15 @@
       </tbody>
     </table>
 
+    <!-- Average Score -->
     <p id="averageScore">Average Score: 0</p>
-    <button class="reset-button" onclick="exportScores()">Export Scores</button>
-    <button class="reset-button" onclick="importScores()">Import Scores</button>
+    <button onclick="exportScores()">Export Scores</button>
+    <button onclick="importScores()">Import Scores</button>
     <input type="file" id="fileInput" style="display:none;" onchange="handleFile(event)">
   </div>
 
-<script>
+  <!-- JavaScript Code -->
+  <script>
     let mode = 'teamwork';
     let isPaused = false;
     let timerInterval, countdownInterval;
@@ -222,18 +320,31 @@
     let timeLeft = 60;
     let scores = [];
 
+    // Base64 encoding and decoding helper functions
+    function encodeBase64(data) {
+      return btoa(unescape(encodeURIComponent(data)));
+    }
+
+    function decodeBase64(data) {
+      return decodeURIComponent(escape(atob(data)));
+    }
+
+    // Toggle Timer Visibility
     function toggleTimer() {
       const timerSection = document.getElementById("timer-section");
       timerSection.classList.toggle("hidden");
     }
 
+    // Add Score to Table
     function addToTable() {
-      let totalPoints = calculatePoints();
+      let totalPoints = calculateScores();
       scores.push(totalPoints);
       updateTable();
       calculateAverage();
+      resetValues(); // Reset scoring values after adding to table
     }
 
+    // Update Scores Table
     function updateTable() {
       const tableBody = document.getElementById("scoresTable").querySelector('tbody');
       tableBody.innerHTML = ""; // Clear table before repopulating
@@ -243,21 +354,29 @@
       });
     }
 
+    // Calculate Average Score
     function calculateAverage() {
-      if (scores.length === 0) return;
+      if (scores.length === 0) {
+        document.getElementById("averageScore").innerText = "Average Score: 0";
+        return;
+      }
       const total = scores.reduce((acc, curr) => acc + curr, 0);
       const average = total / scores.length;
       document.getElementById("averageScore").innerText = `Average Score: ${average.toFixed(2)}`;
     }
 
+    // Export Scores as Base64-encoded JSON
     function exportScores() {
-      const blob = new Blob([scores.join("\n")], { type: 'text/plain' });
+      const jsonScores = JSON.stringify(scores);
+      const base64Data = encodeBase64(jsonScores);
+      const blob = new Blob([base64Data], { type: 'text/plain' });
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
-      link.download = "scores.txt";
+      link.download = "scores.json";
       link.click();
     }
 
+    // Import Scores from Base64-encoded JSON
     function importScores() {
       document.getElementById('fileInput').click();
     }
@@ -266,22 +385,22 @@
       const file = event.target.files[0];
       const reader = new FileReader();
       reader.onload = function(event) {
-        const text = event.target.result;
-        scores = text.split('\n').map(Number).filter(Boolean); // Parse and remove empty lines
+        const base64Data = event.target.result;
+        const jsonData = decodeBase64(base64Data);
+        scores = JSON.parse(jsonData); // Parse JSON back to array
         updateTable();
         calculateAverage();
       };
       reader.readAsText(file);
     }
 
+    // Timer Logic
     function startPauseTimer() {
       let timerDisplay = document.getElementById("timer");
-      let audio = document.getElementById("timerAudio");
       let startPauseButton = document.getElementById("startPauseButton");
 
       if (!isPaused) {
         if (countdown > 0) {
-          audio.play(); // Play audio immediately
           countdownInterval = setInterval(() => {
             countdown--;
             timerDisplay.innerHTML = countdown;
@@ -292,14 +411,12 @@
           }, 1000);
         } else {
           startMinuteTimer();
-          audio.play(); // Resume playing the audio when resumed
         }
-        startPauseButton.innerText = 'Pause Timer';
+        startPauseButton.innerText = '⏸️';
       } else {
         clearInterval(timerInterval);
         clearInterval(countdownInterval);
-        audio.pause();
-        startPauseButton.innerText = 'Resume Timer';
+        startPauseButton.innerText = '▶️';
       }
       isPaused = !isPaused;
     }
@@ -318,85 +435,122 @@
     }
 
     function resetTimer() {
-      if (countdown > 0) {
-        clearInterval(countdownInterval);  // Only clear countdown if it's still running
-      } else {
-        clearInterval(timerInterval);  // Clear the minute timer if it's running
-      }
+      clearInterval(countdownInterval);
+      clearInterval(timerInterval);
       countdown = 3;
       timeLeft = 60;
       document.getElementById("timer").innerHTML = 3;
-      document.getElementById("startPauseButton").innerText = 'Start Timer';
+      document.getElementById("startPauseButton").innerText = '▶️';
       isPaused = false;
-      document.getElementById("timerAudio").pause();
-      document.getElementById("timerAudio").currentTime = 0; // Reset the audio
     }
 
-    function calculatePoints() {
-      let passes = parseInt(document.getElementById('passes-display').value) || 0;
-      let goals = parseInt(document.getElementById('goals-display').value) || 0;
-      let switches = Math.min(parseInt(document.getElementById('switches-display').value) || 0, 4);
+    // Function to calculate scores based on the scoring criteria
+    function calculateScores() {
+      let score = 0;
+      let scoreInvalid = false;
 
-      let totalPoints = 0;
+      // Get values from elements
+      let balls = document.getElementById('goals-display').value;
+      let switches = document.getElementById('switches-display').value;
+      let passes = document.getElementById('passes-display').value;
 
-      if (mode === 'teamwork') {
-        totalPoints = (passes * 2) + (goals * 5) + (switches * 3);
-      } else if (mode === 'skills') {
-        totalPoints = switches * 1; 
-        switch (switches) {
-          case 1:
-            totalPoints += goals * 4;
-            break;
-          case 2:
-            totalPoints += goals * 8;
-            break;
-          case 3:
-            totalPoints += goals * 10;
-            break;
-          case 4:
-            totalPoints += goals * 12;
-            break;
-        }
+      // Mode is stored in variable 'mode' ('teamwork' or 'skills')
+      // We'll map 'teamwork' to 0 and 'skills' to 1 for matchType
+      let matchType = (mode === 'teamwork') ? 0 : 1;
+
+      // Parse values to integers, defaulting to 0
+      balls = (balls == "") ? 0 : parseInt(balls);
+      switches = (switches == "") ? 0 : parseInt(switches);
+      passes = (passes == "") ? 0 : parseInt(passes);
+
+      // Adjust passes based on switches and balls
+      if(switches == 0 && passes > 4 && matchType == 0) {
+        passes = 4;
+      }
+      else if(passes > balls && matchType == 0 && switches != 0) {
+        passes = balls;
+        console.log(passes);
       }
 
-      document.getElementById('result').textContent = 'Total Points: ' + totalPoints;
-      return totalPoints; // Return the calculated points for table updates
-    }
+      // Scoring keys
+      const switchKey = [1,4,8,10,12,12,12,12,12];
+      let scoreKey = (matchType == 0) ? [1,1,switchKey[switches]] : [switchKey[switches],1,0];
 
-    function selectMode(selectedMode) {
-      mode = selectedMode;
+      let matchData = [balls, switches, passes];
+      matchData = matchData.map(function(currentElement) {
+        return currentElement == "" ? 0 : parseInt(currentElement);
+      });
 
-      document.getElementById('teamwork-button').classList.remove('active');
-      document.getElementById('skills-button').classList.remove('active');
-      document.getElementById(selectedMode + '-button').classList.add('active');
-
-      if (mode === 'teamwork') {
-        document.getElementById('passes-group').classList.remove('hidden');
-      } else if (mode === 'skills') {
-        document.getElementById('passes-group').classList.add('hidden');
+      // Calculate score
+      for(let i=0; i<3; i++) {
+        score += matchData[i] * scoreKey[i];
       }
 
-      calculatePoints();
+      // Show/hide passes input based on mode
+      if(matchType == 0) {
+        document.getElementById('passes-group').style.display = "block";
+      } else {
+        document.getElementById('passes-group').style.display = "none";
+      }
+
+      // Validate score
+      scoreInvalid = (Math.min.apply(Math, matchData) < 0 || matchData[1] > 4);
+      let resultElement = document.getElementById('result');
+      if(scoreInvalid) {
+        resultElement.style.color = "red";
+        resultElement.innerHTML = "Illegal Score: " + score.toString();
+      } else {
+        resultElement.style.color = "white";
+        resultElement.innerHTML = "Total Points: " + score.toString();
+      }
+
+      return score; // Return the calculated score for table updates
     }
 
-    function adjustValue(id, adjustment) {
-      let currentValue = parseInt(document.getElementById(id + '-display').value);
-      let newValue = Math.max(0, currentValue + adjustment);
-      if (id === 'switches') newValue = Math.min(4, newValue); // Ensure switches don't exceed 4
-      document.getElementById(id + '-display').value = newValue;
-      calculatePoints(); // Recalculate points after adjustment
-    }
-
+    // Reset Values Function
     function resetValues() {
       document.getElementById('passes-display').value = 0;
       document.getElementById('goals-display').value = 0;
       document.getElementById('switches-display').value = 0;
-      calculatePoints();
+      document.getElementById('result').textContent = 'Total Points: 0';
+      calculateScores(); // Recalculate points after reset
     }
 
-    calculatePoints(); // Initialize points when the page loads
-</script>
+    // Select Mode Function
+    function selectMode(selectedMode) {
+      mode = selectedMode;
 
+      document.getElementById('teamwork-button').classList.toggle('active', mode === 'teamwork');
+      document.getElementById('skills-button').classList.toggle('active', mode === 'skills');
+
+      if (mode === 'teamwork') {
+        document.getElementById('passes-group').style.display = "block";
+      } else if (mode === 'skills') {
+        document.getElementById('passes-group').style.display = "none";
+      }
+
+      calculateScores();
+    }
+
+    // Adjust Value Function
+    function adjustValue(id, adjustment) {
+      let inputField = document.getElementById(id + '-display');
+      let currentValue = parseInt(inputField.value) || 0;
+      let newValue = currentValue + adjustment;
+
+      // Ensure values are within valid ranges
+      if (id === 'switches') {
+        newValue = Math.min(Math.max(newValue, 0), 4); // Switches between 0 and 4
+      } else {
+        newValue = Math.max(newValue, 0); // No negative values
+      }
+
+      inputField.value = newValue;
+      calculateScores(); // Recalculate points after adjustment
+    }
+
+    // Initialize Points When the Page Loads
+    calculateScores();
+  </script>
 </body>
-
 </html>
