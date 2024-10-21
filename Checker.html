@@ -3,9 +3,9 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Score Viewer</title>
+  <title>VEX IQ Rapid Relay Score Viewer</title>
   <style>
+    /* Body Styling */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -13,19 +13,21 @@
       background-color: #1a1a1a;
       color: #fff;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
       min-height: 100vh;
-      flex-direction: column;
     }
 
+    /* Heading */
     h1 {
       text-align: center;
       color: #ffcc00;
+      margin-bottom: 20px;
     }
 
+    /* Table Styling */
     table {
-      width: 100%;
+      width: 80%;
       margin-top: 20px;
       color: #fff;
       border-collapse: collapse;
@@ -38,97 +40,250 @@
       text-align: center;
     }
 
-    button {
+    /* Statistics Section */
+    .statistics {
+      margin-top: 30px;
+      background-color: #2e2e2e;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      width: 80%;
+    }
+
+    .statistics p {
+      margin: 10px 0;
+      font-size: 18px;
+    }
+
+    /* Upload Button Styling */
+    #uploadButton {
       width: 150px;
-      padding: 5px;
+      padding: 10px;
       background-color: #ffcc00;
       color: #1a1a1a;
       border: none;
-      border-radius: 4px;
-      font-size: 14px;
+      border-radius: 10px;
+      font-size: 16px;
       cursor: pointer;
-      margin-top: 20px;
+      margin: 20px auto;
+      display: block;
     }
 
-    button:hover {
+    #uploadButton:hover {
       background-color: #e6b800;
     }
 
-    .result {
-      margin-top: 20px;
-      font-size: 24px;
-      font-weight: bold;
-      color: #fff;
-      text-align: center;
+    /* Canvas Styling */
+    .chart-container {
+      width: 80%;
+      margin-top: 40px;
+    }
+
+    canvas {
+      background-color: #2e2e2e;
+      padding: 20px;
+      border-radius: 10px;
     }
   </style>
 </head>
 
 <body>
+  <h1>VEX IQ Rapid Relay Score Viewer</h1>
+  <button id="uploadButton" onclick="document.getElementById('fileInput').click();">Upload Scores</button>
+  <input type="file" id="fileInput" accept=".json" style="display: none;" onchange="handleFileUpload()">
 
-  <h1>Score Viewer</h1>
+  <div id="scoreTableContainer" class="hidden">
+    <table id="scoresTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
 
-  <button onclick="importScores()">Upload Scores File</button>
-  <input type="file" id="fileInput" style="display:none;" onchange="handleFile(event)">
+  <!-- Statistics Section -->
+  <div id="statistics" class="statistics hidden">
+    <div id="basicStats" class="basic-stats">
+      <p id="averageScore">Average Score: </p>
+      <p id="bestScore">Best Score: </p>
+      <p id="totalScores">Total Scores: </p>
+      <p id="aboveBelowAverage">Scores Above Average: </p>
+      <p id="averageRecent12">Average of 12: </p>
+      <p id="averageRecent6">Average of 6: </p>
+    </div>
+  </div>
 
-  <table id="scoresTable">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Score</th>
-      </tr>
-    </thead>
-    <tbody>
-    </tbody>
-  </table>
+  <!-- Chart Containers -->
+  <div class="chart-container hidden" style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+    <div style="flex: 1;">
+      <canvas id="scoreDistributionChart"></canvas>
+    </div>
+    <div style="flex: 1;">
+      <canvas id="improvementChart"></canvas>
+    </div>
+  </div>
 
-  <p id="averageScore" class="result">Average Score: N/A</p>
-
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-    let scores = [];
-
-    // Base64 decoding helper function
-    function decodeBase64(data) {
-      return decodeURIComponent(escape(window.atob(data)));
+    function handleFileUpload() {
+      function decodeBase64(data) {
+        return decodeURIComponent(escape(atob(data)));
+      }
+      const fileInput = document.getElementById('fileInput');
+      const file = fileInput.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          try {
+            let scores;
+            const base64Data = event.target.result.replace(/^data:text\/plain;base64,/, '');
+            const jsonData = decodeBase64(base64Data);
+            scores = JSON.parse(jsonData);
+            if (!Array.isArray(scores)) {
+              throw new Error('Invalid JSON structure');
+            }
+            displayScores(scores);
+          } catch (e) {
+            alert('Invalid file format. Please upload a valid scores JSON file.');
+          }
+        };
+        reader.readAsText(file);
+      } else {
+        alert('Please select a file to upload.');
+      }
     }
 
-    function importScores() {
-      document.getElementById('fileInput').click();
-    }
+    function displayScores(scores) {
+      // Make table, statistics, and charts visible
+      document.getElementById('scoreTableContainer').classList.remove('hidden');
+      document.getElementById('statistics').classList.remove('hidden');
+      document.querySelectorAll('.chart-container').forEach(chart => chart.classList.remove('hidden'));
 
-    function handleFile(event) {
-      const file = event.target.files[0];
-      const reader = new FileReader();
-      reader.onload = function (event) {
-        const base64Data = event.target.result.trim(); // Get the base64 data and remove any whitespace
-        const decodedText = decodeBase64(base64Data); // Decode base64 to text
-        scores = decodedText.split('\n').map(Number).filter(score => !isNaN(score)); // Parse and remove invalid entries
-        updateTable();
-        calculateAverage();
-      };
-      reader.readAsText(file);
-    }
-
-    function updateTable() {
-      const tableBody = document.getElementById("scoresTable").querySelector('tbody');
-      tableBody.innerHTML = ""; // Clear table before repopulating
+      // Populate the scores table
+      const tableBody = document.getElementById('scoresTable').querySelector('tbody');
+      tableBody.innerHTML = '';
+      let totalScore = 0;
+      let bestScore = -Infinity;
+      let scoresAboveAverage = 0;
+      
       scores.forEach((score, index) => {
+        totalScore += score;
+        if (score > bestScore) {
+          bestScore = score;
+        }
         let row = `<tr><td>${index + 1}</td><td>${score}</td></tr>`;
         tableBody.innerHTML += row;
       });
+
+      // Calculate statistics
+      const averageScore = (scores.length > 0) ? (totalScore / scores.length).toFixed(2) : 0;
+      scoresAboveAverage = scores.filter(score => score > averageScore).length;
+
+      const recent12Scores = scores.slice(-12);
+      const averageRecent12 = (recent12Scores.length > 0) ? (recent12Scores.reduce((acc, curr) => acc + curr, 0) / recent12Scores.length).toFixed(2) : 0;
+      
+      const recent6Scores = scores.slice(-6);
+      const averageRecent6 = (recent6Scores.length > 0) ? (recent6Scores.reduce((acc, curr) => acc + curr, 0) / recent6Scores.length).toFixed(2) : 0;
+
+      // Display statistics
+      document.getElementById('basicStats').classList.remove('hidden');
+      document.getElementById('averageScore').innerText = `Average Score: ${averageScore}`;
+      document.getElementById('bestScore').innerText = `Best Score: ${bestScore}`;
+      document.getElementById('totalScores').innerText = `Total Scores: ${scores.length}`;
+      document.getElementById('aboveBelowAverage').innerText = `Scores Above Average: ${scoresAboveAverage}`;
+      document.getElementById('averageRecent12').innerText = `Average of Most Recent 12 Scores: ${averageRecent12}`;
+      document.getElementById('averageRecent6').innerText = `Average of Most Recent 6 Scores: ${averageRecent6}`;
+
+      // Create the charts
+      createScoreDistributionChart(scores, averageScore);
+      createImprovementChart(scores);
     }
 
-    function calculateAverage() {
-      if (scores.length === 0) {
-        document.getElementById("averageScore").innerText = "Average Score: N/A";
-        return;
-      }
-      const total = scores.reduce((acc, curr) => acc + curr, 0);
-      const average = total / scores.length;
-      document.getElementById("averageScore").innerText = `Average Score: ${average.toFixed(2)}`;
+    function createScoreDistributionChart(scores, averageScore) {
+      const ctx = document.getElementById('scoreDistributionChart').getContext('2d');
+      const belowAverageScores = scores.filter(score => score <= averageScore);
+      const aboveAverageScores = scores.filter(score => score > averageScore);
+
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Below Average or Equal to Average', 'Above Average'],
+          datasets: [{
+            label: 'Number of Scores',
+            data: [belowAverageScores.length, aboveAverageScores.length],
+            backgroundColor: ['#ffcc00', '#1a1a1a'],
+            borderColor: '#fff',
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              display: true
+            },
+            title: {
+              display: true,
+              text: 'Score Distribution'
+            }
+          }
+        }
+      });
     }
-  </script>
 
-</body>
+    function createImprovementChart(scores) {
+      const ctx = document.getElementById('improvementChart').getContext('2d');
+      const labels = scores.map((_, index) => `Attempt ${index + 1}`);
 
-</html>
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Score Improvement Over Time',
+            data: scores,
+            borderColor: '#ffcc00',
+            backgroundColor: 'rgba(26, 26, 26, 0.5)',
+            pointBackgroundColor: '#ffcc00',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 1,
+            fill: true
+          }]
+        },
+        options: {
+        responsive: true,
+        plugins: {
+        legend: {
+        display: true
+        },
+        title: {
+        display: true,
+        text: 'Score Improvement Over Time'
+        }
+        },
+        scales: {
+        x: {
+        title: {
+        display: true,
+        text: 'Attempts'
+        }
+        },
+        y: {
+        title: {
+        display: true,
+        text: 'Score'
+        },
+        beginAtZero: true
+        }
+        }
+        }
+        });
+        }
+        </script>
+        </body>
+        
+        </html>
