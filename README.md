@@ -29,11 +29,11 @@
 
 <h3 style="text-align: center;">Version 1.0.3</h3>
 <ul>
-  <li>🔧 **Added toggle for timer visibility**: Functionality to toggle timer on/off with a simple button press.</li>
-  <li>🎵 **Enhanced audio functionality**: Implemented the playback of audio at key countdown points using JavaScript's `Audio` API.</li>
+  <li>🔧 <strong>Added toggle for timer visibility:</strong> Functionality to toggle timer on/off with a simple button press.</li>
+  <li>🎵 <strong>Enhanced audio functionality:</strong> Implemented the playback of audio at key countdown points using JavaScript's `Audio` API.</li>
   <li>📊 **Improved score calculation**: JavaScript function dynamically calculates points based on the user’s inputs for goals, switches, and passes, providing instant feedback in the UI.</li>
-  <li>🛠️ **Reset functionality added**: Integrated a reset button to clear inputs and reset values on the point calculator.</li>
-  <li>🧩 **Refined timer function**: The `startPauseTimer()` function handles both countdown and regular timer modes, making the logic cleaner and more intuitive.</li>
+  <li>🛠️ <strong>Reset functionality added:</strong> Integrated a reset button to clear inputs and reset values on the point calculator.</li>
+  <li>🧩 <strong>Refined timer function:</strong> The `startPauseTimer()` function handles both countdown and regular timer modes, making the logic cleaner and more intuitive.</li>
 </ul>
 
 <h3 style="text-align: center;">Version 1.0.2</h3>
