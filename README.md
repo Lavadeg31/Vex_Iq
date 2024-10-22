@@ -27,6 +27,15 @@
 
 <h2>🛠️ Code Changes</h2>
 
+<h3 style="text-align: center;">Version 1.0.3</h3>
+<ul>
+  <li>🔧 **Added toggle for timer visibility**: Functionality to toggle timer on/off with a simple button press.</li>
+  <li>🎵 **Enhanced audio functionality**: Implemented the playback of audio at key countdown points using JavaScript's `Audio` API.</li>
+  <li>📊 **Improved score calculation**: JavaScript function dynamically calculates points based on the user’s inputs for goals, switches, and passes, providing instant feedback in the UI.</li>
+  <li>🛠️ **Reset functionality added**: Integrated a reset button to clear inputs and reset values on the point calculator.</li>
+  <li>🧩 **Refined timer function**: The `startPauseTimer()` function handles both countdown and regular timer modes, making the logic cleaner and more intuitive.</li>
+</ul>
+
 <h3 style="text-align: center;">Version 1.0.2</h3>
 <ul>
   <li>🎮 Added partial autonomous support</li>
@@ -57,7 +66,7 @@
   <li><img src="https://drive.google.com/uc?export=view&id=1DFVyXuCuYE1jloaBbeH7jvf7zQaiYeNb" width="320" height="240" alt="Catapult sensor integration"></li>
 </ul>
 
-<h2>⏲️ Timer Notes</h2>
+<h2>Software Notes</h2>
 <ul>
   <li>⏳ We implemented a timer that starts with a 3-second countdown and then runs for 1 minute.</li>
   <li>🎵 During the countdown, an audio file (`Timer.mp3`) plays a beep at each second: 3, 2, 1.</li>
@@ -65,8 +74,8 @@
   <li>🔄 You can toggle the visibility of the timer using the "Timer On/Off" toggle.</li>
   <li>🖱️ <a href="https://lavadeg31.github.io/Vex_Iq/Calc.html">Try the Timer Here!</a></li>
 </ul>
+
 <h2>New Rule Summary!</h2>
 <ul>
   <li>📕 <a href="https://lavadeg31.github.io/Vex_Iq/Rules.html">Read It!</a></li>
 </ul>
-
