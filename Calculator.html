@@ -4,220 +4,222 @@
   <meta charset="UTF-8">
   <title>VEX IQ Rapid Relay Point Calculator</title>
   <style>
-    /* Body Styling */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 10px;
-      background-color: #1a1a1a;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-    }
+/* Body Styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 10px;
+  background-color: #f5f5dc; /* Light beige */
+  color: #1a1a1a; /* Dark text to stand out */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
 
-    /* Heading */
-    h1 {
-      text-align: center;
-      color: #ffcc00;
-      margin-bottom: 20px;
-    }
+/* Heading */
+h1 {
+  text-align: center;
+  color: #1a1a1a; /* Dark text for contrast */
+  margin-bottom: 20px;
+}
 
-    /* Calculator Container */
-    .calculator {
-      max-width: 600px;
-      width: 100%;
-      padding: 20px;
-      text-align: center;
-      background-color: #2e2e2e;
-      border-radius: 10px;
-    }
+/* Calculator Container */
+.calculator {
+  max-width: 600px;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  background-color: #d2c2a3; /* Darker beige */
+  border-radius: 10px;
+  color: #1a1a1a; /* Dark text */
+}
 
-    /* Input Groups */
-    .input-group {
-      margin-bottom: 20px;
-    }
+/* Input Groups */
+.input-group {
+  margin-bottom: 20px;
+}
 
-    .input-group label {
-      display: block;
-      margin-bottom: 5px;
-      color: #fff;
-    }
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #1a1a1a; /* Dark text */
+}
 
-    /* Plus-Minus Buttons */
-    .plus-minus {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-    }
+/* Plus-Minus Buttons */
+.plus-minus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
 
-    .plus-minus button {
-      width: 50px;
-      height: 50px;
-      font-size: 24px;
-      background-color: #ffcc00;
-      color: #1a1a1a;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-    }
+.plus-minus button {
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  background-color: #bfae90; /* Darker beige for buttons */
+  color: #1a1a1a; /* Dark text */
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
 
-    .plus-minus button:hover {
-      background-color: #e6b800;
-    }
+.plus-minus button:hover {
+  background-color: #a8997a; /* Slightly darker beige for hover effect */
+}
 
-    /* Input Fields */
-    input[type="number"] {
-      width: 60px;
-      height: 50px;
-      text-align: center;
-      font-size: 24px;
-      background-color: #3a3a3a;
-      border: none;
-      border-radius: 5px;
-      color: #fff;
-      outline: none;
-    }
+/* Input Fields */
+input[type="number"] {
+  width: 60px;
+  height: 50px;
+  text-align: center;
+  font-size: 24px;
+  background-color: #e0d6b9; /* Lighter beige for input background */
+  border: none;
+  border-radius: 5px;
+  color: #1a1a1a; /* Dark text */
+  outline: none;
+}
 
-    /* Result Display */
-    .result {
-      margin-top: 20px;
-      font-size: 24px;
-      font-weight: bold;
-      color: #fff;
-    }
+/* Result Display */
+.result {
+  margin-top: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #1a1a1a; /* Dark text */
+}
 
-    /* Buttons */
-    button {
-      width: 150px;
-      padding: 10px;
-      background-color: #ffcc00;
-      color: #1a1a1a;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      cursor: pointer;
-      margin: 5px;
-    }
+/* Buttons */
+button {
+  width: 150px;
+  padding: 10px;
+  background-color: #bfae90; /* Darker beige for buttons */
+  color: #1a1a1a; /* Dark text */
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 5px;
+}
 
-    button:hover {
-      background-color: #e6b800;
-    }
+button:hover {
+  background-color: #a8997a; /* Slightly darker beige for hover effect */
+}
 
-    /* Table Styling */
-    table {
-      width: 100%;
-      margin-top: 20px;
-      color: #fff;
-      border-collapse: collapse;
-    }
+/* Table Styling */
+table {
+  width: 100%;
+  margin-top: 20px;
+  color: #1a1a1a; /* Dark text */
+  border-collapse: collapse;
+}
 
-    th, td {
-      border: 1px solid #fff;
-      padding: 10px;
-      text-align: center;
-    }
+th, td {
+  border: 1px solid #1a1a1a; /* Dark border */
+  padding: 10px;
+  text-align: center;
+}
 
-    /* Hidden Class */
-    .hidden {
-      display: none;
-    }
+/* Hidden Class */
+.hidden {
+  display: none;
+}
 
-    /* Timer Styling */
-    .timer {
-      font-size: 80px;
-      text-align: center;
-    }
+/* Timer Styling */
+.timer {
+  font-size: 80px;
+  text-align: center;
+  color: #1a1a1a; /* Dark text */
+}
 
-    /* Timer Container */
-    #timer-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 20px;
-    }
+/* Timer Container */
+#timer-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
 
-    /* Timer Controls */
-    #startPauseButton, #restartButton {
-      width: 80px;
-      height: 80px;
-      font-size: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #ffcc00;
-      color: #1a1a1a;
-      border: none;
-      cursor: pointer;
-    }
+/* Timer Controls */
+#startPauseButton, #restartButton {
+  width: 80px;
+  height: 80px;
+  font-size: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #bfae90; /* Darker beige for buttons */
+  color: #1a1a1a; /* Dark text */
+  border: none;
+  cursor: pointer;
+}
 
-    #startPauseButton:hover, #restartButton:hover {
-      background-color: #e6b800;
-    }
+#startPauseButton:hover, #restartButton:hover {
+  background-color: #a8997a; /* Slightly darker beige for hover effect */
+}
 
-    /* Mode Buttons */
-    .mode-buttons {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
+/* Mode Buttons */
+.mode-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
 
-    .mode-buttons button {
-      flex: 1;
-      margin: 0 10px;
-    }
+.mode-buttons button {
+  flex: 1;
+  margin: 0 10px;
+}
 
-    .mode-buttons .active {
-      background-color: #e6b800;
-    }
+.mode-buttons .active {
+  background-color: #a8997a; /* Active button darker beige */
+}
 
-    /* Clear Inputs Button Styling */
-    #clearButton {
-      width: 150px;
-      padding: 10px;
-      background-color: #ff5733;
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      cursor: pointer;
-      margin: 20px auto;
-      display: block;
-    }
+/* Clear Inputs Button Styling */
+#clearButton {
+  width: 150px;
+  padding: 10px;
+  background-color: #ff5733; /* Orange for clear button */
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 20px auto;
+  display: block;
+}
 
-    #clearButton:hover {
-      background-color: #e14c2a;
-    }
+#clearButton:hover {
+  background-color: #e14c2a; /* Darker orange on hover */
+}
 
-    /* Responsive Design */
-    @media (max-width: 600px) {
-      .plus-minus {
-        flex-direction: column;
-        gap: 10px;
-      }
+/* Responsive Design */
+@media (max-width: 600px) {
+  .plus-minus {
+    flex-direction: column;
+    gap: 10px;
+  }
 
-      .plus-minus button {
-        width: 100%;
-      }
+  .plus-minus button {
+    width: 100%;
+  }
 
-      input[type="number"] {
-        width: 100%;
-      }
+  input[type="number"] {
+    width: 100%;
+  }
 
-      #timer-container {
-        flex-direction: column;
-      }
+  #timer-container {
+    flex-direction: column;
+  }
 
-      #startPauseButton, #restartButton {
-        width: 60px;
-        height: 60px;
-        font-size: 30px;
-      }
-    }
+  #startPauseButton, #restartButton {
+    width: 60px;
+    height: 60px;
+    font-size: 30px;
+  }
+}
   </style>
 </head>
 
