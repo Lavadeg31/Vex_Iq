@@ -5,85 +5,86 @@
   <meta charset="UTF-8">
   <title>VEX IQ Rapid Relay Score Viewer</title>
   <style>
-    /* Body Styling */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 10px;
-      background-color: #1a1a1a;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-    }
+/* Body Styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 10px;
+  background-color: #f5f5dc; /* Light beige */
+  color: #1a1a1a; /* Dark text to stand out */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
 
-    /* Heading */
-    h1 {
-      text-align: center;
-      color: #ffcc00;
-      margin-bottom: 20px;
-    }
+/* Heading */
+h1 {
+  text-align: center;
+  color: #1a1a1a; /* Dark text for contrast */
+  margin-bottom: 20px;
+}
 
-    /* Table Styling */
-    table {
-      width: 80%;
-      margin-top: 20px;
-      color: #fff;
-      border-collapse: collapse;
-    }
+/* Table Styling */
+table {
+  width: 80%;
+  margin-top: 20px;
+  color: #1a1a1a; /* Dark text for contrast */
+  border-collapse: collapse;
+}
 
-    th,
-    td {
-      border: 1px solid #fff;
-      padding: 10px;
-      text-align: center;
-    }
+th,
+td {
+  border: 1px solid #1a1a1a; /* Dark border for contrast */
+  padding: 10px;
+  text-align: center;
+}
 
-    /* Statistics Section */
-    .statistics {
-      margin-top: 30px;
-      background-color: #2e2e2e;
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-      width: 80%;
-    }
+/* Statistics Section */
+.statistics {
+  margin-top: 30px;
+  background-color: #d2c2a3; /* Darker beige */
+  color: #1a1a1a; /* Dark text to stand out */
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 80%;
+}
 
-    .statistics p {
-      margin: 10px 0;
-      font-size: 18px;
-    }
+.statistics p {
+  margin: 10px 0;
+  font-size: 18px;
+}
 
-    /* Upload Button Styling */
-    #uploadButton {
-      width: 150px;
-      padding: 10px;
-      background-color: #ffcc00;
-      color: #1a1a1a;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      cursor: pointer;
-      margin: 20px auto;
-      display: block;
-    }
+/* Upload Button Styling */
+#uploadButton {
+  width: 150px;
+  padding: 10px;
+  background-color: #d2c2a3; /* Darker beige */
+  color: #1a1a1a; /* Dark text to stand out */
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 20px auto;
+  display: block;
+}
 
-    #uploadButton:hover {
-      background-color: #e6b800;
-    }
+#uploadButton:hover {
+  background-color: #bfae90; /* Slightly darker beige for hover effect */
+}
 
-    /* Canvas Styling */
-    .chart-container {
-      width: 80%;
-      margin-top: 40px;
-    }
+/* Canvas Styling */
+.chart-container {
+  width: 80%;
+  margin-top: 40px;
+}
 
-    canvas {
-      background-color: #2e2e2e;
-      padding: 20px;
-      border-radius: 10px;
-    }
+canvas {
+  background-color: #d2c2a3; /* Darker beige */
+  padding: 20px;
+  border-radius: 10px;
+}
   </style>
 </head>
 
