@@ -27,6 +27,12 @@
 
 <h2>🛠️ Code Changes</h2>
 
+<h3 style="text-align: center;">Version 1.0.3</h3>
+<ul>
+  <li>Tuned tensioning system to add presets to top and bottom goal</li>
+  <li>Nothing More</li>
+</ul>
+
 
 <h3 style="text-align: center;">Version 1.0.2</h3>
 <ul>
@@ -52,14 +58,9 @@
 
 <p>Full Changelog: <a href="https://github.com/Lavadeg31/Vex_Iq/commits/Code">Code V1.0.1 Changelog</a></p>
 
-<h2>📄 Patch Notes</h2>
-<ul>
-  <li><strong>Patch V1.0.1 (October 16, 2024):</strong> Integrated distance sensor to halt movement when the catapult is in the lowered position.</li>
-  <li><img src="https://drive.google.com/uc?export=view&id=1DFVyXuCuYE1jloaBbeH7jvf7zQaiYeNb" width="320" height="240" alt="Catapult sensor integration"></li>
-</ul>
 
 <h2>Software Notes</h2>
-<h3 style="text-align: center;">Version 1.0.3</h3>
+<h3 style="text-align: center;">Version 1</h3>
 <ul>
   <li>🔧 <strong>Added toggle for timer visibility:</strong> Functionality to toggle timer on/off with a simple button press.</li>
   <li>🎵 <strong>Enhanced audio functionality:</strong> Implemented the playback of audio at key countdown points using JavaScript's `Audio` API.</li>
