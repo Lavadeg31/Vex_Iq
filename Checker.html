@@ -1,232 +1,264 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-  <title>VEX IQ Rapid Relay Score Viewer</title>
+  <title>Enhanced VEX IQ Rapid Relay Score Viewer</title>
   <style>
-/* Body Styling */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 10px;
-  background-color: #f5f5dc; /* Light beige */
-  color: #1a1a1a; /* Dark text to stand out */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
-}
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 10px;
+      background-color: #f5f5dc;
+      color: #1a1a1a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
 
-/* Heading */
-h1 {
-  text-align: center;
-  color: #1a1a1a; /* Dark text for contrast */
-  margin-bottom: 20px;
-}
+    h1, h2 {
+      text-align: center;
+      color: #1a1a1a;
+      margin-bottom: 20px;
+    }
 
-/* Table Styling */
-table {
-  width: 80%;
-  margin-top: 20px;
-  color: #1a1a1a; /* Dark text for contrast */
-  border-collapse: collapse;
-}
+    table {
+      width: 80%;
+      margin-top: 20px;
+      color: #1a1a1a;
+      border-collapse: collapse;
+    }
 
-th,
-td {
-  border: 1px solid #1a1a1a; /* Dark border for contrast */
-  padding: 10px;
-  text-align: center;
-}
+    th, td {
+      border: 1px solid #1a1a1a;
+      padding: 10px;
+      text-align: center;
+    }
 
-/* Statistics Section */
-.statistics {
-  margin-top: 30px;
-  background-color: #d2c2a3; /* Darker beige */
-  color: #1a1a1a; /* Dark text to stand out */
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  width: 80%;
-}
+    .statistics {
+      margin-top: 30px;
+      background-color: #d2c2a3;
+      color: #1a1a1a;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      width: 80%;
+    }
 
-.statistics p {
-  margin: 10px 0;
-  font-size: 18px;
-}
+    .statistics p {
+      margin: 10px 0;
+      font-size: 18px;
+    }
 
-/* Upload Button Styling */
-#uploadButton {
-  width: 150px;
-  padding: 10px;
-  background-color: #d2c2a3; /* Darker beige */
-  color: #1a1a1a; /* Dark text to stand out */
-  border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  cursor: pointer;
-  margin: 20px auto;
-  display: block;
-}
+    #uploadButton {
+      width: 150px;
+      padding: 10px;
+      background-color: #d2c2a3;
+      color: #1a1a1a;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 20px auto;
+      display: block;
+    }
 
-#uploadButton:hover {
-  background-color: #bfae90; /* Slightly darker beige for hover effect */
-}
+    #uploadButton:hover {
+      background-color: #bfae90;
+    }
 
-/* Canvas Styling */
-.chart-container {
-  width: 80%;
-  margin-top: 40px;
-}
+    .chart-container {
+      width: 80%;
+      margin: 20px 0;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
 
-canvas {
-  background-color: #d2c2a3; /* Darker beige */
-  padding: 20px;
-  border-radius: 10px;
-}
+    .chart-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      width: 90%;
+      margin: 20px auto;
+    }
+
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 
 <body>
-  <h1>VEX IQ Rapid Relay Score Viewer</h1>
+  <h1>Enhanced VEX IQ Rapid Relay Score Viewer</h1>
   <button id="uploadButton" onclick="document.getElementById('fileInput').click();">Upload Scores</button>
   <input type="file" id="fileInput" accept=".json" style="display: none;" onchange="handleFileUpload()">
 
-  <div id="scoreTableContainer" class="hidden">
-    <table id="scoresTable">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Score</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
+  <div class="statistics" id="statistics">
+    <h2>Performance Analytics</h2>
+    <div id="basicStats"></div>
+    <div id="advancedStats"></div>
   </div>
 
-  <!-- Statistics Section -->
-  <div id="statistics" class="statistics hidden">
-    <div id="basicStats" class="basic-stats">
-      <p id="averageScore">Average Score: </p>
-      <p id="bestScore">Best Score: </p>
-      <p id="totalScores">Total Scores: </p>
-      <p id="aboveBelowAverage">Scores Above Average: </p>
-      <p id="averageRecent12">Average of 12: </p>
-      <p id="averageRecent6">Average of 6: </p>
+  <div class="chart-grid">
+    <div class="chart-container">
+      <canvas id="scoreOverTime"></canvas>
     </div>
-  </div>
-
-  <!-- Chart Containers -->
-  <div class="chart-container hidden" style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
-    <div style="flex: 1;">
-      <canvas id="scoreDistributionChart"></canvas>
+    <div class="chart-container">
+      <canvas id="movingAverages"></canvas>
     </div>
-    <div style="flex: 1;">
-      <canvas id="improvementChart"></canvas>
+    <div class="chart-container">
+      <canvas id="scoreDistribution"></canvas>
+    </div>
+    <div class="chart-container">
+      <canvas id="performanceConsistency"></canvas>
     </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     function handleFileUpload() {
-      function decodeBase64(data) {
-        return decodeURIComponent(escape(atob(data)));
-      }
       const fileInput = document.getElementById('fileInput');
       const file = fileInput.files[0];
+      
       if (file) {
         const reader = new FileReader();
         reader.onload = function(event) {
           try {
-            let scores;
-            const base64Data = event.target.result.replace(/^data:text\/plain;base64,/, '');
-            const jsonData = decodeBase64(base64Data);
-            scores = JSON.parse(jsonData);
-            if (!Array.isArray(scores)) {
-              throw new Error('Invalid JSON structure');
-            }
-            displayScores(scores);
+            const scores = JSON.parse(decodeURIComponent(escape(atob(event.target.result.replace(/^data:text\/plain;base64,/, '')))));
+            if (!Array.isArray(scores)) throw new Error('Invalid JSON structure');
+            processAndDisplayData(scores);
           } catch (e) {
             alert('Invalid file format. Please upload a valid scores JSON file.');
           }
         };
         reader.readAsText(file);
-      } else {
-        alert('Please select a file to upload.');
       }
     }
 
-    function displayScores(scores) {
-      // Make table, statistics, and charts visible
-      document.getElementById('scoreTableContainer').classList.remove('hidden');
-      document.getElementById('statistics').classList.remove('hidden');
-      document.querySelectorAll('.chart-container').forEach(chart => chart.classList.remove('hidden'));
+    function calculateStatistics(scores) {
+      const stats = {
+        total: scores.length,
+        mean: scores.reduce((a, b) => a + b, 0) / scores.length,
+        best: Math.max(...scores),
+        worst: Math.min(...scores),
+        recent6Avg: scores.slice(-6).reduce((a, b) => a + b, 0) / Math.min(6, scores.length),
+        recent12Avg: scores.slice(-12).reduce((a, b) => a + b, 0) / Math.min(12, scores.length)
+      };
 
-      // Populate the scores table
-      const tableBody = document.getElementById('scoresTable').querySelector('tbody');
-      tableBody.innerHTML = '';
-      let totalScore = 0;
-      let bestScore = -Infinity;
-      let scoresAboveAverage = 0;
-      
-      scores.forEach((score, index) => {
-        totalScore += score;
-        if (score > bestScore) {
-          bestScore = score;
-        }
-        let row = `<tr><td>${index + 1}</td><td>${score}</td></tr>`;
-        tableBody.innerHTML += row;
-      });
+      // Calculate standard deviation
+      const variance = scores.reduce((a, b) => a + Math.pow(b - stats.mean, 2), 0) / scores.length;
+      stats.stdDev = Math.sqrt(variance);
 
-      // Calculate statistics
-      const averageScore = (scores.length > 0) ? (totalScore / scores.length).toFixed(2) : 0;
-      scoresAboveAverage = scores.filter(score => score > averageScore).length;
+      // Calculate consistency score (inverse of coefficient of variation)
+      stats.consistency = (1 - (stats.stdDev / stats.mean)) * 100;
 
-      const recent12Scores = scores.slice(-12);
-      const averageRecent12 = (recent12Scores.length > 0) ? (recent12Scores.reduce((acc, curr) => acc + curr, 0) / recent12Scores.length).toFixed(2) : 0;
-      
-      const recent6Scores = scores.slice(-6);
-      const averageRecent6 = (recent6Scores.length > 0) ? (recent6Scores.reduce((acc, curr) => acc + curr, 0) / recent6Scores.length).toFixed(2) : 0;
-
-      // Display statistics
-      document.getElementById('basicStats').classList.remove('hidden');
-      document.getElementById('averageScore').innerText = `Average Score: ${averageScore}`;
-      document.getElementById('bestScore').innerText = `Best Score: ${bestScore}`;
-      document.getElementById('totalScores').innerText = `Total Scores: ${scores.length}`;
-      document.getElementById('aboveBelowAverage').innerText = `Scores Above Average: ${scoresAboveAverage}`;
-      document.getElementById('averageRecent12').innerText = `Average of Most Recent 12 Scores: ${averageRecent12}`;
-      document.getElementById('averageRecent6').innerText = `Average of Most Recent 6 Scores: ${averageRecent6}`;
-
-      // Create the charts
-      createScoreDistributionChart(scores, averageScore);
-      createImprovementChart(scores);
+      return stats;
     }
 
-    function createScoreDistributionChart(scores, averageScore) {
-      const ctx = document.getElementById('scoreDistributionChart').getContext('2d');
-      const belowAverageScores = scores.filter(score => score <= averageScore);
-      const aboveAverageScores = scores.filter(score => score > averageScore);
+    function calculateMovingAverage(scores, window) {
+      return scores.map((_, idx) => {
+        const start = Math.max(0, idx - window + 1);
+        const windowScores = scores.slice(start, idx + 1);
+        return windowScores.reduce((a, b) => a + b, 0) / windowScores.length;
+      });
+    }
 
+    function createScoreOverTimeChart(scores) {
+      const ctx = document.getElementById('scoreOverTime').getContext('2d');
       new Chart(ctx, {
-        type: 'bar',
+        type: 'line',
         data: {
-          labels: ['Below Average or Equal to Average', 'Above Average'],
+          labels: scores.map((_, i) => `Attempt ${i + 1}`),
           datasets: [{
-            label: 'Number of Scores',
-            data: [belowAverageScores.length, aboveAverageScores.length],
-            backgroundColor: ['#ffcc00', '#1a1a1a'],
-            borderColor: '#fff',
-            borderWidth: 2
+            label: 'Score',
+            data: scores,
+            borderColor: '#1a1a1a',
+            backgroundColor: 'rgba(26, 26, 26, 0.1)',
+            fill: true
           }]
         },
         options: {
           responsive: true,
           plugins: {
-            legend: {
-              display: true
-            },
+            title: {
+              display: true,
+              text: 'Score Progression'
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Score'
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function createMovingAveragesChart(scores) {
+      const ma3 = calculateMovingAverage(scores, 3);
+      const ma6 = calculateMovingAverage(scores, 6);
+      
+      const ctx = document.getElementById('movingAverages').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: scores.map((_, i) => `Attempt ${i + 1}`),
+          datasets: [{
+            label: '3-Attempt MA',
+            data: ma3,
+            borderColor: '#d4af37',
+            borderWidth: 2,
+            fill: false
+          }, {
+            label: '6-Attempt MA',
+            data: ma6,
+            borderColor: '#1a1a1a',
+            borderWidth: 2,
+            fill: false
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Moving Averages Trend'
+            }
+          }
+        }
+      });
+    }
+
+    function createScoreDistributionChart(scores) {
+      const binSize = 5;
+      const bins = {};
+      scores.forEach(score => {
+        const bin = Math.floor(score / binSize) * binSize;
+        bins[bin] = (bins[bin] || 0) + 1;
+      });
+
+      const ctx = document.getElementById('scoreDistribution').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: Object.keys(bins),
+          datasets: [{
+            label: 'Frequency',
+            data: Object.values(bins),
+            backgroundColor: '#d2c2a3',
+            borderColor: '#1a1a1a',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
             title: {
               display: true,
               text: 'Score Distribution'
@@ -236,55 +268,63 @@ canvas {
       });
     }
 
-    function createImprovementChart(scores) {
-      const ctx = document.getElementById('improvementChart').getContext('2d');
-      const labels = scores.map((_, index) => `Attempt ${index + 1}`);
+    function createPerformanceConsistencyChart(scores) {
+      const stats = calculateStatistics(scores);
+      const consistency = scores.map(score => 
+        Math.abs(score - stats.mean) <= stats.stdDev ? 'Within 1σ' :
+        Math.abs(score - stats.mean) <= 2 * stats.stdDev ? 'Within 2σ' : 'Outside 2σ'
+      );
 
+      const distribution = {
+        'Within 1σ': consistency.filter(x => x === 'Within 1σ').length,
+        'Within 2σ': consistency.filter(x => x === 'Within 2σ').length,
+        'Outside 2σ': consistency.filter(x => x === 'Outside 2σ').length
+      };
+
+      const ctx = document.getElementById('performanceConsistency').getContext('2d');
       new Chart(ctx, {
-        type: 'line',
+        type: 'doughnut',
         data: {
-          labels: labels,
+          labels: Object.keys(distribution),
           datasets: [{
-            label: 'Score Improvement Over Time',
-            data: scores,
-            borderColor: '#ffcc00',
-            backgroundColor: 'rgba(26, 26, 26, 0.5)',
-            pointBackgroundColor: '#ffcc00',
-            pointBorderColor: '#fff',
-            pointBorderWidth: 1,
-            fill: true
+            data: Object.values(distribution),
+            backgroundColor: ['#d4af37', '#d2c2a3', '#1a1a1a']
           }]
         },
         options: {
-        responsive: true,
-        plugins: {
-        legend: {
-        display: true
-        },
-        title: {
-        display: true,
-        text: 'Score Improvement Over Time'
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Performance Consistency'
+            }
+          }
         }
-        },
-        scales: {
-        x: {
-        title: {
-        display: true,
-        text: 'Attempts'
-        }
-        },
-        y: {
-        title: {
-        display: true,
-        text: 'Score'
-        },
-        beginAtZero: true
-        }
-        }
-        }
-        });
-        }
-        </script>
-        </body>
-        
-        </html>
+      });
+    }
+
+    function updateStatistics(stats) {
+      const basicStats = document.getElementById('basicStats');
+      basicStats.innerHTML = `
+        <p>Total Attempts: ${stats.total}</p>
+        <p>Average Score: ${stats.mean.toFixed(2)}</p>
+        <p>Best Score: ${stats.best}</p>
+        <p>Worst Score: ${stats.worst}</p>
+        <p>Recent 6 Average: ${stats.recent6Avg.toFixed(2)}</p>
+        <p>Recent 12 Average: ${stats.recent12Avg.toFixed(2)}</p>
+        <p>Consistency Score: ${stats.consistency.toFixed(1)}%</p>
+      `;
+    }
+
+    function processAndDisplayData(scores) {
+      const stats = calculateStatistics(scores);
+      updateStatistics(stats);
+      
+      createScoreOverTimeChart(scores);
+      createMovingAveragesChart(scores);
+      createScoreDistributionChart(scores);
+      createPerformanceConsistencyChart(scores);
+    }
+  </script>
+</body>
+</html>
