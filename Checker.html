@@ -108,6 +108,12 @@
       <canvas id="scoreOverTime"></canvas>
     </div>
     <div class="chart-container">
+  <canvas id="scoreGrowthRate"></canvas>
+</div>
+<div class="chart-container">
+  <canvas id="scoreDeviationOverTime"></canvas>
+</div>
+    <div class="chart-container">
       <canvas id="movingAverages"></canvas>
     </div>
     <div class="chart-container">
@@ -318,15 +324,92 @@
       `;
     }
 
-    function processAndDisplayData(scores) {
-      const stats = calculateStatistics(scores);
-      updateStatistics(stats);
-      
-      createScoreOverTimeChart(scores);
-      createMovingAveragesChart(scores);
-      createScoreDistributionChart(scores);
-      createPerformanceConsistencyChart(scores);
+function processAndDisplayData(scores) {
+  const stats = calculateStatistics(scores);
+  updateStatistics(stats);
+
+  createScoreOverTimeChart(scores);
+  createMovingAveragesChart(scores);
+  createScoreDistributionChart(scores);
+  createPerformanceConsistencyChart(scores);
+  createScoreGrowthRateChart(scores);          // New chart
+  createScoreDeviationOverTimeChart(scores);    // New chart
+}
+
+    function createScoreGrowthRateChart(scores) {
+  const growthRates = scores.slice(1).map((score, i) => score - scores[i]);
+
+  const ctx = document.getElementById('scoreGrowthRate').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: growthRates.map((_, i) => `Attempt ${i + 2}`),
+      datasets: [{
+        label: 'Score Growth Rate',
+        data: growthRates,
+        borderColor: '#007ACC',
+        backgroundColor: 'rgba(0, 122, 204, 0.1)',
+        fill: true
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: {
+          display: true,
+          text: 'Score Growth Rate Over Time'
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Growth Rate'
+          }
+        }
+      }
     }
+  });
+}
+
+function createScoreDeviationOverTimeChart(scores) {
+  const stats = calculateStatistics(scores);
+  const deviations = scores.map(score => score - stats.mean);
+
+  const ctx = document.getElementById('scoreDeviationOverTime').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: deviations.map((_, i) => `Attempt ${i + 1}`),
+      datasets: [{
+        label: 'Score Deviation from Mean',
+        data: deviations,
+        borderColor: '#FF6347',
+        backgroundColor: 'rgba(255, 99, 71, 0.1)',
+        fill: true
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: {
+          display: true,
+          text: 'Score Deviation from Mean Over Time'
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: false,
+          title: {
+            display: true,
+            text: 'Deviation from Mean'
+          }
+        }
+      }
+    }
+  });
+}
   </script>
 </body>
 </html>
