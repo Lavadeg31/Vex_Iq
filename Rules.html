@@ -9,71 +9,132 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 10px;
-            background-color: #1a1a1a;
-            color: #fff;
+            background-color: #f5f5dc; /* Light beige background */
+            color: #1a1a1a; /* Dark text */
         }
+        
         h1, h2 {
             text-align: center;
-            color: #ffcc00;
+            color: #1a1a1a;
+            margin-bottom: 20px;
         }
+        
         .rules-section {
             max-width: 800px;
             margin: 20px auto;
             padding: 20px;
-            background-color: rgba(0, 0, 0, 0.8);
-            border: 2px solid #ffcc00;
-            border-radius: 8px;
+            background-color: #d2c2a3; /* Darker beige */
+            border: 2px solid #1a1a1a;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
+        
         ul {
             list-style-type: none;
             padding: 0;
         }
+        
         ul li {
             margin-bottom: 15px;
             font-size: 18px;
+            padding: 10px;
+            background-color: #e0d6b9; /* Lighter beige for list items */
+            border-radius: 5px;
+            transition: background-color 0.3s;
         }
+        
+        ul li:hover {
+            background-color: #bfae90; /* Slightly darker on hover */
+        }
+        
         ul li strong {
-            color: #ffcc00;
+            color: #1a1a1a;
+            display: block;
+            margin-bottom: 5px;
         }
+        
         a {
-            color: #ffcc00;
+            color: #1a1a1a;
             text-decoration: none;
+            border-bottom: 2px solid #1a1a1a;
+            transition: all 0.3s;
         }
+        
         a:hover {
-            text-decoration: underline;
+            background-color: #bfae90;
+            border-bottom-color: #bfae90;
+        }
+
+        /* Manual Link Styling */
+        .manual-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #bfae90;
+            border-radius: 5px;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .manual-link:hover {
+            background-color: #a8997a;
+        }
+
+        /* License Section */
+        .license-section {
+            margin-top: 20px;
+            text-align: center;
+            padding: 10px;
+            background-color: #e0d6b9;
+            border-radius: 5px;
+        }
+
+        .license-section img {
+            vertical-align: middle;
+            margin: 0 3px;
         }
     </style>
 </head>
 <body>
-
     <h1>🤖 VEX IQ Rapid Relay Rules Summary</h1>
 
     <div class="rules-section">
         <h2>📜 Key Rules Overview</h2>
         <ul>
-            <li><strong>🔧 Objective of the Game:</strong> Players compete on a 6'x6' field aiming to maneuver balls between robots to earn points by scoring goals and activating switches.</li>
+            <li><strong>🔧 Objective of the Game</strong> Players compete on a 6'x6' field aiming to maneuver balls between robots to earn points by scoring goals and activating switches.</li>
             
-            <li><strong>🤖 Teamwork Challenge:</strong> Two robots collaborate during a 60-second match to pass balls, score goals, and clear switches for maximum points.</li>
+            <li><strong>🤖 Teamwork Challenge</strong> Two robots collaborate during a 60-second match to pass balls, score goals, and clear switches for maximum points.</li>
             
-            <li><strong>🤖 Robot Challenge Task:</strong> Robots compete solo in completing tasks, including scoring goals and passing balls, without the help of a partner robot.</li>
+            <li><strong>🤖 Robot Challenge Task</strong> Robots compete solo in completing tasks, including scoring goals and passing balls, without the help of a partner robot.</li>
             
-            <li><strong>🏀 Scoring System Explanation:</strong> Points are earned by shooting balls through targets and clearing switches. Each pass between robots also adds points.</li>
+            <li><strong>🏀 Scoring System Explanation</strong> Points are earned by shooting balls through targets and clearing switches. Each pass between robots also adds points.</li>
             
-            <li><strong>🎯 Switches & Targets:</strong> There are four switches and four targets. Points are earned by clearing switches and scoring balls through the targets.</li>
+            <li><strong>🎯 Switches & Targets</strong> There are four switches and four targets. Points are earned by clearing switches and scoring balls through the targets.</li>
             
-            <li><strong>🏁 Driver Rotation:</strong> In teamwork matches, two drivers must take turns controlling the robot to ensure participation from both drivers during the match.</li>
+            <li><strong>🏁 Driver Rotation</strong> In teamwork matches, two drivers must take turns controlling the robot to ensure participation from both drivers during the match.</li>
             
-            <li><strong>🔨 Robot Construction:</strong> Robots must adhere to size restrictions, use VEX IQ components, and pass inspection before competing. Additional decorations are allowed as long as they do not interfere with gameplay.</li>
+            <li><strong>🔨 Robot Construction</strong> Robots must adhere to size restrictions, use VEX IQ components, and pass inspection before competing. Additional decorations are allowed as long as they do not interfere with gameplay.</li>
             
-            <li><strong>🏁 Pre-Match Setup:</strong> Robots start in designated areas and may be pre-loaded with a ball for immediate scoring. The field layout and ball positions play a key role in strategy.</li>
+            <li><strong>🏁 Pre-Match Setup</strong> Robots start in designated areas and may be pre-loaded with a ball for immediate scoring. The field layout and ball positions play a key role in strategy.</li>
             
-            <li><strong>⚖️ Penalties:</strong> Penalties are applied for violations such as robot mishandling, rule violations regarding field elements, or safety breaches. Severe infractions can lead to disqualification from the match.</li>
+            <li><strong>⚖️ Penalties</strong> Penalties are applied for violations such as robot mishandling, rule violations regarding field elements, or safety breaches. Severe infractions can lead to disqualification from the match.</li>
             
-            <li><strong>🗒️ Final Assessment:</strong> After each match, referees calculate the score based on successful passes, switches cleared, and goals scored. The scoring is finalized post-match.</li>
+            <li><strong>🗒️ Final Assessment</strong> After each match, referees calculate the score based on successful passes, switches cleared, and goals scored. The scoring is finalized post-match.</li>
         </ul>
-        <p>For more detailed rules, check out the official <a href="https://www.vexrobotics.com/rapid-relay-manual" target="_blank">VEX IQ Rapid Relay Manual</a>.</p>
+        <p>For more detailed rules, check out the <a href="https://www.vexrobotics.com/rapid-relay-manual" target="_blank" class="manual-link">VEX IQ Rapid Relay Manual</a>.</p>
     </div>
 
+    <div class="license-section">
+        <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
+            <a property="dct:title" rel="cc:attributionURL" href="https://github.com/Lavadeg31/Vex_Iq/blob/main/Rules.html">Vex Iq Rapid Relay Rule Summary</a> by 
+            <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/Lavadeg31">Lars van de Griend</a> is licensed under 
+            <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
+                CC BY-SA 4.0
+                <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt="">
+                <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt="">
+                <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt="">
+            </a>
+        </p>
+    </div>
 </body>
-    <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/Lavadeg31/Vex_Iq/blob/main/Rules.html">Vex Iq Rapid Relay Rule Summary</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/Lavadeg31">Lars van de Griend</a> is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
 </html>
