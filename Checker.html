@@ -1,9 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- 
+  This is the Elite VEX IQ Rapid Relay Performance Analyzer.
+  It uses Chart.js for data visualization and includes various statistical analyses.
+  The page allows users to upload score data and view multiple performance metrics.
+  -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/regression@2.0.1/dist/regression.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@1.1.1/dist/chartjs-chart-matrix.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ml-regression@5.0.0/dist/ml-regression.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis@latest"></script>
+
   <meta charset="UTF-8">
-  <title>VEX IQ Rapid Relay Score Viewer</title>
+  <title>VEX IQ Rapid Relay Advanced Performance Analyzer</title>
   <style>
+    /* 
+    Global styles for the analyzer page.
+    Includes styling for body, headings, tables, and chart containers.
+    */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -43,6 +59,8 @@
       border-radius: 10px;
       text-align: center;
       width: 80%;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .statistics p {
@@ -70,6 +88,7 @@
   .chart-container {
     width: 100%; /* Ensures full width scaling */
     max-width: 1200px; /* Max width for larger screens */
+    height: 400px; /* Increase this value to make charts taller */
     margin: 20px auto;
     padding: 20px;
     background-color: #fff;
@@ -78,41 +97,70 @@
   }
   
   .chart-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    width: 100%; /* Ensures full width scaling */
-    max-width: 80vw; /* Responsive layout */
-    margin: 20px auto;
-  }
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 90vw;
+      margin: 20px auto;
+    }
 
     .hidden {
       display: none;
+    }
+
+    .advanced-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 90vw;
+      margin: 20px auto;
+    }
+
+    .stat-card {
+      background-color: #d2c2a3;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .stat-card h3 {
+      margin-top: 0;
+      color: #1a1a1a;
+      border-bottom: 2px solid #1a1a1a;
+      padding-bottom: 10px;
+    }
+
+    .chart-container {
+      background-color: #d2c2a3;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
   </style>
 </head>
 
 <body>
-  <h1>Enhanced VEX IQ Rapid Relay Score Viewer</h1>
+  <h1>Elite VEX IQ Rapid Relay Performance Analyzer</h1>
   <button id="uploadButton" onclick="document.getElementById('fileInput').click();">Upload Scores</button>
-  <input type="file" id="fileInput" accept=".json" style="display: none;" onchange="handleFileUpload()">
+  <input type="file" id="fileInput" style="display: none;" onchange="handleFileUpload()">
 
-  <div class="statistics" id="statistics">
-    <h2>Performance Analytics</h2>
+  <div class="statistics">
+    <h2>Basic Statistics</h2>
     <div id="basicStats"></div>
+    
+    <h2>Advanced Statistics</h2>
     <div id="advancedStats"></div>
+    
+    <h2>Performance Breakdown</h2>
+    <div id="performanceBreakdown"></div>
   </div>
 
   <div class="chart-grid">
     <div class="chart-container">
       <canvas id="scoreOverTime"></canvas>
     </div>
-    <div class="chart-container">
-  <canvas id="scoreGrowthRate"></canvas>
-</div>
-<div class="chart-container">
-  <canvas id="scoreDeviationOverTime"></canvas>
-</div>
     <div class="chart-container">
       <canvas id="movingAverages"></canvas>
     </div>
@@ -122,10 +170,50 @@
     <div class="chart-container">
       <canvas id="performanceConsistency"></canvas>
     </div>
+    <div class="chart-container">
+      <canvas id="scoreGrowthRate"></canvas>
+    </div>
+    <div class="chart-container">
+      <canvas id="scoreDeviationOverTime"></canvas>
+    </div>
+    <div class="chart-container">
+      <canvas id="performanceTrend"></canvas>
+    </div>
+    <div class="chart-container">
+      <canvas id="rollingPerformance"></canvas>
+    </div>
+    <div class="chart-container">
+      <canvas id="improvementRate"></canvas>
+    </div>
+    <div class="chart-container">
+      <canvas id="performanceHeatmap"></canvas>
+    </div>
+    <div class="chart-container">
+      <canvas id="momentumIndex"></canvas>
+    </div>
+    <div class="chart-container">
+      <canvas id="learningCurve"></canvas>
+    </div>
+    <div class="chart-container">
+      <canvas id="performanceStability"></canvas>
+    </div>
+    <div class="chart-container">
+      <canvas id="percentileRankings"></canvas>
+    </div>
+    <div class="chart-container">
+      <canvas id="skillAcquisitionRate"></canvas>
+    </div>
+    <div class="chart-container">
+      <canvas id="relativePerformanceIndex"></canvas>
+    </div>
+    <div class="chart-container">
+      <canvas id="performancePrediction"></canvas>
+    </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <script>
+    // Function to handle file upload and process the data
     function handleFileUpload() {
       const fileInput = document.getElementById('fileInput');
       const file = fileInput.files[0];
@@ -134,35 +222,107 @@
         const reader = new FileReader();
         reader.onload = function(event) {
           try {
-            const scores = JSON.parse(decodeURIComponent(escape(atob(event.target.result.replace(/^data:text\/plain;base64,/, '')))));
-            if (!Array.isArray(scores)) throw new Error('Invalid JSON structure');
+            // Process the uploaded file content
+            const content = event.target.result;
+            let scores;
+            
+            // Decode Base64 string and parse as JSON
+            const decodedContent = atob(content.trim());
+            scores = JSON.parse(decodedContent);
+            
+            if (!Array.isArray(scores)) {
+              throw new Error('Invalid data structure. Expected an array.');
+            }
+            
+            // Convert all elements to numbers
+            scores = scores.map(Number);
+            
+            if (scores.some(isNaN)) {
+              throw new Error('Invalid data structure. Expected an array of numbers.');
+            }
+            
+            console.log('Processed scores:', scores);
+            
             processAndDisplayData(scores);
           } catch (e) {
-            alert('Invalid file format. Please upload a valid scores JSON file.');
+            console.error('Error processing file:', e);
+            alert('Error processing file: ' + e.message);
           }
         };
         reader.readAsText(file);
       }
     }
 
+    // Function to calculate various statistics from the scores
     function calculateStatistics(scores) {
+      if (!Array.isArray(scores) || scores.length === 0) {
+        console.error('Invalid scores array:', scores);
+        return null;
+      }
+
       const stats = {
         total: scores.length,
         mean: scores.reduce((a, b) => a + b, 0) / scores.length,
+        median: calculateMedian(scores),
+        mode: calculateMode(scores),
         best: Math.max(...scores),
         worst: Math.min(...scores),
-        recent6Avg: scores.slice(-6).reduce((a, b) => a + b, 0) / Math.min(6, scores.length),
-        recent12Avg: scores.slice(-12).reduce((a, b) => a + b, 0) / Math.min(12, scores.length)
+        stdDev: calculateStandardDeviation(scores),
+        coefficientOfVariation: 0,
+        performanceConsistencyIndex: 0,
+        peakPerformanceFrequency: 0,
+        recoveryRate: 0,
+        performanceEfficiency: 0,
+        trendStrength: 0,
+        performanceVolatility: 0,
+        excellent: 0,
+        good: 0,
+        average: 0,
+        belowAverage: 0,
+        percentileRankings: calculatePercentileRankings(scores),
+        skillAcquisitionRate: calculateSkillAcquisitionRate(scores),
+        relativePerformanceIndex: calculateRelativePerformanceIndex(scores),
       };
 
-      // Calculate standard deviation
-      const variance = scores.reduce((a, b) => a + Math.pow(b - stats.mean, 2), 0) / scores.length;
-      stats.stdDev = Math.sqrt(variance);
+      // Calculate coefficient of variation
+      stats.coefficientOfVariation = (stats.stdDev / stats.mean) * 100;
 
-      // Calculate consistency score (inverse of coefficient of variation)
-      stats.consistency = (1 - (stats.stdDev / stats.mean)) * 100;
+      // Calculate performance breakdown
+      stats.excellent = scores.filter(score => score >= 90).length;
+      stats.good = scores.filter(score => score >= 70 && score < 90).length;
+      stats.average = scores.filter(score => score >= 50 && score < 70).length;
+      stats.belowAverage = scores.filter(score => score < 50).length;
+
+      // Add calculations for other advanced statistics here
+      // ...
 
       return stats;
+    }
+
+    function calculateMedian(scores) {
+      const sorted = scores.slice().sort((a, b) => a - b);
+      const middle = Math.floor(sorted.length / 2);
+      return sorted.length % 2 ? sorted[middle] : (sorted[middle - 1] + sorted[middle]) / 2;
+    }
+
+    function calculateMode(scores) {
+      const counts = {};
+      let maxCount = 0;
+      let mode;
+      for (const score of scores) {
+        counts[score] = (counts[score] || 0) + 1;
+        if (counts[score] > maxCount) {
+          maxCount = counts[score];
+          mode = score;
+        }
+      }
+      return mode;
+    }
+
+    function calculateStandardDeviation(scores) {
+      const mean = scores.reduce((a, b) => a + b, 0) / scores.length;
+      const variance = scores.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / scores.length;
+      return Math.sqrt(variance);
     }
 
     function calculateMovingAverage(scores, window) {
@@ -173,6 +333,7 @@
       });
     }
 
+    // Function to create the score over time chart
     function createScoreOverTimeChart(scores) {
       const ctx = document.getElementById('scoreOverTime').getContext('2d');
       new Chart(ctx, {
@@ -189,6 +350,7 @@
         },
         options: {
           responsive: true,
+          maintainAspectRatio: false, // Add this line
           plugins: {
             title: {
               display: true,
@@ -201,6 +363,9 @@
               title: {
                 display: true,
                 text: 'Score'
+              },
+              ticks: {
+                maxTicksLimit: 20 // Increase this value to show more y-axis labels
               }
             }
           }
@@ -208,6 +373,7 @@
       });
     }
 
+    // Function to create the moving averages chart
     function createMovingAveragesChart(scores) {
       const ma3 = calculateMovingAverage(scores, 3);
       const ma6 = calculateMovingAverage(scores, 6);
@@ -243,6 +409,7 @@
       });
     }
 
+    // Function to create the score distribution chart
     function createScoreDistributionChart(scores) {
       const binSize = 5;
       const bins = {};
@@ -276,27 +443,24 @@
       });
     }
 
-    function createPerformanceConsistencyChart(scores) {
-      const stats = calculateStatistics(scores);
-      const consistency = scores.map(score => 
-        Math.abs(score - stats.mean) <= stats.stdDev ? 'Within 1σ' :
-        Math.abs(score - stats.mean) <= 2 * stats.stdDev ? 'Within 2σ' : 'Outside 2σ'
-      );
+    // Function to create the performance consistency chart
+    function createPerformanceConsistencyChart(stats) {
+      if (!stats || typeof stats !== 'object') {
+        console.error('Invalid stats object:', stats);
+        return;
+      }
 
-      const distribution = {
-        'Within 1σ': consistency.filter(x => x === 'Within 1σ').length,
-        'Within 2σ': consistency.filter(x => x === 'Within 2σ').length,
-        'Outside 2σ': consistency.filter(x => x === 'Outside 2σ').length
-      };
+      const consistency = stats.coefficientOfVariation ? 100 - stats.coefficientOfVariation : 0;
+      const inconsistency = 100 - consistency;
 
       const ctx = document.getElementById('performanceConsistency').getContext('2d');
       new Chart(ctx, {
         type: 'doughnut',
         data: {
-          labels: Object.keys(distribution),
+          labels: ['Consistency', 'Inconsistency'],
           datasets: [{
-            data: Object.values(distribution),
-            backgroundColor: ['#d4af37', '#d2c2a3', '#1a1a1a']
+            data: [consistency, inconsistency],
+            backgroundColor: ['#d4af37', '#1a1a1a']
           }]
         },
         options: {
@@ -312,105 +476,985 @@
     }
 
     function updateStatistics(stats) {
-      const basicStats = document.getElementById('basicStats');
-      basicStats.innerHTML = `
-        <p>Total Attempts: ${stats.total}</p>
-        <p>Average Score: ${stats.mean.toFixed(2)}</p>
-        <p>Best Score: ${stats.best}</p>
-        <p>Worst Score: ${stats.worst}</p>
-        <p>Recent 6 Average: ${stats.recent6Avg.toFixed(2)}</p>
-        <p>Recent 12 Average: ${stats.recent12Avg.toFixed(2)}</p>
-        <p>Consistency Score: ${stats.consistency.toFixed(1)}%</p>
-      `;
+      const basicStatsContainer = document.getElementById('basicStats');
+      const advancedStatsContainer = document.getElementById('advancedStats');
+      const performanceBreakdownContainer = document.getElementById('performanceBreakdown');
+
+      function createStatElement(label, value, container) {
+        const p = document.createElement('p');
+        let displayValue = 'N/A';
+        if (value !== undefined && value !== null) {
+          displayValue = typeof value === 'number' ? value.toFixed(2) : value.toString();
+        }
+        p.innerHTML = `<strong>${label}:</strong> ${displayValue}`;
+        container.appendChild(p);
+      }
+
+      // Basic Stats
+      if (stats) {
+        createStatElement('Total Attempts', stats.total, basicStatsContainer);
+        createStatElement('Average Score', stats.mean, basicStatsContainer);
+        createStatElement('Median Score', stats.median, basicStatsContainer);
+        createStatElement('Mode Score', stats.mode, basicStatsContainer);
+        createStatElement('Highest Score', stats.best, basicStatsContainer);
+        createStatElement('Lowest Score', stats.worst, basicStatsContainer);
+        createStatElement('Standard Deviation', stats.stdDev, basicStatsContainer);
+        createStatElement('Coefficient of Variation', stats.coefficientOfVariation, basicStatsContainer);
+
+        // Advanced Stats
+        createStatElement('Performance Consistency Index', stats.performanceConsistencyIndex, advancedStatsContainer);
+        createStatElement('Peak Performance Frequency', stats.peakPerformanceFrequency, advancedStatsContainer);
+        createStatElement('Recovery Rate', stats.recoveryRate, advancedStatsContainer);
+        createStatElement('Performance Efficiency', stats.performanceEfficiency, advancedStatsContainer);
+        createStatElement('Trend Strength', stats.trendStrength, advancedStatsContainer);
+        createStatElement('Performance Volatility', stats.performanceVolatility, advancedStatsContainer);
+
+        // Performance Breakdown
+        createStatElement('Excellent', stats.excellent, performanceBreakdownContainer);
+        createStatElement('Good', stats.good, performanceBreakdownContainer);
+        createStatElement('Average', stats.average, performanceBreakdownContainer);
+        createStatElement('Below Average', stats.belowAverage, performanceBreakdownContainer);
+      } else {
+        console.error('Stats object is undefined');
+      }
     }
 
-function processAndDisplayData(scores) {
-  const stats = calculateStatistics(scores);
-  updateStatistics(stats);
+    function calculateAdvancedStatistics(scores) {
+      const totalAttempts = scores.length;
+      const averageScore = scores.reduce((sum, score) => sum + score, 0) / totalAttempts;
+      const sortedScores = [...scores].sort((a, b) => a - b);
+      const medianScore = sortedScores[Math.floor(totalAttempts / 2)];
+      
+      // Calculate mode
+      const scoreCounts = {};
+      let modeScore = null;
+      let maxCount = 0;
+      for (const score of scores) {
+        scoreCounts[score] = (scoreCounts[score] || 0) + 1;
+        if (scoreCounts[score] > maxCount) {
+          modeScore = score;
+          maxCount = scoreCounts[score];
+        }
+      }
 
-  createScoreOverTimeChart(scores);
-  createMovingAveragesChart(scores);
-  createScoreDistributionChart(scores);
-  createPerformanceConsistencyChart(scores);
-  createScoreGrowthRateChart(scores);          // New chart
-  createScoreDeviationOverTimeChart(scores);    // New chart
-}
+      const minScore = Math.min(...scores);
+      const maxScore = Math.max(...scores);
+      const rangeScore = maxScore - minScore;
+
+      const varianceScore = scores.reduce((sum, score) => sum + Math.pow(score - averageScore, 2), 0) / totalAttempts;
+      const standardDeviation = Math.sqrt(varianceScore);
+
+      const firstQuartile = sortedScores[Math.floor(totalAttempts * 0.25)];
+      const thirdQuartile = sortedScores[Math.floor(totalAttempts * 0.75)];
+      const interquartileRange = thirdQuartile - firstQuartile;
+
+      const skewnessScore = scores.reduce((sum, score) => sum + Math.pow((score - averageScore) / standardDeviation, 3), 0) / totalAttempts;
+      const kurtosisScore = scores.reduce((sum, score) => sum + Math.pow((score - averageScore) / standardDeviation, 4), 0) / totalAttempts - 3;
+
+      const coefficientOfVariation = (standardDeviation / averageScore) * 100;
+
+      const performanceConsistencyIndex = calculatePerformanceConsistencyIndex(scores);
+      const peakPerformanceFrequency = calculatePeakPerformanceFrequency(scores);
+      const recoveryRate = calculateRecoveryRate(scores);
+      const performanceEfficiency = calculatePerformanceEfficiency(scores);
+      const trendStrength = calculateTrendStrength(scores);
+      const performanceVolatility = calculatePerformanceVolatility(scores);
+
+      // Performance breakdown
+      const excellent = scores.filter(score => score >= 90).length;
+      const good = scores.filter(score => score >= 70 && score < 90).length;
+      const average = scores.filter(score => score >= 50 && score < 70).length;
+      const belowAverage = scores.filter(score => score < 50).length;
+
+      // Percentile rankings
+      const percentileRankings = scores.map(score => {
+        return scores.filter(s => s <= score).length / scores.length * 100;
+      });
+
+      const skillAcquisitionRate = calculateSkillAcquisitionRate(scores);
+      const relativePerformanceIndex = calculateRelativePerformanceIndex(scores);
+
+      return {
+        totalAttempts,
+        averageScore,
+        medianScore,
+        modeScore,
+        standardDeviation,
+        varianceScore,
+        rangeScore,
+        minScore,
+        maxScore,
+        firstQuartile,
+        thirdQuartile,
+        interquartileRange,
+        skewnessScore,
+        kurtosisScore,
+        coefficientOfVariation,
+        performanceConsistencyIndex,
+        peakPerformanceFrequency,
+        recoveryRate,
+        performanceEfficiency,
+        trendStrength,
+        performanceVolatility,
+        excellent,
+        good,
+        average,
+        belowAverage,
+        percentileRankings,
+        skillAcquisitionRate,
+        relativePerformanceIndex
+      };
+    }
+
+    function updateAdvancedStatistics(stats) {
+      function updateStat(id, value, decimals = 2) {
+        const element = document.getElementById(id);
+        if (element) {
+          if (value !== undefined && value !== null) {
+            element.textContent = typeof value === 'number' ? value.toFixed(decimals) : value;
+          } else {
+            console.warn(`Statistic '${id}' is undefined or null`);
+            element.textContent = 'N/A';
+          }
+        } else {
+          console.warn(`Element with id '${id}' not found`);
+        }
+      }
+
+      updateStat('performanceConsistencyIndex', stats.performanceConsistencyIndex);
+      updateStat('peakPerformanceFrequency', stats.peakPerformanceFrequency, 4);
+      updateStat('recoveryRate', stats.recoveryRate, 4);
+      updateStat('performanceEfficiency', stats.performanceEfficiency);
+      updateStat('trendStrength', stats.trendStrength);
+      updateStat('performanceVolatility', stats.performanceVolatility);
+      
+      if (Array.isArray(stats.skillAcquisitionRate) && stats.skillAcquisitionRate.length > 0) {
+        const avgSkillAcquisitionRate = stats.skillAcquisitionRate.reduce((sum, rate) => sum + rate, 0) / stats.skillAcquisitionRate.length;
+        updateStat('skillAcquisitionRate', avgSkillAcquisitionRate);
+      } else {
+        console.warn('Skill Acquisition Rate data is missing or invalid');
+        updateStat('skillAcquisitionRate', null);
+      }
+      
+      if (Array.isArray(stats.relativePerformanceIndex) && stats.relativePerformanceIndex.length > 0) {
+        const latestRPI = stats.relativePerformanceIndex[stats.relativePerformanceIndex.length - 1];
+        updateStat('relativePerformanceIndex', latestRPI);
+      } else {
+        console.warn('Relative Performance Index data is missing or invalid');
+        updateStat('relativePerformanceIndex', null);
+      }
+    }
+
+    function createPerformanceTrendChart(scores) {
+      const ctx = document.getElementById('performanceTrend').getContext('2d');
+      const linearRegression = regression.linear(scores.map((score, index) => [index, score]));
+      const trendline = linearRegression.points.map(point => point[1]);
+
+      new Chart(ctx, {
+        type: 'scatter',
+        data: {
+          datasets: [{
+            label: 'Actual Scores',
+            data: scores.map((score, index) => ({x: index, y: score})),
+            backgroundColor: '#1a1a1a'
+          }, {
+            label: 'Trend Line',
+            data: trendline.map((value, index) => ({x: index, y: value})),
+            type: 'line',
+            borderColor: '#d4af37',
+            fill: false
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Performance Trend Analysis'
+            }
+          },
+          scales: {
+            x: {
+              type: 'linear',
+              position: 'bottom',
+              title: {
+                display: true,
+                text: 'Attempt Number'
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: 'Score'
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function createRollingPerformanceChart(scores) {
+      const windowSizes = [3, 6, 12];
+      const datasets = windowSizes.map(size => ({
+        label: `${size}-Attempt Rolling Average`,
+        data: calculateMovingAverage(scores, size),
+        borderColor: `hsl(${Math.random() * 360}, 70%, 50%)`,
+        fill: false
+      }));
+
+      const ctx = document.getElementById('rollingPerformance').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: scores.map((_, i) => `Attempt ${i + 1}`),
+          datasets: datasets
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Rolling Performance Averages'
+            }
+          }
+        }
+      });
+    }
+
+    function createImprovementRateChart(scores) {
+      const improvementRates = scores.slice(1).map((score, i) => {
+        const prevAvg = scores.slice(0, i + 1).reduce((a, b) => a + b, 0) / (i + 1);
+        return ((score - prevAvg) / prevAvg) * 100;
+      });
+
+      const ctx = document.getElementById('improvementRate').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: improvementRates.map((_, i) => `Attempt ${i + 2}`),
+          datasets: [{
+            label: 'Improvement Rate (%)',
+            data: improvementRates,
+            backgroundColor: improvementRates.map(rate => 
+              rate >= 0 ? 'rgba(75, 192, 192, 0.6)' : 'rgba(255, 99, 132, 0.6)'
+            )
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Improvement Rate per Attempt'
+            }
+          },
+          scales: {
+            y: {
+              title: {
+                display: true,
+                text: 'Improvement Rate (%)'
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function createPerformanceHeatmap(scores) {
+      const ctx = document.getElementById('performanceHeatmap').getContext('2d');
+      const data = scores.map((score, index) => ({x: index, y: 0, v: score}));
+
+      new Chart(ctx, {
+        type: 'matrix',
+        data: {
+          datasets: [{
+            label: 'Performance Heatmap',
+            data: data,
+            backgroundColor: (context) => {
+              const value = context.dataset.data[context.dataIndex].v;
+              const alpha = value / Math.max(...scores);
+              return `rgba(26, 26, 26, ${alpha})`;
+            },
+            width: ({chart}) => (chart.chartArea || {}).width / scores.length - 1,
+            height: ({chart}) => (chart.chartArea || {}).height - 1
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Performance Heatmap'
+            },
+            legend: {
+              display: false
+            },
+            tooltip: {
+              callbacks: {
+                title: () => '',
+                label: (context) => `Score: ${context.dataset.data[context.dataIndex].v}`
+              }
+            }
+          },
+          scales: {
+            x: {
+              type: 'linear',
+              offset: true,
+              min: -0.5,
+              max: scores.length - 0.5,
+              ticks: {
+                stepSize: 1
+              },
+              title: {
+                display: true,
+                text: 'Attempt'
+              }
+            },
+            y: {
+              type: 'linear',
+              offset: true,
+              min: -0.5,
+              max: 0.5,
+              ticks: {
+                display: false
+              }
+            }
+          },
+          layout: {
+            padding: {
+              top: 10,
+              bottom: 10
+            }
+          }
+        }
+      });
+    }
+
+    function createMomentumIndexChart(scores) {
+      const momentumIndices = scores.slice(1).map((score, i) => {
+        return (score - scores[i]) / (i + 1);
+      });
+
+      const ctx = document.getElementById('momentumIndex').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: momentumIndices.map((_, i) => `Attempt ${i + 2}`),
+          datasets: [{
+            label: 'Momentum Index',
+            data: momentumIndices,
+            borderColor: '#FF6384',
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            fill: true
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Momentum Index Over Time'
+            }
+          },
+          scales: {
+            y: {
+              title: {
+                display: true,
+                text: 'Momentum Index'
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function createPerformanceBreakdownChart(stats) {
+      if (!stats.excellent || !stats.good || !stats.average || !stats.belowAverage) {
+        console.error("Performance breakdown data is missing");
+        return;
+      }
+      const ctx = document.getElementById('performanceBreakdown').getContext('2d');
+      new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: ['Excellent', 'Good', 'Average', 'Below Average'],
+          datasets: [{
+            data: [
+              stats.performanceBreakdown.excellent,
+              stats.performanceBreakdown.good,
+              stats.performanceBreakdown.average,
+              stats.performanceBreakdown.belowAverage
+            ],
+            backgroundColor: [
+              '#4BC0C0',
+              '#36A2EB',
+              '#FFCE56',
+              '#FF6384'
+            ]
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Performance Breakdown'
+            }
+          }
+        }
+      });
+    }
+
+    function createLearningCurveChart(scores) {
+      const ctx = document.getElementById('learningCurve').getContext('2d');
+      const cumulativeAvg = scores.map((_, i) => 
+        scores.slice(0, i + 1).reduce((a, b) => a + b, 0) / (i + 1)
+      );
+
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: scores.map((_, i) => `Attempt ${i + 1}`),
+          datasets: [{
+            label: 'Actual Scores',
+            data: scores,
+            borderColor: '#36A2EB',
+            fill: false
+          }, {
+            label: 'Learning Curve',
+            data: cumulativeAvg,
+            borderColor: '#FF6384',
+            fill: false
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Learning Curve Analysis'
+            }
+          },
+          scales: {
+            y: {
+              title: {
+                display: true,
+                text: 'Score'
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function createPerformanceStabilityChart(scores) {
+      const stabilityWindow = 5;
+      const stabilityScores = scores.slice(stabilityWindow).map((score, i) => {
+        const windowScores = scores.slice(i, i + stabilityWindow);
+        return calculateStandardDeviation(windowScores) / (windowScores.reduce((a, b) => a + b, 0) / windowScores.length);
+      });
+
+      const ctx = document.getElementById('performanceStability').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: stabilityScores.map((_, i) => `Attempt ${i + stabilityWindow + 1}`),
+          datasets: [{
+            label: 'Stability Index',
+            data: stabilityScores,
+            borderColor: '#4BC0C0',
+            fill: false
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Performance Stability Over Time'
+            }
+          },
+          scales: {
+            y: {
+              title: {
+                display: true,
+                text: 'Stability Index (%)'
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function createSkillAcquisitionRateChart(stats) {
+      if (!stats.skillAcquisitionRate || !Array.isArray(stats.skillAcquisitionRate)) {
+        console.error('Skill Acquisition Rate data is missing or invalid');
+        return;
+      }
+
+      const ctx = document.getElementById('skillAcquisitionRate').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: stats.skillAcquisitionRate.map((_, i) => `Attempt ${i + 6}`),
+          datasets: [{
+            label: 'Skill Acquisition Rate',
+            data: stats.skillAcquisitionRate,
+            borderColor: '#1a1a1a',
+            fill: false
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Skill Acquisition Rate Over Time'
+            }
+          },
+          scales: {
+            y: {
+              title: {
+                display: true,
+                text: 'Rate (%)'
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function createPerformancePredictionChart(scores, stats) {
+      if (typeof ML === 'undefined') {
+        console.error("ML.js library is not loaded");
+        return;
+      }
+      const ctx = document.getElementById('performancePrediction').getContext('2d');
+      const regression = new ML.SimpleLinearRegression(scores.map((_, i) => i), scores);
+      const futureAttempts = 5;
+      const predictions = Array.from({length: futureAttempts}, (_, i) => 
+        regression.predict(scores.length + i)
+      );
+
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: [...scores.map((_, i) => `Attempt ${i + 1}`), ...predictions.map((_, i) => `Future ${i + 1}`)],
+          datasets: [{
+            label: 'Actual Scores',
+            data: [...scores, ...Array(futureAttempts).fill(null)],
+            borderColor: '#36A2EB',
+            fill: false
+          }, {
+            label: 'Predicted Scores',
+            data: [...Array(scores.length).fill(null), ...predictions],
+            borderColor: '#FF6384',
+            borderDash: [5, 5],
+            fill: false
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Performance Prediction'
+            }
+          },
+          scales: {
+            y: {
+              title: {
+                display: true,
+                text: 'Score'
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function createCompetitiveAnalysisChart(scores, stats) {
+      const ctx = document.getElementById('competitiveAnalysis').getContext('2d');
+      const benchmarkScore = 80; // Assuming a benchmark score of 80
+      const competitiveIndex = scores.map(score => (score / benchmarkScore) * 100);
+
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: scores.map((_, i) => `Attempt ${i + 1}`),
+          datasets: [{
+            label: 'Competitive Index',
+            data: competitiveIndex,
+            borderColor: '#4BC0C0',
+            fill: false
+          }, {
+            label: 'Benchmark',
+            data: Array(scores.length).fill(100),
+            borderColor: '#FF6384',
+            borderDash: [5, 5],
+            fill: false
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Competitive Analysis'
+            }
+          },
+          scales: {
+            y: {
+              title: {
+                display: true,
+                text: 'Competitive Index (%)'
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function processAndDisplayData(scores) {
+      console.log('Received scores:', scores);
+      
+      // Ensure scores is an array of numbers
+      scores = Array.isArray(scores) ? scores : Array.from(scores);
+      scores = scores.map(Number);
+      
+      console.log('Processed scores:', scores);
+
+      if (scores.length === 0 || scores.some(isNaN)) {
+        console.error('Invalid scores data:', scores);
+        alert('Error: Invalid or empty scores data');
+        return;
+      }
+
+      try {
+        const stats = calculateStatistics(scores);
+        console.log('Calculated stats:', stats);
+        updateStatistics(stats);
+
+        // Create charts with error handling
+        try { createScoreOverTimeChart(scores); } catch (e) { console.error('Error in createScoreOverTimeChart:', e); }
+        try { createMovingAveragesChart(scores); } catch (e) { console.error('Error in createMovingAveragesChart:', e); }
+        try { createScoreDistributionChart(scores); } catch (e) { console.error('Error in createScoreDistributionChart:', e); }
+        try { createPerformanceConsistencyChart(stats); } catch (e) { console.error('Error in createPerformanceConsistencyChart:', e); }
+        try { createScoreGrowthRateChart(scores); } catch (e) { console.error('Error in createScoreGrowthRateChart:', e); }
+        try { createScoreDeviationOverTimeChart(scores); } catch (e) { console.error('Error in createScoreDeviationOverTimeChart:', e); }
+        try { createPerformanceTrendChart(scores); } catch (e) { console.error('Error in createPerformanceTrendChart:', e); }
+        try { createRollingPerformanceChart(scores); } catch (e) { console.error('Error in createRollingPerformanceChart:', e); }
+        try { createImprovementRateChart(scores); } catch (e) { console.error('Error in createImprovementRateChart:', e); }
+        try { createPerformanceHeatmap(scores); } catch (e) { console.error('Error in createPerformanceHeatmap:', e); }
+        try { createMomentumIndexChart(scores); } catch (e) { console.error('Error in createMomentumIndexChart:', e); }
+        try { createLearningCurveChart(scores); } catch (e) { console.error('Error in createLearningCurveChart:', e); }
+        try { createPerformanceStabilityChart(scores); } catch (e) { console.error('Error in createPerformanceStabilityChart:', e); }
+        try { createPercentileRankingsChart(stats); } catch (e) { console.error('Error in createPercentileRankingsChart:', e); }
+        try { createSkillAcquisitionRateChart(stats); } catch (e) { console.error('Error in createSkillAcquisitionRateChart:', e); }
+        try { createRelativePerformanceIndexChart(stats); } catch (e) { console.error('Error in createRelativePerformanceIndexChart:', e); }
+        try { createPerformancePredictionChart(scores, stats); } catch (e) { console.error('Error in createPerformancePredictionChart:', e); }
+
+      } catch (error) {
+        console.error('Error in processAndDisplayData:', error);
+        alert('An error occurred while processing the data. Please check the console for more details.');
+      }
+    }
 
     function createScoreGrowthRateChart(scores) {
-  const growthRates = scores.slice(1).map((score, i) => score - scores[i]);
+      if (typeof Chart === 'undefined') {
+        console.error('Chart.js is not loaded. Please check if the library is properly included.');
+        return;
+      }
 
-  const ctx = document.getElementById('scoreGrowthRate').getContext('2d');
-  new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: growthRates.map((_, i) => `Attempt ${i + 2}`),
-      datasets: [{
-        label: 'Score Growth Rate',
-        data: growthRates,
-        borderColor: '#007ACC',
-        backgroundColor: 'rgba(0, 122, 204, 0.1)',
-        fill: true
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        title: {
-          display: true,
-          text: 'Score Growth Rate Over Time'
-        }
-      },
-      scales: {
-        y: {
-          beginAtZero: true,
-          title: {
-            display: true,
-            text: 'Growth Rate'
+      const ctx = document.getElementById('scoreGrowthRate').getContext('2d');
+      
+      // Calculate growth rates
+      const growthRates = scores.slice(1).map((score, index) => {
+        const previousScore = scores[index];
+        return ((score - previousScore) / previousScore) * 100;
+      });
+
+      try {
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: growthRates.map((_, index) => `Attempt ${index + 2}`),
+            datasets: [{
+              label: 'Score Growth Rate (%)',
+              data: growthRates,
+              borderColor: '#1a1a1a',
+              backgroundColor: 'rgba(26, 26, 26, 0.1)',
+              fill: true
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              title: {
+                display: true,
+                text: 'Score Growth Rate'
+              }
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                title: {
+                  display: true,
+                  text: 'Growth Rate (%)'
+                }
+              }
+            }
           }
-        }
+        });
+      } catch (error) {
+        console.error('Error creating Score Growth Rate chart:', error);
       }
     }
-  });
-}
 
-function createScoreDeviationOverTimeChart(scores) {
-  const stats = calculateStatistics(scores);
-  const deviations = scores.map(score => score - stats.mean);
+    function createScoreDeviationOverTimeChart(scores) {
+      const stats = calculateStatistics(scores);
+      const deviations = scores.map(score => score - stats.mean);
 
-  const ctx = document.getElementById('scoreDeviationOverTime').getContext('2d');
-  new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: deviations.map((_, i) => `Attempt ${i + 1}`),
-      datasets: [{
-        label: 'Score Deviation from Mean',
-        data: deviations,
-        borderColor: '#FF6347',
-        backgroundColor: 'rgba(255, 99, 71, 0.1)',
-        fill: true
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        title: {
-          display: true,
-          text: 'Score Deviation from Mean Over Time'
-        }
-      },
-      scales: {
-        y: {
-          beginAtZero: false,
-          title: {
-            display: true,
-            text: 'Deviation from Mean'
+      const ctx = document.getElementById('scoreDeviationOverTime').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: deviations.map((_, i) => `Attempt ${i + 1}`),
+          datasets: [{
+            label: 'Score Deviation from Mean',
+            data: deviations,
+            borderColor: '#FF6347',
+            backgroundColor: 'rgba(255, 99, 71, 0.1)',
+            fill: true
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Score Deviation from Mean Over Time'
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: false,
+              title: {
+                display: true,
+                text: 'Deviation from Mean'
+              }
+            }
           }
         }
-      }
+      });
     }
-  });
-}
+
+    function calculateStandardDeviation(values) {
+      const n = values.length;
+      if (n < 2) return 0;
+      
+      const mean = values.reduce((sum, value) => sum + value, 0) / n;
+      const squaredDifferences = values.map(value => Math.pow(value - mean, 2));
+      const variance = squaredDifferences.reduce((sum, value) => sum + value, 0) / (n - 1);
+      return Math.sqrt(variance);
+    }
+
+    function calculatePercentileRankings(scores) {
+      const sortedScores = [...scores].sort((a, b) => a - b);
+      return scores.map(score => {
+        const rank = sortedScores.indexOf(score) + 1;
+        return (rank / scores.length) * 100;
+      });
+    }
+
+    function calculatePerformanceConsistencyIndex(scores) {
+      const mean = scores.reduce((sum, score) => sum + score, 0) / scores.length;
+      const deviations = scores.map(score => Math.abs(score - mean));
+      const averageDeviation = deviations.reduce((sum, dev) => sum + dev, 0) / scores.length;
+      return (1 - (averageDeviation / mean)) * 100;
+    }
+
+    function calculatePeakPerformanceFrequency(scores) {
+      const max = Math.max(...scores);
+      const threshold = max * 0.9;
+      return scores.filter(score => score >= threshold).length / scores.length;
+    }
+
+    function calculateRecoveryRate(scores) {
+      let recoveries = 0;
+      for (let i = 2; i < scores.length; i++) {
+        if (scores[i-1] < scores[i-2] && scores[i] > scores[i-1]) {
+          recoveries++;
+        }
+      }
+      return recoveries / (scores.length - 2);
+    }
+
+    function calculatePerformanceEfficiency(scores) {
+      const totalScore = scores.reduce((sum, score) => sum + score, 0);
+      const maxPossibleScore = Math.max(...scores) * scores.length;
+      return (totalScore / maxPossibleScore) * 100;
+    }
+
+    function calculateTrendStrength(scores) {
+      const xValues = scores.map((_, index) => index + 1);
+      const xMean = xValues.reduce((sum, x) => sum + x, 0) / xValues.length;
+      const yMean = scores.reduce((sum, y) => sum + y, 0) / scores.length;
+      
+      const numerator = xValues.reduce((sum, x, i) => sum + (x - xMean) * (scores[i] - yMean), 0);
+      const denominator = Math.sqrt(
+        xValues.reduce((sum, x) => sum + Math.pow(x - xMean, 2), 0) *
+        scores.reduce((sum, y) => sum + Math.pow(y - yMean, 2), 0)
+      );
+      
+      return numerator / denominator;
+    }
+
+    function calculatePerformanceVolatility(scores) {
+      const changes = scores.slice(1).map((score, index) => Math.abs(score - scores[index]));
+      return changes.reduce((sum, change) => sum + change, 0) / (scores.length - 1);
+    }
+
+    function calculateSkillAcquisitionRate(scores) {
+      const windowSize = 5;
+      return scores.slice(windowSize).map((score, i) => {
+        const prevAvg = scores.slice(i, i + windowSize).reduce((a, b) => a + b) / windowSize;
+        return (score - prevAvg) / prevAvg * 100;
+      });
+    }
+
+    function calculateRelativePerformanceIndex(scores) {
+      const mean = scores.reduce((a, b) => a + b) / scores.length;
+      return scores.map(score => (score - mean) / mean * 100);
+    }
+
+    // New chart creation functions
+
+    function createPercentileRankingsChart(stats) {
+      if (!stats.percentileRankings || !Array.isArray(stats.percentileRankings)) {
+        console.error('Percentile rankings data is missing or invalid');
+        return;
+      }
+
+      const ctx = document.getElementById('percentileRankings').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: stats.percentileRankings.map((_, i) => `Attempt ${i + 1}`),
+          datasets: [{
+            label: 'Percentile Ranking',
+            data: stats.percentileRankings,
+            borderColor: '#1a1a1a',
+            fill: false
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Percentile Rankings Over Time'
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 100,
+              title: {
+                display: true,
+                text: 'Percentile'
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function createSkillAcquisitionRateChart(stats) {
+      if (!stats.skillAcquisitionRate || !Array.isArray(stats.skillAcquisitionRate)) {
+        console.error('Skill Acquisition Rate data is missing or invalid');
+        return;
+      }
+
+      const ctx = document.getElementById('skillAcquisitionRate').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: stats.skillAcquisitionRate.map((_, i) => `Attempt ${i + 6}`),
+          datasets: [{
+            label: 'Skill Acquisition Rate',
+            data: stats.skillAcquisitionRate,
+            borderColor: '#1a1a1a',
+            fill: false
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Skill Acquisition Rate Over Time'
+            }
+          },
+          scales: {
+            y: {
+              title: {
+                display: true,
+                text: 'Rate (%)'
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function createRelativePerformanceIndexChart(stats) {
+      if (!stats.relativePerformanceIndex || !Array.isArray(stats.relativePerformanceIndex)) {
+        console.error('Relative Performance Index data is missing or invalid');
+        return;
+      }
+
+      const ctx = document.getElementById('relativePerformanceIndex').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: stats.relativePerformanceIndex.map((_, i) => `Attempt ${i + 1}`),
+          datasets: [{
+            label: 'Relative Performance Index',
+            data: stats.relativePerformanceIndex,
+            borderColor: '#1a1a1a',
+            fill: false
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Relative Performance Index Over Time'
+            }
+          },
+          scales: {
+            y: {
+              title: {
+                display: true,
+                text: 'Index (%)'
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function createPerformancePrediction(scores) {
+      if (typeof tf === 'undefined') {
+        console.error('TensorFlow.js library is not loaded. Skipping performance prediction.');
+        return;
+      }
+
+      // Your existing ML.js code here
+      // ...
+    }
   </script>
-  <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/Lavadeg31/Vex_Iq/blob/main/Checker.html">Vex Iq Rapid Relay Score Grapher</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/Lavadeg31">Lars van de Griend</a> is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
 </body>
 </html>
