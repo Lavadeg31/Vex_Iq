@@ -93,10 +93,142 @@
             vertical-align: middle;
             margin: 0 3px;
         }
+
+        /* Toggle Switch Styling */
+        .toggle-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            gap: 10px;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #bfae90;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: #f5f5dc;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #d2c2a3;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .toggle-label {
+            font-size: 18px;
+            color: #1a1a1a;
+        }
+
+        .official-rules {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background-color: #d2c2a3;
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 1200px; /* Increased to accommodate iframe */
+            width: 95%;
+        }
+
+        .official-rules h2 {
+            margin-bottom: 20px;
+        }
+
+        .official-rules iframe {
+            background-color: #f5f5dc;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .official-rules iframe:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .official-rules a {
+            font-size: 20px;
+            padding: 15px 30px;
+            display: inline-block;
+            background-color: #bfae90;
+            border-radius: 5px;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .official-rules a:hover {
+            background-color: #a8997a;
+        }
+
+        /* Add loading indicator */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading:after {
+            content: "Loading...";
+            font-size: 18px;
+            color: #1a1a1a;
+        }
+
+        .manual-container {
+            padding: 20px;
+            background-color: #e0d6b9;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .pdf-viewer {
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 <body>
     <h1>🤖 VEX IQ Rapid Relay Rules Summary</h1>
+
+    <div class="toggle-container">
+        <span class="toggle-label">Summary</span>
+        <label class="switch">
+            <input type="checkbox" id="rulesToggle">
+            <span class="slider"></span>
+        </label>
+        <span class="toggle-label">Official Rules</span>
+    </div>
 
     <div class="rules-section">
         <h2>📜 Key Rules Overview</h2>
@@ -124,6 +256,23 @@
         <p>For more detailed rules, check out the <a href="https://www.vexrobotics.com/rapid-relay-manual" target="_blank" class="manual-link">VEX IQ Rapid Relay Manual</a>.</p>
     </div>
 
+    <div class="official-rules" id="officialRules">
+        <h2>📚 Official VEX IQ Rapid Relay Manual</h2>
+        <div class="manual-container">
+            <object 
+                data="https://content.vexrobotics.com/docs/23-24/viqrc-fullvolume/VIQRC-23-24-GameManual-4.0.pdf"
+                type="application/pdf"
+                width="100%"
+                height="800px"
+                class="pdf-viewer">
+                <p>Unable to display PDF file. 
+                   <a href="https://content.vexrobotics.com/docs/23-24/viqrc-fullvolume/VIQRC-23-24-GameManual-4.0.pdf" 
+                      target="_blank">Download PDF</a> instead.
+                </p>
+            </object>
+        </div>
+    </div>
+
     <div class="license-section">
         <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">
             <a property="dct:title" rel="cc:attributionURL" href="https://github.com/Lavadeg31/Vex_Iq/blob/main/Rules.html">Vex Iq Rapid Relay Rule Summary</a> by 
@@ -136,5 +285,23 @@
             </a>
         </p>
     </div>
+
+    <script>
+        const rulesToggle = document.getElementById('rulesToggle');
+        const rulesSection = document.querySelector('.rules-section');
+        const officialRules = document.getElementById('officialRules');
+
+        rulesToggle.addEventListener('change', function() {
+            if (this.checked) {
+                // Show Official Rules
+                rulesSection.style.display = 'none';
+                officialRules.style.display = 'block';
+            } else {
+                // Show Summary
+                rulesSection.style.display = 'block';
+                officialRules.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
