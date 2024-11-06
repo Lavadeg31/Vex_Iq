@@ -1,0 +1,7 @@
+path: /Users/larsini/Documents/Code/Vex_Iq/vex-tools/Vision/training_data  # Dataset root directory
+train: /Users/larsini/Documents/Code/Vex_Iq/vex-tools/Vision/training_data/images  # Train images
+val: /Users/larsini/Documents/Code/Vex_Iq/vex-tools/Vision/training_data/images    # Validation images
+
+# Classes
+names:
+  0: ball  # Yellow VEX IQ ball
