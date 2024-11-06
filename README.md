@@ -279,8 +279,246 @@ The system uses multiple checks to give accurate scoring:
 - Color detection thresholds
 - Goal area monitoring
 
+
+
+
+# VEX IQ Calculator - Detailed Component Documentation
+
+## 1. User Interface Components
+
+### Main Layout Structure
+```html
+<div class="container mx-auto p-4">
+    <!-- Three-column grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <!-- Left: Calculator -->
+        <!-- Middle: Live Scores -->
+        <!-- Right: Analytics -->
+    </div>
+</div>
+```
+**Purpose:**
+- Creates responsive 3-column layout
+- Adapts to screen size (single column on mobile)
+- Maintains consistent spacing and padding
+
+
+### Score Input Controls
+```javascript
+// Button handlers for score adjustments
+const buttons = {
+    'increase-goals': () => adjustValue('goals', 1),
+    'decrease-goals': () => adjustValue('goals', -1),
+    'increase-switches': () => adjustValue('switches', 1),
+    'decrease-switches': () => adjustValue('switches', -1)
+};
+
+function adjustValue(field, change) {
+    const input = document.getElementById(`${field}-display`);
+    let value = parseInt(input.value) + change;
+    
+    // Validation for switches (max 4)
+    if (field === 'switches') {
+        value = Math.min(4, Math.max(0, value));
+    }
+    calculateScores(); // Recalculate after change
+}
+```
+**Features:**
+- Increment/decrement controls for each score type
+- Input validation
+- Automatic score recalculation
+- Maximum limits enforcement
+
+
+## 2. Scoring System
+
+### Score Calculation Logic
+```javascript
+function calculateScores() {
+    let score = 0;
+    
+    // Get input values
+    let goals = parseInt(document.getElementById('goals-display').value) || 0;
+    let switches = parseInt(document.getElementById('switches-display').value) || 0;
+    let passes = parseInt(document.getElementById('passes-display').value) || 0;
+
+    // Mode-specific calculations
+    if (mode === 'teamwork') {
+        // Teamwork scoring rules
+        if (switches === 0) {
+            passes = Math.min(passes, 4);  // Max 4 passes without switches
+        } else {
+            passes = Math.min(passes, goals);  // Can't pass more than goals
+        }
+        score = goals + switches + (passes * switchMultiplier);
+    } else {
+        // Skills scoring rules
+        const switchKey = [1, 4, 8, 10, 12, 12, 12, 12, 12];
+        score = (goals * switchKey[switches]) + switches;
+    }
+
+    updateDisplay(score);
+    return score;
+}
+```
+**Functionality:**
+- Handles both Teamwork and Skills modes
+- Applies appropriate multipliers
+- Validates input combinations
+- Updates score display
+
+
+## 3. Timer System
+
+### Timer Controls
+```javascript
+let isRunning = false;
+let timeLeft = 60;
+let countdown = 3;
+
+function startPauseTimer() {
+    if (!isRunning) {
+        // Start timer
+        isRunning = true;
+        if (document.getElementById("countdown-toggle").checked) {
+            startCountdown();
+        } else {
+            startMainTimer();
+        }
+    } else {
+        // Pause timer
+        clearInterval(timerInterval);
+        isRunning = false;
+    }
+    updateButtonDisplay();
+}
+
+function updateTimerDisplay(minutes, seconds) {
+    document.getElementById('timer-minutes').style.setProperty('--value', minutes);
+    document.getElementById('timer-seconds').style.setProperty('--value', seconds);
+}
+```
+**Features:**
+- 60-second match timer
+- Optional 3-second countdown
+- Start/pause functionality
+- Audio alerts
+- Visual countdown display
+
+
+## 4. Data Management
+
+### Score Storage and Export
+```javascript
+function saveScores() {
+    chrome.storage.sync.set({ 
+        scores: scores,
+        timestamp: new Date().toISOString()
+    });
+}
+
+function exportScores() {
+    const data = {
+        scores: scores,
+        mode: mode,
+        timestamp: new Date().toISOString(),
+        statistics: {
+            average: calculateAverage(),
+            highest: Math.max(...scores),
+            total: scores.length
+        }
+    };
+    
+    // Create downloadable file
+    const blob = new Blob([JSON.stringify(data)], 
+                         {type: 'application/json'});
+    const url = URL.createObjectURL(blob);
+    downloadFile(url, 'vex-scores.json');
+}
+```
+**Capabilities:**
+- Persistent score storage
+- JSON export format
+- Statistical data inclusion
+- Chrome storage sync
+- File download generation
+
+
+## 5. Analytics System
+
+### Chart Generation
+```javascript
+const chartConfig = {
+    responsive: true,
+    maintainAspectRatio: true,
+    interaction: {
+        mode: 'index',
+        intersect: false
+    },
+    plugins: {
+        legend: {
+            position: 'top',
+            labels: { usePointStyle: true }
+        }
+    }
+};
+
+function updateGraphs() {
+    // Score History
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: timeLabels,
+            datasets: [{
+                label: 'Match Scores',
+                data: scores
+            }]
+        },
+        options: chartConfig
+    });
+    
+    // Additional charts...
+}
+```
+**Features:**
+- Responsive chart sizing
+- Multiple chart types
+- Interactive charts
+- Theme styling
+- Auto updating data
+
+
+## 6. Theme System
+
+### Theme Management
+```javascript
+function toggleTheme() {
+    const isDark = body.getAttribute('data-theme') === 'dark';
+    const newTheme = isDark ? 'light' : 'dark';
+    
+    // Update DOM
+    body.setAttribute('data-theme', newTheme);
+    document.documentElement.setAttribute('data-theme', newTheme);
+    
+    // Save preference
+    chrome.storage.sync.set({ theme: newTheme });
+    
+    // Update charts
+    if (document.getElementById('showAllGraphs').checked) {
+        updateGraphs();
+    }
+}
+```
+**Functionality:**
+- Light/dark mode toggle
+- Theme preference
+- Real-time UI updates
+- Chart theme sync
+
+
 <h2>All Info here were made by 45557A Unless otherwise specifyed by the word "official"</h2>
-<h3>Try out our new in house developed tools to help show your performance along with our new code VEX VISION. Able to score your games autonomosly using AI and Machine Learn</h3>
+<h3>Try out our new in house developed tools to help show your performance along with our new code VEX VISION. Able to score your games autonomosly using AI and Machine Learning</h3>
 <div align="center">
   <h2>Tools</h2>
   <p>
