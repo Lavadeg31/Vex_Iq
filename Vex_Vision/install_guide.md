@@ -217,4 +217,3 @@ If you encounter any other issues, please check:
 3. Python and pip are in PATH
 4. You're in the correct directory
 
-Let me know if you need help with any specific error!
