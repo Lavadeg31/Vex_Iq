@@ -1,9 +1,13 @@
 
 
-# Recommended System Specifications for Vision Tracking System
-## ALL APPLE SILICON CHIPS WORK WELL
-## CPU Recommendations by Tier
+# Recommended System Specifications for Vex Vision
+# Nex Vex Vision (With Ai)
 
+#### ALL APPLE SILICON CHIPS WORK WELL
+
+
+
+# Old Vex Vision (No machine learning and deep learning)
 ### Minimum Tier (Basic Functionality)
 **Intel:**
 - i5-4460 (4C/4T)
