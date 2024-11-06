@@ -137,5 +137,3 @@ if cv2.cuda.getCudaEnabledDeviceCount() > 0:
 if platform.processor().startswith('AMD'):
     cv2.setNumThreads(8)  # AMD CPUs often have more threads
 ```
-
-Would you like more specific details about any of these tiers or particular CPU models?
