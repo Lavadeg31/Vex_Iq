@@ -94,11 +94,11 @@
 
 <h3>Rules Summary Tool</h3>
 <ul>
-  <li>📋 Comprehensive game rules overview</li>
+  <li>📋 Game rules overview</li>
   <li>🎯 Scoring system explanation</li>
-  <li>🤖 Robot specifications</li>
-  <li>🏁 Match procedures</li>
-  <li>⚖️ Penalty guidelines</li>
+  <li>🤖 Robot Requirements</li>
+  <li>🏁 Match Rules</li>
+  <li>⚖️ Penalty Rules</li>
   <li>📱 Mobile-friendly layout</li>
   <li>🔍 Easy navigation</li>
   <li>📖 Links to official documentation</li>
@@ -125,7 +125,7 @@
 <ul>
   <li>🔧 <strong>Added toggle for timer visibility:</strong> Functionality to toggle timer on/off with a simple button press.</li>
   <li>🎵 <strong>Enhanced audio functionality:</strong> Implemented the playback of audio at key countdown points using JavaScript's `Audio` API.</li>
-  <li>📊 **Improved score calculation**: JavaScript function dynamically calculates points based on the user’s inputs for goals, switches, and passes, providing instant feedback in the UI.</li>
+  <li>📊 <strong>Improved score calculation:</strong> JavaScript function dynamically calculates points based on the user’s inputs for goals, switches, and passes, providing instant feedback in the UI.</li>
   <li>🛠️ <strong>Reset functionality added:</strong> Integrated a reset button to clear inputs and reset values on the point calculator.</li>
   <li>🧩 <strong>Refined timer function:</strong> The `startPauseTimer()` function handles both countdown and regular timer modes, making the logic cleaner and more intuitive.</li>
 </ul>
@@ -142,7 +142,6 @@
   <p>
     <a href="https://lavadeg31.github.io/Vex_Iq/Old%20Tools/Calculator">Score Calculator</a> |
     <a href="https://lavadeg31.github.io/Vex_Iq/Rules">Rules</a> |
-    <a href="https://lavadeg31.github.io/Vex_Iq/policy">Privacy Policy</a>
   </p>
   <p>
     <a href="https://chromewebstore.google.com/detail/vex-iq-calculator/aandmkklddpghampkpkdpopemddnhhij">Chrome Extension</a>
