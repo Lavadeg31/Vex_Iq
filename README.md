@@ -163,3 +163,14 @@
 <ul>
   <li>📕 <a href="https://lavadeg31.github.io/Vex_Iq/Rules.html">Read It!</a></li>
 </ul>
+<div align="center">
+  <h2>Tools</h2>
+  <p>
+    <a href="Calculator.html">Score Calculator</a> |
+    <a href="Rules.html">Rules</a> |
+    <a href="policy.html">Privacy Policy</a>
+  </p>
+  <p>
+    <a href="https://chromewebstore.google.com/detail/vex-iq-calculator/aandmkklddpghampkpkdpopemddnhhij">Chrome Extension</a>
+  </p>
+</div>
