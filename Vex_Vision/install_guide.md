@@ -153,6 +153,7 @@ py -m ensurepip --upgrade
 
 # macOS/Linux
 python3 -m ensurepip --upgrade
+# If that works but pip does not try pip3 instead of pip
 ```
 
 ### OpenCV Installation Fails
