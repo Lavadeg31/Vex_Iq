@@ -82,6 +82,51 @@ sudo apt install -y libopencv-dev
 pip3 install opencv-python numpy
 ```
 
+
+## Verifying Installation
+
+```bash
+# Check Python
+python --version  # or python3 --version
+
+# Check pip
+pip --version    # or pip3 --version
+
+# Test OpenCV
+python -c "import cv2; print(cv2.__version__)"
+```
+
+## Running the Program
+
+1. Navigate to program directory:
+```bash
+cd path/to/rapid-relay-scorer
+```
+
+2. Run with webcam:
+```bash
+# Windows
+python vision.py 0
+
+# macOS/Linux
+python3 vision.py 0
+```
+
+3. Run with video file:
+```bash
+# Windows
+python vision.py path/to/video.mp4
+
+# macOS/Linux
+python3 vision.py path/to/video.mp4
+```
+
+If you encounter any other issues, please check:
+1. All dependencies are installed
+2. Camera permissions are granted
+3. Python and pip are in PATH
+4. You're in the correct directory
+
 ## Troubleshooting Common Issues
 
 ### Python Not Found
@@ -173,47 +218,4 @@ sudo chmod 666 /dev/video0
 sudo chmod -R 755 /usr/local/lib/python3.*/site-packages
 ```
 
-## Verifying Installation
-
-```bash
-# Check Python
-python --version  # or python3 --version
-
-# Check pip
-pip --version    # or pip3 --version
-
-# Test OpenCV
-python -c "import cv2; print(cv2.__version__)"
-```
-
-## Running the Program
-
-1. Navigate to program directory:
-```bash
-cd path/to/rapid-relay-scorer
-```
-
-2. Run with webcam:
-```bash
-# Windows
-python vision.py 0
-
-# macOS/Linux
-python3 vision.py 0
-```
-
-3. Run with video file:
-```bash
-# Windows
-python vision.py path/to/video.mp4
-
-# macOS/Linux
-python3 vision.py path/to/video.mp4
-```
-
-If you encounter any other issues, please check:
-1. All dependencies are installed
-2. Camera permissions are granted
-3. Python and pip are in PATH
-4. You're in the correct directory
 
