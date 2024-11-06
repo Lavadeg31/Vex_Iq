@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VEX IQ Calculator</title>
+    <link href="./dist/output.css" rel="stylesheet">
+    <link href="./dist/output.css" rel="stylesheet">
+    <script src="scripts/chart.js"></script>
+    <script src="scripts/d3.min.js"></script>
+    <script src="./src/js/main.js" defer></script>
+    <style>
+        body {
+            width: 800px;
+            height: 600px;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+  <link href="./dist/output.css" rel="stylesheet">
+</head>
+
+<body data-theme="light" class="min-h-screen bg-base-200">
+  <!-- Add audio elements -->
+  <audio id="timerAudio" src="./assets/Timer.mp3"></audio>
+  <audio id="timerAudioNoCountdown" src="./assets/Timer2.mp3"></audio>
+
+  <!-- Navbar -->
+  <div class="navbar bg-base-100 shadow-lg sticky top-0 z-50">
+    <div class="flex-1">
+      <h1 class="text-2xl font-bold px-4">VEX IQ Calculator</h1>
+    </div>
+    <div class="flex-none px-4">
+      <label class="swap swap-rotate">
+        <!-- this hidden checkbox controls the state -->
+        <input type="checkbox" class="theme-controller" value="synthwave" />
+        
+        <!-- sun icon -->
+        <svg class="swap-on fill-current w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/></svg>
+        
+        <!-- moon icon -->
+        <svg class="swap-off fill-current w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/></svg>
+      </label>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container mx-auto p-4">
+    <!-- Main Content Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 min-h-[calc(100vh-12rem)]">
+      <!-- Left Column (Calculator) -->
+      <div class="lg:col-span-2 space-y-4">
+        <!-- Stats Overview -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="stats shadow bg-base-100">
+            <div class="stat">
+              <div class="stat-title">Average Score</div>
+              <div class="stat-value text-primary" id="averageScore">0</div>
+              <div class="stat-desc" id="scoreChange">No change</div>
+            </div>
+          </div>
+          <div class="stats shadow bg-base-100">
+            <div class="stat">
+              <div class="stat-title">High Score</div>
+              <div class="stat-value text-secondary" id="highScore">0</div>
+              <div class="stat-desc" id="lastScore">Last: 0</div>
+            </div>
+          </div>
+          <div class="stats shadow bg-base-100">
+            <div class="stat">
+              <div class="stat-title">Total Attempts</div>
+              <div class="stat-value" id="totalAttempts">0</div>
+              <div class="stat-desc">Session Progress</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timer Card -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title justify-center">Timer</h2>
+            <div class="form-control">
+              <label class="label cursor-pointer justify-center">
+                <span class="label-text mr-4">Enable Timer</span>
+                <input type="checkbox" class="toggle" id="timer-toggle">
+              </label>
+              <label class="label cursor-pointer justify-center">
+                <span class="label-text mr-4">Show Countdown</span>
+                <input type="checkbox" class="toggle" id="countdown-toggle" checked>
+              </label>
+            </div>
+            <div id="timer-section" class="hidden">
+              <div class="grid grid-flow-col gap-5 text-center auto-cols-max justify-center mb-4">
+                <div class="flex flex-col">
+                  <span class="countdown font-mono text-5xl">
+                    <span id="timer-minutes" style="--value:1;"></span>
+                  </span>
+                  min
+                </div> 
+                <div class="flex flex-col">
+                  <span class="countdown font-mono text-5xl">
+                    <span id="timer-seconds" style="--value:0;"></span>
+                  </span>
+                  sec
+                </div>
+              </div>
+              <div class="flex justify-center gap-4">
+                <button id="startPauseButton" class="btn btn-circle btn-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                  </svg>
+                </button>
+                <button id="resetButton" class="btn btn-circle btn-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Calculator Card -->
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title justify-center">Score Calculator</h2>
+            <div class="form-control mb-4">
+              <label class="label cursor-pointer justify-center">
+                <span class="label-text mr-4">Skills Mode</span>
+                <input type="checkbox" class="toggle" id="mode-toggle">
+              </label>
+            </div>
+            
+            <!-- Score Inputs -->
+            <div id="score-inputs-grid" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text">Goals</span>
+                </label>
+                <div class="join">
+                  <button class="btn join-item decrease-goals">-</button>
+                  <input type="text" id="goals-display" class="join-item input input-bordered w-20 text-center" value="0">
+                  <button class="btn join-item increase-goals">+</button>
+                </div>
+              </div>
+              
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text">Switches</span>
+                </label>
+                <div class="join">
+                  <button class="btn join-item decrease-switches">-</button>
+                  <input type="text" id="switches-display" class="join-item input input-bordered w-20 text-center" value="0">
+                  <button class="btn join-item increase-switches">+</button>
+                </div>
+              </div>
+              
+              <div class="form-control" id="passes-group">
+                <label class="label">
+                  <span class="label-text">Passes</span>
+                </label>
+                <div class="join">
+                  <button class="btn join-item decrease-passes">-</button>
+                  <input type="text" id="passes-display" class="join-item input input-bordered w-20 text-center" value="0">
+                  <button class="btn join-item increase-passes">+</button>
+                </div>
+              </div>
+            </div>
+
+            <div id="result" class="text-center text-2xl font-bold mt-4 text-base-content">Total Points: 0</div>
+            
+            <div class="flex justify-center gap-4 mt-4">
+              <button class="btn btn-error" id="clearButton">Clear</button>
+              <button class="btn btn-primary" id="addScoreButton">Add Score</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column (Live Scores) -->
+      <div class="lg:col-span-1 flex flex-col h-full">
+        <div class="card bg-base-100 shadow-xl flex-grow" style="margin-bottom: 1.5rem;">
+          <div class="card-body p-4 flex flex-col">
+            <h2 class="card-title justify-center mb-4">Recent Scores</h2>
+            <div class="flex-grow flex flex-col">
+              <div class="overflow-y-auto flex-grow" style="height: calc(13 * 2.5rem);">
+                <table class="table table-zebra w-full">
+                  <thead class="sticky top-0 bg-base-100 z-30">
+                    <tr>
+                      <th class="text-center">Score</th>
+                      <th class="text-center">Date</th>
+                    </tr>
+                  </thead>
+                  <tbody id="liveScoreTable" class="pt-2">
+                    <!-- Live scores will appear here -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="mt-6">
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title justify-center">Performance Analytics</h2>
+          <div class="form-control">
+            <label class="label cursor-pointer justify-center">
+              <span class="label-text mr-4">Show Charts</span>
+              <input type="checkbox" class="toggle" id="showAllGraphs">
+            </label>
+          </div>
+          <div id="chartGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
+            <div class="card bg-base-100 shadow-xl">
+              <div class="card-body">
+                <canvas id="scoreHistory" height="200"></canvas>
+              </div>
+            </div>
+            <div class="card bg-base-100 shadow-xl">
+              <div class="card-body">
+                <canvas id="movingAverage" height="200"></canvas>
+              </div>
+            </div>
+            <div class="card bg-base-100 shadow-xl">
+              <div class="card-body">
+                <canvas id="scoreDistribution" height="200"></canvas>
+              </div>
+            </div>
+            <div class="card bg-base-100 shadow-xl">
+              <div class="card-body">
+                <canvas id="progressionChart" height="200"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Score History Section (after charts) -->
+    <div class="mt-6">
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title justify-center">Score History</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="scoreHistoryColumns">
+            <!-- Score history columns will be generated here -->
+          </div>
+          <div class="flex justify-center gap-4 mt-4">
+            <input type="file" class="file-input file-input-bordered w-full max-w-xs" 
+                   accept=".json,.txt" id="fileInput" />
+            <button class="btn btn-outline" id="exportButton">Export</button>
+            <button class="btn btn-error" id="deleteLastButton">Delete Last</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast container -->
+  <div class="toast toast-end"></div>
+
+  <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/Lavadeg31/Vex_Iq/blob/main/Calculator.html">Vex Iq Rapid Relay Score Calculator</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/Lavadeg31">Lars van de Griend</a> is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
+</body>
+</html>

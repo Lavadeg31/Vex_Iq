@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "VEX IQ Calculator",
+  "version": "2.0", 
+  "description": "A calculator for VEX IQ Rapid Relay scoring",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": ["storage"],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'; media-src 'self'"
+  },
+  "web_accessible_resources": [{
+    "resources": [
+      "Timer.mp3",
+      "Timer2.mp3", 
+      "scripts/*.js"
+    ],
+    "matches": ["<all_urls>"]
+  }]
+}
