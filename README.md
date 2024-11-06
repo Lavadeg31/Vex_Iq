@@ -158,11 +158,7 @@
   <li>🔄 You can toggle the visibility of the timer using the "Timer On/Off" toggle.</li>
   <li>🖱️ <a href="https://lavadeg31.github.io/Vex_Iq/Calculator.html">Try the Timer Here!</a></li>
 </ul>
-
-<h2>New Rule Summary!</h2>
-<ul>
-  <li>📕 <a href="https://lavadeg31.github.io/Vex_Iq/Rules.html">Read It!</a></li>
-</ul>
+<h2>All Info here were made by 45557A Unless otherwise specifyed by the word "official"</h2>
 <div align="center">
   <h2>Tools</h2>
   <p>
@@ -172,5 +168,6 @@
   </p>
   <p>
     <a href="https://chromewebstore.google.com/detail/vex-iq-calculator/aandmkklddpghampkpkdpopemddnhhij">Chrome Extension</a>
+    <a href="https://lavadeg31.github.io/Vex_Iq/Rules.html">Rule Summary</a>
   </p>
 </div>
