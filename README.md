@@ -140,9 +140,9 @@
 <div align="center">
   <h2>Tools</h2>
   <p>
-    <a href="Calculator.html">Score Calculator</a> |
-    <a href="Rules.html">Rules</a> |
-    <a href="policy.html">Privacy Policy</a>
+    <a href="https://lavadeg31.github.io/Vex_Iq/Old%20Tools/Calculator">Score Calculator</a> |
+    <a href="https://lavadeg31.github.io/Vex_Iq/Rules">Rules</a> |
+    <a href="https://lavadeg31.github.io/Vex_Iq/policy">Privacy Policy</a>
   </p>
   <p>
     <a href="https://chromewebstore.google.com/detail/vex-iq-calculator/aandmkklddpghampkpkdpopemddnhhij">Chrome Extension</a>
