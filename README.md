@@ -136,7 +136,151 @@
   <li>🔄 You can toggle the visibility of the timer using the "Timer On/Off" toggle.</li>
   <li>🖱️ <a href="https://lavadeg31.github.io/Vex_Iq/Calculator.html">Try the Timer Here!</a></li>
 </ul>
+
+
+# Vision Tracking System 
+[Please Check if your system can run this code by looking at my recomended specs for this code](https://lavadeg31.github.io/Vex_Iq/Vex_Vision/System_Requirements)
+## 1. Basic Concept
+The system tracks yellow balls going into goals by:
+1. Detecting the yellow color
+2. Monitoring specific areas (goals)
+3. Tracking when balls enter and exit goals
+4. Calculating scores based on these movements
+
+## 2. Key Features
+
+### Color Detection
+The system first needs to know what "yellow" looks like. It lets users click on a yellow ball to sample the color:
+
+```python
+def sample_yellow_color(self, frame):
+    """Sample yellow ball color from user click"""
+    print("\nYellow Ball Color Sampling:")
+    print("1. Click on a yellow ball")
+    print("2. Press 'r' to resample")
+    print("3. Press 'c' when satisfied with the color")
+    
+    # When user clicks, we get the color at that point
+    if sample_point:
+        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+        color = hsv[sample_point[1], sample_point[0]]
+        
+        # Create a range around that color
+        self.lower_yellow = np.array([max(0, color[0] - 10), 100, 100])
+        self.upper_yellow = np.array([min(180, color[0] + 10), 255, 255])
+```
+
+This creates a color range that will be used to detect yellow balls throughout the video.
+
+### Goal Detection
+The system needs to know where to look for balls. It can automatically detect goals or let users manually select them:
+**Python**
+```python
+def auto_select_goals(self, frame):
+    """Automatically detect goals with manual fallback"""
+    try:
+        # Convert to HSV for yellow detection
+        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+        
+        # Find yellow goal borders
+        yellow_mask = cv2.inRange(hsv, lower_yellow, upper_yellow)
+        contours, _ = cv2.findContours(yellow_mask, cv2.RETR_EXTERNAL, 
+                                     cv2.CHAIN_APPROX_SIMPLE)
+        
+        # Look for square/rectangular shapes
+        goal_contours = []
+        for contour in contours:
+            if len(approx) == 4:  # If it has 4 corners
+                # Check if it's roughly square shaped
+                x, y, w, h = cv2.boundingRect(contour)
+                if 0.7 < float(w)/h < 1.3:
+                    goal_contours.append(approx)
+```
+
+### Score Detection
+The system monitors each goal area for ball movement. Here's how it works:
+**Python**
+```python
+def process_frame(self, frame):
+    """Process single frame to detect scoring"""
+    current_time = time.time()
+    
+    for i in range(4):  # For each goal
+        # Check if there's yellow in the goal area
+        yellow_pixels = cv2.countNonZero(cv2.bitwise_and(yellow_mask, center_mask))
+        
+        # Determine if goal is empty
+        is_empty = yellow_pixels <= 50
+        was_empty = self.goal_states[i]['is_empty']
+        
+        # Track when balls enter/exit
+        if is_empty and not was_empty:
+            self.goal_states[i]['last_empty'] = current_time
+        elif not is_empty and was_empty:
+            self.goal_states[i]['entered_time'] = current_time
+        
+        # Score detection logic
+        if not is_empty:
+            # Check if this is a valid score:
+            # 1. Enough time since last score
+            # 2. Ball was outside goal before
+            # 3. Ball entered recently
+            if (current_time - last_time >= 0.75 and
+                last_empty > 0 and
+                entered_time - last_empty >= 0.3 and
+                current_time - entered_time <= 0.2):
+                
+                self.score['goals'] += 1
+```
+
+### Performance Optimization
+For Windows systems, there are specific optimizations:
+**Python**
+```python
+class RapidRelayScorer:
+    def __init__(self):
+        # Performance optimizations
+        self.frame_queue = Queue(maxsize=2)
+        self.result_queue = Queue()
+        
+        # Windows-specific optimizations
+        cv2.setNumThreads(4)  # Optimize for quad-core processors
+        
+    def process_video(self, source):
+        # Windows optimization: Set DirectShow backend
+        cap.set(cv2.CAP_PROP_BACKEND, cv2.CAP_DSHOW)
+        
+        # Optimize buffer size
+        cap.set(cv2.CAP_PROP_BUFFERSIZE, 2)
+```
+
+## 3. How It All Works Together
+
+1. **Setup**:
+   - User clicks on a yellow ball color
+   - System detects or user selects goals
+   - System initializes tracking
+
+2. **Processing Phase**:
+   - Each frame is analyzed for yellow balls
+   - System tracks ball movement in goal areas
+   - Scores are calculated based on valid movements
+   - Data is stored and can be exported
+
+3. **Scoring Logic**:
+   - Ball must be outside goal first
+   - Ball must enter goal area
+   - Movement must meet timing requirements
+   - Switch bonuses are calculated automatically
+
+The system uses multiple checks to give accurate scoring:
+- Time between scores
+- Ball movement patterns
+- Color detection thresholds
+- Goal area monitoring
+
 <h2>All Info here were made by 45557A Unless otherwise specifyed by the word "official"</h2>
+<h3>Try out our new in house developed tools to help show your performance along with our new code VEX VISION. Able to score your games autonomosly using AI and Machine Learn</h3>
 <div align="center">
   <h2>Tools</h2>
   <p>
@@ -148,3 +292,4 @@
     <a href="https://lavadeg31.github.io/Vex_Iq/Rules.html">Rule Summary</a>
   </p>
 </div>
+
