@@ -1,4 +1,4 @@
-<h1>🤖 VEX IQ Engineering Progress</h1>
+# 🤖 VEX IQ Engineering Progress
 
 <h2>🗓️ Timeline of Robot Development</h2>
 
@@ -282,7 +282,7 @@ The system uses multiple checks to give accurate scoring:
 
 
 
-# VEX IQ Calculator - Detailed Component Documentation
+# Manual Calculator
 
 ## 1. User Interface Components
 
