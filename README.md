@@ -61,13 +61,12 @@
 
 <h3>Calculator Tool</h3>
 <ul>
-  <li>⏱️ Interactive timer with audio cues</li>
-  <li>🧮 Dynamic score calculation</li>
+  <li>⏱️ Timer with audio cues</li>
+  <li>🧮 Score calculation</li>
   <li>🔄 Reset functionality</li>
   <li>📊 Real-time point tracking</li>
   <li>🎯 Goal scoring system</li>
   <li>🔄 Pass counter</li>
-  <li>🎚️ Switch activation tracking</li>
 </ul>
 
 <h3>Performance Checker Tool</h3>
@@ -105,16 +104,6 @@
   <li>📖 Links to official documentation</li>
 </ul>
 
-<h3>Hub Features</h3>
-<ul>
-  <li>🔄 Seamless navigation between tools</li>
-  <li>💾 State preservation when switching tools</li>
-  <li>📱 Responsive design</li>
-  <li>🎨 Consistent theme across all tools</li>
-  <li>🏠 Central homepage access</li>
-  <li>🔗 Quick access to all features</li>
-</ul>
-
 <h2>📱 Compatibility</h2>
 <ul>
   <li>✅ Works on desktop and mobile devices</li>
@@ -125,20 +114,9 @@
 
 <h2>🔜 Upcoming Features</h2>
 <ul>
-  <li>📊 Data export functionality</li>
   <li>App for mobile devices</li>
-  <li>🔄 Auto-save capabilities</li>
-  <li>📱 Progressive Web App support</li>
-  <li>📊 Enhanced data visualization</li>
 </ul>
 
-<h2>🔗 Quick Links</h2>
-<ul>
-  <li><a href="https://lavadeg31.github.io/Vex_Iq/Calculator">Score Calculator</a></li>
-  <li><a href="https://lavadeg31.github.io/Vex_Iq/Checker">Performance Checker</a></li>
-  <li><a href="https://lavadeg31.github.io/Vex_Iq/Rules.html">Rules Summary</a></li>
-  <li><a href="https://lavadeg31.github.io/Vex_Iq/">Main Hub</a></li>
-</ul>
 
 <p>Full Changelog: <a href="https://github.com/Lavadeg31/Vex_Iq/commits/Code">Code V1.0.1 Changelog</a></p>
 
