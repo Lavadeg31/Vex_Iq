@@ -1,7 +1,7 @@
 
 
 # Recommended System Specifications for Vision Tracking System
-
+## ALL APPLE SILICON CHIPS WORK WELL
 ## CPU Recommendations by Tier
 
 ### Minimum Tier (Basic Functionality)
