@@ -185,3 +185,8 @@ A: Use the export function in the Chrome extension to save your data as JSON.
 - GitHub: Lavadeg31
 - Email: vandegriendlars@gmail.com
 
+## Quick Links
+- [Extention Files](https://github.com/Lavadeg31/Vex_Iq/blob/main/vex-tools/vex-tools.zip)
+- [Vision Guides](https://github.com/Lavadeg31/Vex_Iq/blob/main/Vex_Vision/install_guide.md)
+- [Chrome Web Store](https://chromewebstore.google.com/detail/vex-iq-calculator/aandmkklddpghampkpkdpopemddnhhij)
+
