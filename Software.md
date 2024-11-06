@@ -11,7 +11,7 @@
 ## Tools Available
 
 ### 1. Score Calculator (Web Version) (Not recomended due to CSS limitations
-- Open [[Calculator.html](https://lavadeg31.github.io/Vex_Iq/Old%20Tools/Calculator) in your browser
+- Open [Calculator.html](https://lavadeg31.github.io/Vex_Iq/Old%20Tools/Calculator) in your browser
 - Select mode (**Skills/Teamwork**)
 - Input scores and track performance
 - View statistics and analytics
