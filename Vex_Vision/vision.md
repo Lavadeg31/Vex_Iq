@@ -15,7 +15,7 @@ pip install opencv-python numpy
 ### 1. Clone or Download
 ```bash
 git clone <github.com/Lavadeg31/Vex_Iq>
-# or download and extract the ZIP file
+# or download the vision.py file in the repo
 ```
 
 ### 2. Running the Program
