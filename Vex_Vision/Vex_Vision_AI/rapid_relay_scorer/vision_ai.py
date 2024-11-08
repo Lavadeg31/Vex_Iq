@@ -15,7 +15,6 @@ class AIRapidRelayScorer:
         self.last_score_time = {}
         self.switches_cleared = set()
         
-        # Suppress YOLO output during model loading
         with contextlib.redirect_stdout(StringIO()):
             self.model = YOLO('best.pt')
         self.model.verbose = False
@@ -25,7 +24,7 @@ class AIRapidRelayScorer:
         self.recent_scores = []
         self.pending_scores = []
         
-        # Optimization 1: Use MPS (Metal) acceleration on Mac
+        # Use MPS (Metal) acceleration on Mac, this speeds up the AI using apple specific code
         device = 'mps' if torch.backends.mps.is_available() else 'cpu'
         print(f"Using device: {device}")
         
@@ -34,10 +33,9 @@ class AIRapidRelayScorer:
         self.model = YOLO(model_path)
         self.model.to(device)
         
-        # Optimization 2: Set inference parameters
         self.conf_threshold = 0.5
         self.iou_threshold = 0.3
-        self.max_det = 10  # Max number of detections per frame
+        self.max_det = 10 
         
         print("Model loaded and optimized!")
 
@@ -53,7 +51,6 @@ class AIRapidRelayScorer:
             # Create yellow mask
             yellow_mask = cv2.inRange(hsv, self.lower_yellow, self.upper_yellow)
             
-            # Find contours
             contours, _ = cv2.findContours(yellow_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
             
             # Filter and sort contours
