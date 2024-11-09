@@ -1,0 +1,556 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		DE4DF1642CDD79C100A6F166 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DE4DF14A2CDD79BF00A6F166 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DE4DF1512CDD79BF00A6F166;
+			remoteInfo = "VIQRC+";
+		};
+		DE4DF16E2CDD79C100A6F166 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DE4DF14A2CDD79BF00A6F166 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DE4DF1512CDD79BF00A6F166;
+			remoteInfo = "VIQRC+";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		DE4DF1522CDD79BF00A6F166 /* VIQRC+.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VIQRC+.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE4DF1632CDD79C100A6F166 /* VIQRC+Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "VIQRC+Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE4DF16D2CDD79C100A6F166 /* VIQRC+UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "VIQRC+UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		DE4DF1542CDD79BF00A6F166 /* VIQRC+ */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "VIQRC+";
+			sourceTree = "<group>";
+		};
+		DE4DF1662CDD79C100A6F166 /* VIQRC+Tests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "VIQRC+Tests";
+			sourceTree = "<group>";
+		};
+		DE4DF1702CDD79C100A6F166 /* VIQRC+UITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "VIQRC+UITests";
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DE4DF14F2CDD79BF00A6F166 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE4DF1602CDD79C100A6F166 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE4DF16A2CDD79C100A6F166 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DE4DF1492CDD79BF00A6F166 = {
+			isa = PBXGroup;
+			children = (
+				DE4DF1542CDD79BF00A6F166 /* VIQRC+ */,
+				DE4DF1662CDD79C100A6F166 /* VIQRC+Tests */,
+				DE4DF1702CDD79C100A6F166 /* VIQRC+UITests */,
+				DE4DF1532CDD79BF00A6F166 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DE4DF1532CDD79BF00A6F166 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DE4DF1522CDD79BF00A6F166 /* VIQRC+.app */,
+				DE4DF1632CDD79C100A6F166 /* VIQRC+Tests.xctest */,
+				DE4DF16D2CDD79C100A6F166 /* VIQRC+UITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DE4DF1512CDD79BF00A6F166 /* VIQRC+ */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DE4DF1772CDD79C100A6F166 /* Build configuration list for PBXNativeTarget "VIQRC+" */;
+			buildPhases = (
+				DE4DF14E2CDD79BF00A6F166 /* Sources */,
+				DE4DF14F2CDD79BF00A6F166 /* Frameworks */,
+				DE4DF1502CDD79BF00A6F166 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				DE4DF1542CDD79BF00A6F166 /* VIQRC+ */,
+			);
+			name = "VIQRC+";
+			packageProductDependencies = (
+			);
+			productName = "VIQRC+";
+			productReference = DE4DF1522CDD79BF00A6F166 /* VIQRC+.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DE4DF1622CDD79C100A6F166 /* VIQRC+Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DE4DF17A2CDD79C100A6F166 /* Build configuration list for PBXNativeTarget "VIQRC+Tests" */;
+			buildPhases = (
+				DE4DF15F2CDD79C100A6F166 /* Sources */,
+				DE4DF1602CDD79C100A6F166 /* Frameworks */,
+				DE4DF1612CDD79C100A6F166 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DE4DF1652CDD79C100A6F166 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				DE4DF1662CDD79C100A6F166 /* VIQRC+Tests */,
+			);
+			name = "VIQRC+Tests";
+			packageProductDependencies = (
+			);
+			productName = "VIQRC+Tests";
+			productReference = DE4DF1632CDD79C100A6F166 /* VIQRC+Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DE4DF16C2CDD79C100A6F166 /* VIQRC+UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DE4DF17D2CDD79C100A6F166 /* Build configuration list for PBXNativeTarget "VIQRC+UITests" */;
+			buildPhases = (
+				DE4DF1692CDD79C100A6F166 /* Sources */,
+				DE4DF16A2CDD79C100A6F166 /* Frameworks */,
+				DE4DF16B2CDD79C100A6F166 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DE4DF16F2CDD79C100A6F166 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				DE4DF1702CDD79C100A6F166 /* VIQRC+UITests */,
+			);
+			name = "VIQRC+UITests";
+			packageProductDependencies = (
+			);
+			productName = "VIQRC+UITests";
+			productReference = DE4DF16D2CDD79C100A6F166 /* VIQRC+UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DE4DF14A2CDD79BF00A6F166 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1610;
+				LastUpgradeCheck = 1610;
+				TargetAttributes = {
+					DE4DF1512CDD79BF00A6F166 = {
+						CreatedOnToolsVersion = 16.1;
+					};
+					DE4DF1622CDD79C100A6F166 = {
+						CreatedOnToolsVersion = 16.1;
+						TestTargetID = DE4DF1512CDD79BF00A6F166;
+					};
+					DE4DF16C2CDD79C100A6F166 = {
+						CreatedOnToolsVersion = 16.1;
+						TestTargetID = DE4DF1512CDD79BF00A6F166;
+					};
+				};
+			};
+			buildConfigurationList = DE4DF14D2CDD79BF00A6F166 /* Build configuration list for PBXProject "VIQRC+" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DE4DF1492CDD79BF00A6F166;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = DE4DF1532CDD79BF00A6F166 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DE4DF1512CDD79BF00A6F166 /* VIQRC+ */,
+				DE4DF1622CDD79C100A6F166 /* VIQRC+Tests */,
+				DE4DF16C2CDD79C100A6F166 /* VIQRC+UITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DE4DF1502CDD79BF00A6F166 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE4DF1612CDD79C100A6F166 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE4DF16B2CDD79C100A6F166 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DE4DF14E2CDD79BF00A6F166 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE4DF15F2CDD79C100A6F166 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE4DF1692CDD79C100A6F166 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DE4DF1652CDD79C100A6F166 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DE4DF1512CDD79BF00A6F166 /* VIQRC+ */;
+			targetProxy = DE4DF1642CDD79C100A6F166 /* PBXContainerItemProxy */;
+		};
+		DE4DF16F2CDD79C100A6F166 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DE4DF1512CDD79BF00A6F166 /* VIQRC+ */;
+			targetProxy = DE4DF16E2CDD79C100A6F166 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		DE4DF1752CDD79C100A6F166 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DE4DF1762CDD79C100A6F166 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		DE4DF1782CDD79C100A6F166 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "VIQRC+/VIQRC_.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"VIQRC+/Preview Content\"";
+				DEVELOPMENT_TEAM = N46CH345NQ;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Lars.VIQRC-";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		DE4DF1792CDD79C100A6F166 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "VIQRC+/VIQRC_.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"VIQRC+/Preview Content\"";
+				DEVELOPMENT_TEAM = N46CH345NQ;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Lars.VIQRC-";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		DE4DF17B2CDD79C100A6F166 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N46CH345NQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Lars.VIQRC-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VIQRC+.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/VIQRC+";
+			};
+			name = Debug;
+		};
+		DE4DF17C2CDD79C100A6F166 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N46CH345NQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Lars.VIQRC-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VIQRC+.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/VIQRC+";
+			};
+			name = Release;
+		};
+		DE4DF17E2CDD79C100A6F166 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N46CH345NQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Lars.VIQRC-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "VIQRC+";
+			};
+			name = Debug;
+		};
+		DE4DF17F2CDD79C100A6F166 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N46CH345NQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Lars.VIQRC-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "VIQRC+";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DE4DF14D2CDD79BF00A6F166 /* Build configuration list for PBXProject "VIQRC+" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE4DF1752CDD79C100A6F166 /* Debug */,
+				DE4DF1762CDD79C100A6F166 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DE4DF1772CDD79C100A6F166 /* Build configuration list for PBXNativeTarget "VIQRC+" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE4DF1782CDD79C100A6F166 /* Debug */,
+				DE4DF1792CDD79C100A6F166 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DE4DF17A2CDD79C100A6F166 /* Build configuration list for PBXNativeTarget "VIQRC+Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE4DF17B2CDD79C100A6F166 /* Debug */,
+				DE4DF17C2CDD79C100A6F166 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DE4DF17D2CDD79C100A6F166 /* Build configuration list for PBXNativeTarget "VIQRC+UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE4DF17E2CDD79C100A6F166 /* Debug */,
+				DE4DF17F2CDD79C100A6F166 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DE4DF14A2CDD79BF00A6F166 /* Project object */;
+}
