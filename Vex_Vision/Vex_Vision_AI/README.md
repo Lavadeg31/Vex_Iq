@@ -91,47 +91,50 @@ The AI model learns through supervised learning, where humans provide the "groun
 - Each click makes an overlay specifying:
   - The ball's exact center position
   - A consistent bounding box (40-pixel radius)
-- Multiple ball\rked in each frame
-- Humans can verify and correct their annotations before saving
+- Multiple ball marked in each frame
+- Humans can verify and correct their clicks before saving
 
 #### How The AI Learns From This
 1. **Pattern Recognition**
-   - The model looks at the pixel data around each human-marked ball
+   - The model looks at the pixels around each human-marked ball
    - It learns visual patterns like:
      - The ball's circular shape
      - Color patterns and variations
      - Shadows and lighting effects
-     - Different angles and partial views
+     - Different angles and obstructed views
 
 2. **Feature Extraction**
-   - The AI develops internal representations of what makes a "ball"
+   - The AI develops "thoughts" of what makes a "ball"
    - It learns to ignore irrelevant background elements
-   - Builds understanding of ball appearances in various contexts
+   - It gets a understanding of what a ball looks like in various times such as motion blur from fast movment or it being blocked by intake rollers or a robot mechanisim.
 
 3. **Training Iterations**
-   - The model makes predictions on training images
-   - Compares its predictions to human annotations
-   - Adjusts its internal parameters to reduce errors
-   - Repeats this process 100 times (epochs) to refine accuracy
+   - The model makes predictions based on its "thoughts" on the training images
+   - Compares its guesses to human clicks
+   - Adjusts its strategy to reduce errors
+   - Repeats this process 100 times (epochs) to get better accuracy
 
-## Training Tools and Infrastructure
+## Training Tools and Code
 
-### Software Stack
-- **Ultralytics YOLOv8**: Core detection framework
-- **OpenCV**: Image processing and annotation interface
-- **PyTorch**: Deep learning backend
+### Software Inports
+- **Ultralytics YOLOv8**: detection framework
+- **OpenCV**: Image processing and annotation interface (its just the inport that makes it able to open video or webcam)
+- **PyTorch**: Deep learning backend or AI training code, depends on what you think is better
 - **Python**: Primary programming language
 
 ### Hardware Requirements
 - Capable CPU for data processing
-- GPU recommended for faster training (though not required)
-- Sufficient RAM for batch processing
-- Webcam or video input device for data collection
+- GPU recommended for smoother stream (not needed)
+- Enough RAM for batch processing
+- Webcam or video input device for data collection (it cAN run on video bu just using
+   ```
+   python3 vision_ai.py your/video/path/here.mp4
+   ```
 
 ### Training Pipeline
 
 #### 1. Data Collection Process
-The data collection system (`collect_data.py`) implements a sophisticated annotation workflow:
+The data collection system (`collect_data.py`) uses a marking technique:
 - Processes video files frame-by-frame with configurable intervals
 - Provides an interactive GUI for precise ball marking
 - Uses a 40-pixel radius for consistent ball sizing
@@ -165,11 +168,10 @@ Hardware detection and utilization:
 - Configurable batch sizes based on available memory
 - Memory management during inference
 
-## Post-Training Optimization
+## After-Training Optimization
 - Frame skipping for processing speed improvments
-- Batched rendering operations
-- Optimized video capture settings
-- Memory-efficient frame buffer management
+- Optimized video input/output capture settings
+- Memory-efficient frame management
 - Silent inference mode to reduce overhead
 - Real-time FPS monitoring and adjustment
 - Score validation system with pending score states
