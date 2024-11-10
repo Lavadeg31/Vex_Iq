@@ -34,6 +34,7 @@ If you see "App can't be opened because it is from an unidentified developer":
 2. Select "Open" from the menu
 3. Click "Open" in the security dialog
 4. You only need to do this once
+#### or just open it while clicking ctrl
 
 ### If you dont see that menu and it does not let you open it follow these steps
 1. Go to settings
@@ -41,6 +42,11 @@ If you see "App can't be opened because it is from an unidentified developer":
 3. Scroll down and click open anyways
 3. you only need to do this once
 
+## For mac os 15.1 users on the latest software run this command and then open the software
+```
+sudo spctl --master-disable , reboot
+```
+### this will restart your computer and allow my unsigned app to open
 ## Notes
 - This app is not signed with an Apple Developer ID
 - You'll need to approve it manually on first launch
