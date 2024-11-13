@@ -15,8 +15,9 @@ class AIRapidRelayScorer:
         self.last_score_time = {}
         self.switches_cleared = set()
         
+        # Suppress YOLO output during model loading
         with contextlib.redirect_stdout(StringIO()):
-            self.model = YOLO('best.pt')
+            self.model = YOLO('/Users/larsini/Documents/Models/VEX/ball_detector/train/weights/best.pt')
         self.model.verbose = False
         
         self.lower_yellow = None
@@ -24,18 +25,19 @@ class AIRapidRelayScorer:
         self.recent_scores = []
         self.pending_scores = []
         
-        # Use MPS (Metal) acceleration on Mac, this speeds up the AI using apple specific code
+        # Optimization 1: Use MPS (Metal) acceleration on Mac
         device = 'mps' if torch.backends.mps.is_available() else 'cpu'
         print(f"Using device: {device}")
         
         # Load model
-        model_path = 'best.pt'
+        model_path = '/Users/larsini/Documents/Models/VEX/ball_detector/train/weights/best.pt'
         self.model = YOLO(model_path)
         self.model.to(device)
         
+        # Optimization 2: Set inference parameters
         self.conf_threshold = 0.5
         self.iou_threshold = 0.3
-        self.max_det = 10 
+        self.max_det = 10  # Max number of detections per frame
         
         print("Model loaded and optimized!")
 
@@ -51,6 +53,7 @@ class AIRapidRelayScorer:
             # Create yellow mask
             yellow_mask = cv2.inRange(hsv, self.lower_yellow, self.upper_yellow)
             
+            # Find contours
             contours, _ = cv2.findContours(yellow_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
             
             # Filter and sort contours
@@ -432,8 +435,17 @@ class AIRapidRelayScorer:
 
 if __name__ == "__main__":
     import sys
-    # Default to webcam if no source is provided
-    source = int(sys.argv[1]) if len(sys.argv) > 1 else 0
+    
+    if len(sys.argv) < 2:
+        print("Usage: python vision_ai.py <source>")
+        print("Source can be a path to a video file or a number (0, 1, 2, etc.) for webcam")
+        sys.exit(1)
+    
+    source = sys.argv[1]
+    
+    # Check if the source is a number (for webcam)
+    if source.isdigit():
+        source = int(source)
     
     scorer = AIRapidRelayScorer()
     scorer.process_video(source)
