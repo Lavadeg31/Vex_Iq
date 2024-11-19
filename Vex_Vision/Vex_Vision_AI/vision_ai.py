@@ -17,7 +17,7 @@ class AIRapidRelayScorer:
         
         # Suppress YOLO output during model loading
         with contextlib.redirect_stdout(StringIO()):
-            self.model = YOLO('best.pt')
+            self.model = YOLO('/Users/larsini/Documents/Models/VEX/ball_detector/train/weights/best.pt')
         self.model.verbose = False
         
         self.lower_yellow = None
@@ -30,7 +30,7 @@ class AIRapidRelayScorer:
         print(f"Using device: {device}")
         
         # Load model
-        model_path = 'best.pt'
+        model_path = '/Users/larsini/Documents/Models/VEX/ball_detector/train/weights/best.pt'
         self.model = YOLO(model_path)
         self.model.to(device)
         
@@ -386,11 +386,66 @@ class AIRapidRelayScorer:
         
         print(f"Reverted score for goal {score_state['goal_idx'] + 1}")
 
+    def manual_select_goals(self, frame):
+        """Manually select 4 goals by clicking corners"""
+        print("\nManual Goal Selection:")
+        print("1. Click 4 corners for each goal (clockwise from top-left)")
+        print("2. Press 'r' to restart current goal")
+        print("3. Press 'c' to confirm goals when done")
+        
+        self.goals = []
+        current_goal = []
+        
+        def mouse_callback(event, x, y, flags, param):
+            nonlocal current_goal
+            if event == cv2.EVENT_LBUTTONDOWN:
+                current_goal.append([x, y])
+        
+        cv2.namedWindow('Select Goals')
+        cv2.setMouseCallback('Select Goals', mouse_callback)
+        
+        while len(self.goals) < 4:
+            display = frame.copy()
+            
+            # Draw existing goals
+            for i, goal in enumerate(self.goals):
+                cv2.polylines(display, [np.array(goal)], True, (0, 255, 0), 2)
+                center = np.mean(goal, axis=0).astype(int)
+                cv2.putText(display, f"G{i+1}", (center[0]-10, center[1]-10),
+                           cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
+            
+            # Draw current goal points
+            for i, point in enumerate(current_goal):
+                cv2.circle(display, tuple(point), 3, (0, 0, 255), -1)
+                if i > 0:
+                    cv2.line(display, tuple(current_goal[i-1]), tuple(point), (0, 0, 255), 1)
+            
+            cv2.imshow('Select Goals', display)
+            
+            key = cv2.waitKey(1) & 0xFF
+            if key == ord('r'):
+                current_goal = []
+            elif key == ord('c') and len(current_goal) == 4:
+                self.goals.append(np.array(current_goal))
+                current_goal = []
+                print(f"Goal {len(self.goals)} set")
+        
+        cv2.destroyWindow('Select Goals')
+        print("All goals set successfully!")
+
 if __name__ == "__main__":
     import sys
+    
     if len(sys.argv) < 2:
-        print("Usage: python vision_ai.py <path_to_video>")
+        print("Usage: python vision_ai.py <source>")
+        print("Source can be a path to a video file or a number (0, 1, 2, etc.) for webcam")
         sys.exit(1)
     
+    source = sys.argv[1]
+    
+    # Check if the source is a number (for webcam)
+    if source.isdigit():
+        source = int(source)
+    
     scorer = AIRapidRelayScorer()
-    scorer.process_video(sys.argv[1])
+    scorer.process_video(source)
