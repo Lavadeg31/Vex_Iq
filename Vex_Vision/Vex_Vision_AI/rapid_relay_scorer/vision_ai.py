@@ -17,7 +17,7 @@ class AIRapidRelayScorer:
         
         # Suppress YOLO output during model loading
         with contextlib.redirect_stdout(StringIO()):
-            self.model = YOLO('/Users/larsini/Documents/Models/VEX/ball_detector/train/weights/best.pt')
+            self.model = YOLO('best.pt')
         self.model.verbose = False
         
         self.lower_yellow = None
@@ -30,7 +30,7 @@ class AIRapidRelayScorer:
         print(f"Using device: {device}")
         
         # Load model
-        model_path = '/Users/larsini/Documents/Models/VEX/ball_detector/train/weights/best.pt'
+        model_path = 'best.pt'
         self.model = YOLO(model_path)
         self.model.to(device)
         
