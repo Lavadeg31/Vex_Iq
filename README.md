@@ -530,6 +530,8 @@ function toggleTheme() {
     <a href="https://lavadeg31.github.io/Vex_Iq/Rules.html">Rule Summary</a>
   </p>
 </div>
+
+
 # Credits
 Ultralytics Yolo V8 nano
 Open CV
