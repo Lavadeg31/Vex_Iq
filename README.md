@@ -301,7 +301,7 @@ The system uses multiple checks to give accurate scoring:
 - Creates responsive 3-column layout
 - Adapts to screen size (single column on mobile)
 - Maintains consistent spacing and padding
-
+- Uses Daisy UI and Tailwind CSS for frount end
 
 ### Score Input Controls
 ```javascript
@@ -328,7 +328,7 @@ function adjustValue(field, change) {
 - Increment/decrement controls for each score type
 - Input validation
 - Automatic score recalculation
-- Maximum limits enforcement
+- Maximum limits enforcement so you cant have more than 4 switches etc
 
 
 ## 2. Scoring System
@@ -530,4 +530,10 @@ function toggleTheme() {
     <a href="https://lavadeg31.github.io/Vex_Iq/Rules.html">Rule Summary</a>
   </p>
 </div>
+# Credits
+Ultralytics Yolo V8 nano
+Open CV
+Daisy UI
+Tailwind CSS
+
 
