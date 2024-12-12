@@ -25,7 +25,7 @@ class AIRapidRelayScorer:
         self.recent_scores = []
         self.pending_scores = []
         
-        # Optimization 1: Use MPS (Metal) acceleration on Mac
+
         device = 'mps' if torch.backends.mps.is_available() else 'cpu'
         print(f"Using device: {device}")
         
@@ -34,10 +34,10 @@ class AIRapidRelayScorer:
         self.model = YOLO(model_path)
         self.model.to(device)
         
-        # Optimization 2: Set inference parameters
+
         self.conf_threshold = 0.5
         self.iou_threshold = 0.3
-        self.max_det = 10  # Max number of detections per frame
+        self.max_det = 10  
         
         print("Model loaded and optimized!")
 
@@ -210,7 +210,7 @@ class AIRapidRelayScorer:
             print("Error: Could not open video source")
             return
 
-        # Optimization 5: Set optimal video capture properties
+
         cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
         
         # Setup goals
@@ -224,7 +224,7 @@ class AIRapidRelayScorer:
         frame_count = 0
         fps_update_interval = 0.5  # Update FPS every 0.5 seconds
 
-        # Optimization 6: Pre-allocate display frame
+
         display = None
         
         while True:
@@ -232,7 +232,6 @@ class AIRapidRelayScorer:
             if not ret:
                 break
 
-            # Optimization 7: Skip frames if processing is slow
             if frame_count % 2 != 0:  # Process every other frame
                 frame_count += 1
                 continue
@@ -243,7 +242,7 @@ class AIRapidRelayScorer:
             # Check scoring
             self.check_scoring(balls)
             
-            # Optimization 8: Only create new display frame when needed
+
             if display is None:
                 display = np.zeros_like(frame)
             display = frame.copy()
@@ -253,7 +252,7 @@ class AIRapidRelayScorer:
                 color = (0, 255, 0) if i in self.switches_cleared else (0, 165, 255)
                 cv2.polylines(display, [goal], True, color, 2)
             
-            # Optimization 9: Batch text rendering
+
             texts = []
             for ball in balls:
                 x1, y1, x2, y2 = ball['box']
