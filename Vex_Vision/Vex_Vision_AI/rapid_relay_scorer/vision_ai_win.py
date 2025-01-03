@@ -26,6 +26,8 @@ class AIRapidRelayScorer:
         else:
             device = 'cpu'
         print(f"Using device: {device}")
+        torch.cuda.empty_cache()
+        torch.cuda.set_per_process_memory_fraction(0.8)
         
         # Load model with optimizations
         with contextlib.redirect_stdout(StringIO()):
