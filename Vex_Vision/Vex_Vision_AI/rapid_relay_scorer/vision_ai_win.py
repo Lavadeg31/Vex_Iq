@@ -5,6 +5,7 @@ import time
 import torch
 import os
 import contextlib
+import pynvml
 from io import StringIO
 
 class AIRapidRelayScorer:
@@ -45,6 +46,15 @@ class AIRapidRelayScorer:
         self.pending_scores = []
         
         print("Model loaded and optimized!")
+    def check_power_state():
+        if torch.cuda.is_available():
+            try:
+                pynvml.nvmlInit()
+                handle = pynvml.nvmlDeviceGetHandleByIndex(0)
+                power_state = pynvml.nvmlDeviceGetPowerState(handle)
+                print(f"GPU Power State: {power_state}")
+            except:
+                print("Could not check power state")
 
     def setup_goals(self, frame):
         """Automatically detect goals with manual fallback"""
