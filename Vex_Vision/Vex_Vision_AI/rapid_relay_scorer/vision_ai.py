@@ -25,8 +25,13 @@ class AIRapidRelayScorer:
         self.recent_scores = []
         self.pending_scores = []
         
-        # Optimization 1: Use MPS (Metal) acceleration on Mac
-        device = 'mps' if torch.backends.mps.is_available() else 'cpu'
+        # Select best available acceleration device
+        if torch.cuda.is_available():
+            device = 'cuda'
+        elif torch.backends.mps.is_available():
+            device = 'mps'
+        else:
+            device = 'cpu'
         print(f"Using device: {device}")
         
         # Load model
@@ -34,7 +39,7 @@ class AIRapidRelayScorer:
         self.model = YOLO(model_path)
         self.model.to(device)
         
-        # Optimization 2: Set inference parameters
+        # Optimization: Set inference parameters
         self.conf_threshold = 0.5
         self.iou_threshold = 0.3
         self.max_det = 10  # Max number of detections per frame
@@ -152,7 +157,7 @@ class AIRapidRelayScorer:
                 
                 # Show color detection
                 yellow_mask = cv2.inRange(hsv, self.lower_yellow, self.upper_yellow)
-                display_frame = cv2.bitwise_and(display_frame, display_frame, 
+                display_frame = cv2.bitwise_and(display_frame, display_frame,
                                               mask=yellow_mask)
             
             cv2.imshow('Sample Yellow Color', display_frame)
@@ -172,7 +177,7 @@ class AIRapidRelayScorer:
         center = np.mean(points, axis=0)
         
         # Get angles from center
-        angles = np.arctan2(points[:, 1] - center[1], 
+        angles = np.arctan2(points[:, 1] - center[1],
                            points[:, 0] - center[0])
         sorted_indices = np.argsort(angles)
         
@@ -207,7 +212,7 @@ class AIRapidRelayScorer:
         """Optimized video processing"""
         cap = cv2.VideoCapture(source)
         if not cap.isOpened():
-            print("Error: Could not open video source")
+            print("Error: Could not open video source try use absolute path ex path/to/video.mp4 not just video.mp4")
             return
 
         # Optimization 5: Set optimal video capture properties
@@ -262,7 +267,7 @@ class AIRapidRelayScorer:
             
             # Render all text at once
             for text, pos in texts:
-                cv2.putText(display, text, pos, cv2.FONT_HERSHEY_SIMPLEX, 
+                cv2.putText(display, text, pos, cv2.FONT_HERSHEY_SIMPLEX,
                            0.5, (0, 255, 255), 2)
             
             # Update FPS
@@ -273,9 +278,9 @@ class AIRapidRelayScorer:
                 frame_count = 0
                 frame_time = current_time
             
-            cv2.putText(display, f"FPS: {fps:.1f}", (10, 30), 
+            cv2.putText(display, f"FPS: {fps:.1f}", (10, 30),
                        cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
-            cv2.putText(display, f"Score: {self.score['total']}", (10, 70), 
+            cv2.putText(display, f"Score: {self.score['total']}", (10, 70),
                        cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
             
             cv2.imshow('AI Ball Scorer', display)
@@ -301,11 +306,11 @@ class AIRapidRelayScorer:
         current_time = time.time()
         
         # Clean up old pending scores
-        self.pending_scores = [score for score in self.pending_scores 
+        self.pending_scores = [score for score in self.pending_scores
                               if current_time - score['time'] <= 0.5]
         
         # Sort goals from top to bottom
-        sorted_goals = sorted(enumerate(self.goals), 
+        sorted_goals = sorted(enumerate(self.goals),
                             key=lambda x: np.mean(x[1][:, 1]))
         
         counted_balls = set()
@@ -324,7 +329,7 @@ class AIRapidRelayScorer:
                         
                         # Check if scoring would exceed 4 switches
                         would_exceed = (
-                            goal_idx not in self.switches_cleared and 
+                            goal_idx not in self.switches_cleared and
                             len(self.switches_cleared) >= 4
                         )
                         
