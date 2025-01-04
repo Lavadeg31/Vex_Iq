@@ -1,4 +1,5 @@
 # 🤖 VEX IQ Engineering Progress
+### Pg 1, The Table of Contents is next bc I wanted this to be the readme
 
 <h2>🗓️ Timeline of Robot Development</h2>
 
