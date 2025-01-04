@@ -9,5 +9,5 @@ Now we come back to the led lights... The purple led light starts our autonomous
 This all comes together to make it a very lightweight and effective robot that scores around 400 points in skills and a unknown amount in teamwork.
 
 
-<a href="https://vex.larsv.tech/mkdwn/rbt" style="background-color: #2196F3; color: white; padding: 12px 24px; text-decoration: none; border-radius: 25px; font-family: Arial; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">Next Up : Strategy →</a>
+<a href="https://vex.larsv.tech/mkdwn/strategy" style="background-color: #2196F3; color: white; padding: 12px 24px; text-decoration: none; border-radius: 25px; font-family: Arial; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">Next Up : Strategy →</a>
 
