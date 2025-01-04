@@ -531,7 +531,7 @@ function toggleTheme() {
     <a href="https://lavadeg31.github.io/Vex_Iq/Rules.html">Rule Summary</a>
   </p>
 </div>
-
+<a href="https://vex.larsv.tech/mkdwn/tbl-of-contents" style="background-color: #2196F3; color: white; padding: 12px 24px; text-decoration: none; border-radius: 25px; font-family: Arial; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">Next Page →</a>
 
 # Credits
 Ultralytics Yolo V8 nano
