@@ -2,6 +2,11 @@ import { NextResponse } from 'next/server'
 import { createToken, hashPassword } from '@/lib/auth'
 import { query } from '@/lib/db'
 
+interface SignupError {
+  message: string;
+  code?: string;
+}
+
 export async function POST(request: Request) {
   try {
     console.log('Starting signup process')
