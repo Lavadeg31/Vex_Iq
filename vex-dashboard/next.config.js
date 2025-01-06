@@ -7,6 +7,16 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  webpack: (config, { isServer }) => {
+    config.module.rules.push({
+      test: /\.(mp3|wav)$/,
+      type: 'asset/resource',
+      generator: {
+        filename: 'static/media/[name][ext]'
+      }
+    })
+    return config
+  }
 }
 
 module.exports = nextConfig 
