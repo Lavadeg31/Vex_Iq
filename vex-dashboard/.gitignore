@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+/vex-dashboard/node_modules/
+
+# Next.js
+.next/
+/vex-dashboard/.next/
+/vex-dashboard/out/
+
+# Production
+/vex-dashboard/build
+/vex-dashboard/dist
+
+# Local env files
+.env
+.env*.local
+/vex-dashboard/.env
+/vex-dashboard/.env*.local
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Misc
+.DS_Store
+*.pem
