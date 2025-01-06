@@ -41,7 +41,7 @@ export async function GET() {
     console.log('Raw stats query result:', result.rows) // Debug log
 
     // Initialize stats
-    let stats = {
+    const stats = {
       bestScore: 0,
       averageScore: 0,
       teamworkBest: 0,

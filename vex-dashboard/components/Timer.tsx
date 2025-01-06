@@ -5,7 +5,7 @@ import { Play, Pause, RotateCcw, Volume2, VolumeX } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Switch } from "@/components/ui/switch"
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 export function Timer() {
   const [time, setTime] = useState(60)
@@ -95,16 +95,25 @@ export function Timer() {
       }
     }
 
-    let interval: NodeJS.Timeout | null = null;
     if (isRunning && time > 0) {
-      interval = setInterval(() => {
-        setTime(prevTime => prevTime - 1);
-      }, 1000);
+      timerRef.current = setInterval(() => {
+        setTime(t => {
+          if (t <= 1) {
+            clearInterval(timerRef.current)
+            setIsRunning(false)
+            return 0
+          }
+          return t - 1
+        })
+      }, 1000)
     }
+
     return () => {
-      if (interval) clearInterval(interval);
-    };
-  }, [isRunning, hasCountdown, isMuted, audioLoaded, time]);
+      if (timerRef.current) {
+        clearInterval(timerRef.current)
+      }
+    }
+  }, [isRunning, hasCountdown, isMuted, audioLoaded])
 
   // Cleanup countdown timer
   useEffect(() => {

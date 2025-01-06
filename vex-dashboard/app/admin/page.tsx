@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { DashboardLayout } from '@/components/layout/DashboardLayout'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useToast } from "@/components/ui/use-toast"
@@ -22,11 +22,7 @@ export default function AdminPage() {
     totalMatches: 0
   })
 
-  useEffect(() => {
-    fetchStats();
-  }, []);
-
-  const fetchStats = async () => {
+  const fetchStats = useCallback(async () => {
     try {
       const response = await fetch('/api/admin/stats')
       if (!response.ok) throw new Error('Failed to fetch stats')
@@ -39,7 +35,11 @@ export default function AdminPage() {
         variant: "destructive"
       })
     }
-  }
+  }, [toast])
+
+  useEffect(() => {
+    fetchStats()
+  }, [fetchStats])
 
   return (
     <DashboardLayout>
