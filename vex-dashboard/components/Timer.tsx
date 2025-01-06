@@ -95,17 +95,11 @@ export function Timer() {
       }
     }
 
-    if (isRunning && time > 0) {
-      timerRef.current = setInterval(() => {
-        setTime(t => {
-          if (t <= 1) {
-            clearInterval(timerRef.current)
-            setIsRunning(false)
-            return 0
-          }
-          return t - 1
-        })
-      }, 1000)
+    if (isRunning) {
+      const interval = setInterval(() => {
+        setTime(prevTime => prevTime + 10)
+      }, 10)
+      return () => clearInterval(interval)
     }
 
     return () => {

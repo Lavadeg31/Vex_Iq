@@ -110,10 +110,11 @@ export async function POST(request: Request) {
         { status: 500 }
       )
     }
-  } catch (error) {
-    console.error('Unhandled error in signup:', error)
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Server error'
+    console.error('Signup error:', errorMessage)
     return NextResponse.json(
-      { error: 'An unexpected error occurred' },
+      { error: errorMessage },
       { status: 500 }
     )
   }
