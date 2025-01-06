@@ -64,7 +64,7 @@ export default function SignupPage() {
         </div>
         <blockquote className="space-y-2">
           <p className="text-lg">
-            "Track your VEX IQ Rapid Relay scores and improve your performance with detailed analytics and insights."
+            &ldquo;Track your VEX IQ Rapid Relay scores and improve your performance with detailed analytics and insights.&rdquo;
           </p>
         </blockquote>
       </div>
