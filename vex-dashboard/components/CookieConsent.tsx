@@ -42,8 +42,7 @@ export function CookieConsent() {
             <div className="space-y-4">
               <h3 className="font-semibold">Cookie Consent</h3>
               <p className="text-sm text-muted-foreground">
-                We use cookies to enhance your experience and analyze our website traffic.
-                By clicking "Accept", you consent to our use of cookies.
+                We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.
               </p>
               <div className="flex justify-end space-x-2">
                 <Button variant="outline" onClick={() => setIsVisible(false)}>
