@@ -1,4 +1,4 @@
-import { Pool } from 'pg'
+import { Pool, QueryResult } from 'pg'
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -7,7 +7,6 @@ const pool = new Pool({
   } : false
 })
 
-export async function query(text: string, params?: any[]) {
-  return pool.query(text, params)
+export async function query<T extends QueryResultRow>(text: string, params?: unknown[]): Promise<QueryResult<T>> {
+  return pool.query<T>(text, params)
 }
-
