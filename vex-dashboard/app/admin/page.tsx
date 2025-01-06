@@ -22,13 +22,13 @@ export default function AdminPage() {
     totalMatches: 0
   })
 
-  useEffect(() => {
-    fetchStats();
-  }, []);
-
   const fetchStats = async () => {
     try {
       const response = await fetch('/api/admin/stats')
+
+  useEffect(() => {
+    fetchStats()
+  }, [])
       if (!response.ok) throw new Error('Failed to fetch stats')
       const data = await response.json()
       setStats(data)

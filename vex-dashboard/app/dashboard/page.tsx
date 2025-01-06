@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ScoreCalculator } from '@/components/ScoreCalculator'
 import { Timer } from '@/components/Timer'
+import { Overview } from '@/components/Overview'
 import { ScoreHistory } from '@/components/ScoreHistory'
 import { ScoreChart } from '@/components/ScoreChart'
 import { StatsCards } from '@/components/StatsCards'
