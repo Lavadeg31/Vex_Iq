@@ -16,14 +16,21 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useToast } from "@/components/ui/use-toast"
 import { Alert, AlertDescription } from "@/components/ui/alert"
+import { LockIcon, ShieldCheckIcon } from 'lucide-react'
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const router = useRouter()
   const { toast } = useToast()
+
+  const validatePassword = (password: string) => {
+    if (password.length < 8) {
+      throw new Error('Password must be at least 8 characters long')
+    }
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -35,7 +42,13 @@ export default function LoginPage() {
         throw new Error('Please fill in all fields')
       }
 
-      const response = await fetch('/api/auth/login', {
+      if (!email.includes('@')) {
+        throw new Error('Please enter a valid email address')
+      }
+
+      validatePassword(password)
+
+      const response = await fetch('/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -45,23 +58,25 @@ export default function LoginPage() {
 
       if (!response.ok) {
         switch (response.status) {
-          case 401:
-            throw new Error('Invalid email or password')
-          case 404:
-            throw new Error('No account found with this email. Please sign up first.')
-          case 429:
-            throw new Error('Too many attempts. Please try again later.')
+          case 409:
+            throw new Error('This email is already registered. Please sign in instead.')
+          case 400:
+            throw new Error(data.error || 'Invalid email or password format')
           default:
-            throw new Error('Failed to sign in. Please try again.')
+            throw new Error('Failed to create account. Please try again.')
         }
       }
 
-      router.push('/dashboard')
+      toast({
+        title: "Success",
+        description: "Account created successfully! Please sign in.",
+      })
+      router.push('/login')
     } catch (error) {
       setError(error instanceof Error ? error.message : 'An error occurred')
       toast({
         title: "Error",
-        description: error instanceof Error ? error.message : "Failed to login",
+        description: error instanceof Error ? error.message : "Failed to create account",
         variant: "destructive",
       })
     } finally {
@@ -88,9 +103,9 @@ export default function LoginPage() {
       <div className="lg:p-8">
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
           <div className="flex flex-col space-y-2 text-center">
-            <h1 className="text-2xl font-semibold tracking-tight">Sign in to your account</h1>
+            <h1 className="text-2xl font-semibold tracking-tight">Create an account</h1>
             <p className="text-sm text-muted-foreground">
-              Enter your email below to sign in
+              Enter your email below to create your account
             </p>
           </div>
           <div className="grid gap-6">
@@ -129,22 +144,32 @@ export default function LoginPage() {
                   {isLoading && (
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   )}
-                  Sign In
+                  Sign Up
                 </Button>
               </div>
             </form>
           </div>
           <p className="px-8 text-center text-sm text-muted-foreground">
             <Link
-              href="/register"
+              href="/login"
               className="hover:text-brand underline underline-offset-4"
             >
-              Don't have an account? Sign Up
+              Already have an account? Sign In
             </Link>
           </p>
+          <div className="rounded-lg border p-4 bg-muted/50">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <ShieldCheckIcon className="w-4 h-4" />
+              <span>Security Notice:</span>
+            </div>
+            <ul className="mt-2 text-xs text-muted-foreground space-y-1 pl-6 list-disc">
+              <li>Your password is securely hashed using industry-standard encryption</li>
+              <li>We never store or have access to your original password</li>
+              <li>Each password is protected with a unique cryptographic salt</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
   )
-}
-
+} 
