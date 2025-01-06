@@ -7,7 +7,6 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Switch } from "@/components/ui/switch"
 import { Plus, Minus } from 'lucide-react'
-import { storage } from '@/lib/storage'
 import { useToast } from "@/components/ui/use-toast"
 import { useStatsContext } from '@/contexts/StatsContext'
 import { useRouter } from 'next/navigation'

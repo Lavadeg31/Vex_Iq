@@ -1,10 +1,6 @@
 import { NextResponse } from 'next/server'
 import { query } from '@/lib/db'
-import bcrypt from 'bcryptjs'
-import { SignJWT } from 'jose'
-import { cookies } from 'next/headers'
-
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key'
+import { verifyPassword, createToken } from '@/lib/auth'
 
 export async function POST(request: Request) {
   try {
@@ -12,42 +8,29 @@ export async function POST(request: Request) {
 
     // Get user from database
     const result = await query(
-      'SELECT * FROM users WHERE email = $1',
+      'SELECT id, password_hash FROM users WHERE email = $1',
       [email]
     )
 
+    if (result.rows.length === 0) {
+      return NextResponse.json(
+        { error: 'Invalid credentials' },
+        { status: 401 }
+      )
+    }
+
     const user = result.rows[0]
+    const isValid = await verifyPassword(password, user.password_hash)
 
-    if (!user) {
+    if (!isValid) {
       return NextResponse.json(
         { error: 'Invalid credentials' },
         { status: 401 }
       )
     }
 
-    // Verify password
-    const isValidPassword = await bcrypt.compare(password, user.password)
-
-    if (!isValidPassword) {
-      return NextResponse.json(
-        { error: 'Invalid credentials' },
-        { status: 401 }
-      )
-    }
-
-    // Create JWT token
-    const token = await new SignJWT({ userId: user.id })
-      .setProtectedHeader({ alg: 'HS256' })
-      .setExpirationTime('24h')
-      .sign(new TextEncoder().encode(JWT_SECRET))
-
-    // Set cookie
-    cookies().set('auth-token', token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      maxAge: 60 * 60 * 24 // 24 hours
-    })
+    // Create JWT token and set cookie
+    await createToken(user.id)
 
     return NextResponse.json({ success: true })
   } catch (error) {

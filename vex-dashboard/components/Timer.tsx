@@ -95,25 +95,16 @@ export function Timer() {
       }
     }
 
+    let interval: NodeJS.Timeout | null = null;
     if (isRunning && time > 0) {
-      timerRef.current = setInterval(() => {
-        setTime(t => {
-          if (t <= 1) {
-            clearInterval(timerRef.current)
-            setIsRunning(false)
-            return 0
-          }
-          return t - 1
-        })
-      }, 1000)
+      interval = setInterval(() => {
+        setTime(prevTime => prevTime - 1);
+      }, 1000);
     }
-
     return () => {
-      if (timerRef.current) {
-        clearInterval(timerRef.current)
-      }
-    }
-  }, [isRunning, hasCountdown, isMuted, audioLoaded])
+      if (interval) clearInterval(interval);
+    };
+  }, [isRunning, hasCountdown, isMuted, audioLoaded, time]);
 
   // Cleanup countdown timer
   useEffect(() => {
