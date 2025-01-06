@@ -23,8 +23,8 @@ export default function AdminPage() {
   })
 
   useEffect(() => {
-    fetchStats()
-  }, [])
+    fetchStats();
+  }, []);
 
   const fetchStats = async () => {
     try {
