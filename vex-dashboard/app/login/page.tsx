@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useToast } from "@/components/ui/use-toast"
 import { Alert, AlertDescription } from "@/components/ui/alert"
+import { LockIcon } from 'lucide-react'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -142,6 +143,18 @@ export default function LoginPage() {
               </Link>
             </p>
           </div>
+          <p className="px-8 text-center text-sm text-muted-foreground">
+            <Link
+              href="/register"
+              className="hover:text-brand underline underline-offset-4"
+            >
+              Don't have an account? Sign Up
+            </Link>
+          </p>
+          <p className="px-8 text-center text-sm text-muted-foreground">
+            <LockIcon className="inline-block w-4 h-4 mr-2" />
+            Your password is never stored and is encrypted in your browser before being sent to the server. We can never see your password or decrypt it.
+          </p>
         </div>
       </div>
     </div>

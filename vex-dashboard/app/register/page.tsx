@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useToast } from "@/components/ui/use-toast"
 import { Alert, AlertDescription } from "@/components/ui/alert"
+import { LockIcon, ShieldCheckIcon } from 'lucide-react'
 
 export default function RegisterPage() {
   const [email, setEmail] = useState('')
@@ -156,6 +157,17 @@ export default function RegisterPage() {
               Already have an account? Sign In
             </Link>
           </p>
+          <div className="rounded-lg border p-4 bg-muted/50">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <ShieldCheckIcon className="w-4 h-4" />
+              <span>Security Notice:</span>
+            </div>
+            <ul className="mt-2 text-xs text-muted-foreground space-y-1 pl-6 list-disc">
+              <li>Your password is securely hashed using industry-standard encryption</li>
+              <li>We never store or have access to your original password</li>
+              <li>Each password is protected with a unique cryptographic salt</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
