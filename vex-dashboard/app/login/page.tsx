@@ -144,14 +144,6 @@ export default function LoginPage() {
             </p>
           </div>
           <p className="px-8 text-center text-sm text-muted-foreground">
-            <Link
-              href="/register"
-              className="hover:text-brand underline underline-offset-4"
-            >
-              Don't have an account? Sign Up
-            </Link>
-          </p>
-          <p className="px-8 text-center text-sm text-muted-foreground">
             <LockIcon className="inline-block w-4 h-4 mr-2" />
             Your password is never stored and is encrypted in your browser before being sent to the server. We can never see your password or decrypt it.
           </p>
