@@ -21,7 +21,7 @@
 #### - New Member 👶
 
 ## Santiago V
-<img src="" width="250">
+<img src="https://github.com/user-attachments/assets/c5db526b-9691-4f84-9140-a8dbe84a99d3" width="250">
 
 ### Role In the team
 #### - Driver 🎮
