@@ -19,9 +19,15 @@ export function Timer() {
   const timerAudioNoCountdownRef = useRef<HTMLAudioElement | null>(null)
 
   useEffect(() => {
-    // Create audio elements
+    // Create audio elements with preload attribute
     timerAudioRef.current = new Audio('/audio/timer.mp3')
+    timerAudioRef.current.preload = 'auto'
     timerAudioNoCountdownRef.current = new Audio('/audio/timer2.mp3')
+    timerAudioNoCountdownRef.current.preload = 'auto'
+
+    // Load the audio files
+    timerAudioRef.current.load()
+    timerAudioNoCountdownRef.current.load()
 
     return () => {
       stopAndResetAudio()
@@ -187,4 +193,3 @@ export function Timer() {
     </Card>
   )
 }
-
