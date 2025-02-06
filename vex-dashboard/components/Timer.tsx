@@ -25,6 +25,13 @@ export function Timer() {
     timerAudioNoCountdownRef.current = new Audio('/audio/timer2.mp3')
     timerAudioNoCountdownRef.current.preload = 'auto'
 
+    // Cache the audio files
+    if ('caches' in window) {
+      caches.open('timer-audio').then(cache => {
+        cache.addAll(['/audio/timer.mp3', '/audio/timer2.mp3'])
+      }).catch(console.error)
+    }
+
     // Load the audio files
     timerAudioRef.current.load()
     timerAudioNoCountdownRef.current.load()
