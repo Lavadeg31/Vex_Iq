@@ -1,0 +1,45 @@
+{
+  "expo": {
+    "name": "Vexify",
+    "slug": "vex-iq-timer",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#4B6BFB"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.vexify.app",
+      "buildNumber": "1"
+    },
+    "android": {
+      "package": "com.vexify.app",
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS"
+      ],
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#4B6BFB"
+      }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "90d9f5e1-3f81-418c-ad8e-9b1e7818a9c8"
+      }
+    },
+    "owner": "lavadeg",
+    "plugins": [
+      "expo-av",
+      "expo-asset"
+    ],
+    "sdkVersion": "52.0.0"
+  }
+}
