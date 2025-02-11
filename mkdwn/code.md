@@ -21,3 +21,9 @@ This was my second project and it uses a tailwind css ui and the chomeinum stora
 - And finially the [Vex_vision](https://github.com/Lavadeg31/Vex_Iq/tree/main/Vex_Vision) App.
 
 This app was BY FAR the hardest to make. This app included training a yolov8n 50 epoch model to detect and track the yellow balls because regular object detection did not work. And also making the code score your skills run for you. This included me learning how to train and use a ai model in python to create a skills run scorer. I used ultralytics, numpy and other frameworks to score this game for us. And it achives great accuracy with this logic. This ends up in a well rounded ai project that is very usefull because we dont have to manualy enter the score most of the time
+
+### Here is the install guides and docs if you want to install any of them
+#### [Vex-vision](https://github.com/Lavadeg31/Vex_Iq/blob/main/Vex_Vision/install_guide.md) and [Here](https://github.com/Lavadeg31/Vex_Iq/blob/main/Vex_Vision/README.md)
+#### [VIQRC HUB+](https://github.com/Lavadeg31/Vex_Iq/blob/main/VIQRC-HUB%2B/README.md)
+#### [Vex-Dashboard](https://github.com/Lavadeg31/Vex_Iq/tree/main/vex-dashboard)
+#### [vex-tools](https://github.com/Lavadeg31/Vex_Iq/blob/main/vex-tools/vex-tools.md)
