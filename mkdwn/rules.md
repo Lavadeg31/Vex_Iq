@@ -8,9 +8,9 @@
 
 ## Game Objectives
 -	Primary Tasks:
--	Passing Balls: Collaborate with alliance partners to pass balls between robots.
--	Scoring: Deliver balls through the targets to score points.
--	Clearing Switches: Activate switches by scoring balls through the goals.
+    - 	Passing Balls: Collaborate with alliance partners to pass balls between robots.
+    -  	Scoring: Deliver balls through the targets to score points.
+    -  	Clearing Switches: Activate switches by scoring balls through the goals.
 
 Scoring System
 -	Goals Scored: 1 point per ball successfully passed through a target.
@@ -34,6 +34,6 @@ Scoring System
 -	Ball Introduction:
 -	Balls are introduced through the Loading Station or, during the last 15 seconds of a match, via the Rapid Load Zone.
 -	Robot Constraints:
--	Robots must start entirely within their designated Starting Zone and adhere to size restrictions throughout the match.
+-	Robots must start entirely within their designated Starting Zone and stay in the to size restrictions during the match.
 -	Safety and Conduct:
--	Teams must follow all safety guidelines and exhibit good sportsmanship during competitions.
+-	Teams must follow all safety guidelines and have good sportsmanship during competitions.
