@@ -19,9 +19,22 @@ export function Timer() {
   const timerAudioNoCountdownRef = useRef<HTMLAudioElement | null>(null)
 
   useEffect(() => {
-    // Create audio elements
+    // Create audio elements with preload attribute
     timerAudioRef.current = new Audio('/audio/timer.mp3')
+    timerAudioRef.current.preload = 'auto'
     timerAudioNoCountdownRef.current = new Audio('/audio/timer2.mp3')
+    timerAudioNoCountdownRef.current.preload = 'auto'
+
+    // Cache the audio files
+    if ('caches' in window) {
+      caches.open('timer-audio').then(cache => {
+        cache.addAll(['/audio/timer.mp3', '/audio/timer2.mp3'])
+      }).catch(console.error)
+    }
+
+    // Load the audio files
+    timerAudioRef.current.load()
+    timerAudioNoCountdownRef.current.load()
 
     return () => {
       stopAndResetAudio()
@@ -187,4 +200,3 @@ export function Timer() {
     </Card>
   )
 }
-
