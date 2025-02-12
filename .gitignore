@@ -1,6 +1,7 @@
 # Dependencies
 node_modules/
 /vex-dashboard/node_modules/
+/vex-iq-app/node_modules/
 
 # Next.js
 .next/
@@ -10,12 +11,32 @@ node_modules/
 # Production
 /vex-dashboard/build
 /vex-dashboard/dist
+/vex-iq-app/dist/
+/vex-iq-app/web-build/
+
+# Expo
+.expo/
+expo-env.d.ts
+
+# Native
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
 
 # Local env files
 .env
 .env*.local
 /vex-dashboard/.env
 /vex-dashboard/.env*.local
+
+# IDE and Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
 
 # Vercel
 .vercel
@@ -24,10 +45,64 @@ node_modules/
 *.tsbuildinfo
 next-env.d.ts
 
-# Misc
+# Debug logs
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+.metro-health-check*
+
+# Build artifacts
+*.jsbundle
+*.ipa
+*.apk
+
+# macOS system files
 .DS_Store
 *.pem
 .DS_Store?
 ._*
 .Spotlight-V100
 .Trashes
+
+# Xcode
+xcuserdata/
+*.xccheckout
+*.moved-aside
+DerivedData/
+*.hmap
+*.ipa
+*.xcuserstate
+project.xcworkspace/
+
+# Android
+.gradle/
+local.properties
+*.iml
+*.hprof
+.cxx/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Temporary files
+*.log
+*.tmp
