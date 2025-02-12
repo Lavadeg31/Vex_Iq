@@ -5,7 +5,7 @@ We have 2 Ways that we can compete depending on the robot, on a convayor style r
 
 We can also do a straight pass from the start where we pass at the start to get the passing points from the start on the first 2 goals. This gives us a +-64 point teamwork run.
 
-# Current Strategy
+# Current Strategy(using "Ho June" robot)
 When paired with 45557B, 45557C, or 45557D robot we will attempt to instantly exchange the starting balls for passes. After we hit all 4 switches, we leave 1 robot sitting at the goal with the other robot picking up the balls and passing it to the other robot this gives us a +- 100 point teamwork run with the other ISP robots. 
 
 In skills we will hit all 4 switches and then park the robot at a bottom goal for rapid loading. This gives us a +-160 point run.
