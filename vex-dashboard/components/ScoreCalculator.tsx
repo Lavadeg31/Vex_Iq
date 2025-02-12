@@ -135,7 +135,7 @@ export function ScoreCalculator() {
       <CardContent className="space-y-6">
         <div className="grid gap-4">
           <div className="grid gap-2">
-            <Label>Yellow Balls</Label>
+            <Label>Balls</Label>
             <div className="flex items-center space-x-2">
               <Button
                 variant="outline"
