@@ -1,17 +1,16 @@
-# Table of Contents 
-#
-#
-### Mixed Timeline and Progress [Link](/)
-Self explanetory
+# VEX IQ Competition Notebook
 
-### Team  [Link](/mkdwn/team)
-List of team members
+## Table of Contents
 
-### Robot  [Link](/mkdwn/rbt)
-In this section you can see our main progress and how we built, coded and designed our robot
+1. [Team Overview](/mkdwn/team.md)
+2. [Competition Rules](/mkdwnrules.md)
+3. [Game Scoring System](/mkdwn/scoring.md)
+4. [Robot Design Documentation](/mkdwn/rbt.md)
+   - 4.1 [Code Implementation](/mkdwn/code.md)
+   - 4.2 [Design Iterations](/mkdwn/design-iterations.md)
+5. [Match Strategy](/mkdwnstrategy.md)
+6. [Engineering Notebook](/mkdwn/tbl-of-contents.md)
 
-### Strategy  [Link](/mkdwn/strategy)
-In this section you will be able to see our strategy toards competeing and scoring in this season
+---
 
-### Code  [Link](/mkdwn/code)
-In this section you can see our robot code, an explanation along with some other tools I developed in order to understand and comprehand my improvement along with my team's improvements.
+[← Back to Project Home](/)
