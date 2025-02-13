@@ -1,10 +1,13 @@
 # Rules
 ## Field Setup
 -	Dimensions: 6’ x 8’ rectangular field.
+<img src="https://github.com/user-attachments/assets/8c5e249d-1054-45c1-af0c-050841b63735" alt="51d4d9b96d539752e2356fd307141c6d" >
 -	Key Elements:
--	Goals: Located on one side of the field, each with a switch that can be activated by scoring a ball.
+-	Goals: Located on one side of the field
 -	Loading Station: Positioned opposite the goals, used to introduce balls onto the field.
 -	Starting Zones: Designated areas where robots begin the match.
+-	Balls<img src="https://github.com/user-attachments/assets/3adfb50f-2770-46d5-9310-497afc653dfb" alt="51d4d9b96d539752e2356fd307141c6d" width="20" height="20">: Each robot gets 1 ball with the other being stored by the loader 
+
 
 ## Game Objectives
 -	Primary Tasks:
