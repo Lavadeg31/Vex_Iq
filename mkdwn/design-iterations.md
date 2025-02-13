@@ -12,6 +12,7 @@
 - Implemented tensioning system
 - Added sensors to help us not launch balls by accident
 - Added sensors to make rapid loading easier
+- Added "second chance" mechanism, makes the ball rebound when a goal is missed
 
 ## Design Challenges
 
