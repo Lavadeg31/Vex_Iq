@@ -22,6 +22,13 @@ This was my second project and it uses a tailwind css ui and the chomeinum stora
 
 This app was BY FAR the hardest to make. This app included training a yolov8n 50 epoch model to detect and track the yellow balls because regular object detection did not work. And also making the code score your skills run for you. This included me learning how to train and use a ai model in python to create a skills run scorer. I used ultralytics, numpy and other frameworks to score this game for us. And it achives great accuracy with this logic. This ends up in a well rounded ai project that is very usefull because we dont have to manualy enter the score most of the time
 
+## Robot Code
+
+
+<img width="950" alt="Screenshot 2025-02-14 at 3 33 24 PM" src="https://github.com/user-attachments/assets/40b10a98-45b7-43f2-9324-dd621aefb06d" />
+This is our code, It might look messy but it works. We have a lot of functions that we use to score the game and we use them in the autonomous and driver control. Such as our autonomous code for the right and left side, our back and foward button that we use during rapid loading.
+
+
 ### Here is the install guides and docs if you want to install any of them
 #### [Vex-vision](https://github.com/Lavadeg31/Vex_Iq/blob/main/Vex_Vision/install_guide.md) and [Here](https://github.com/Lavadeg31/Vex_Iq/blob/main/Vex_Vision/README.md)
 #### [VIQRC HUB+](https://github.com/Lavadeg31/Vex_Iq/blob/main/VIQRC-HUB%2B/README.md)
