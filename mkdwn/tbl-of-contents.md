@@ -16,3 +16,11 @@ In this section you will be able to see our strategy toards competeing and scori
 
 ### Code  [Link](/mkdwn/code)
 In this section you can see our robot code, an explanation along with some other tools I developed in order to understand and comprehand my improvement along with my team's improvements.
+
+### Scoring  [Link](/mkdwn/scoring)
+In this section you can see the scoring system of rapid relay.
+
+### Rules [Link](/mkdwn/rules)
+In this section you can see the rules of rapid relay
+
+
