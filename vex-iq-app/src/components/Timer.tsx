@@ -59,20 +59,18 @@ export const Timer: React.FC = () => {
 
   const loadSounds = async () => {
     try {
-      // Unload any existing sounds first
-      await stopAndResetAudio();
+      if (mainSoundRef.current) {
+        await mainSoundRef.current.unloadAsync();
+      }
+      if (countdownSoundRef.current) {
+        await countdownSoundRef.current.unloadAsync();
+      }
 
-      // Load both sounds
-      const [{ sound: mainSound }, { sound: countdownSound }] = await Promise.all([
-        Audio.Sound.createAsync(
-          require('../../assets/timer2.mp3'),
-          { shouldPlay: false }
-        ),
-        Audio.Sound.createAsync(
-          require('../../assets/timer.mp3'),
-          { shouldPlay: false }
-        )
-      ]);
+      const mainSound = new Audio.Sound();
+      const countdownSound = new Audio.Sound();
+
+      await mainSound.loadAsync(require('../../assets/timer2.mp3'));
+      await countdownSound.loadAsync(require('../../assets/timer.mp3'));
 
       mainSoundRef.current = mainSound;
       countdownSoundRef.current = countdownSound;
@@ -100,19 +98,19 @@ export const Timer: React.FC = () => {
       if (mainSoundRef.current) {
         try {
           await mainSoundRef.current.stopAsync();
+          await mainSoundRef.current.unloadAsync();
         } catch (e) {
           // Ignore stop errors
         }
-        await mainSoundRef.current.unloadAsync();
         mainSoundRef.current = null;
       }
       if (countdownSoundRef.current) {
         try {
           await countdownSoundRef.current.stopAsync();
+          await countdownSoundRef.current.unloadAsync();
         } catch (e) {
           // Ignore stop errors
         }
-        await countdownSoundRef.current.unloadAsync();
         countdownSoundRef.current = null;
       }
     } catch (error) {
@@ -138,16 +136,10 @@ export const Timer: React.FC = () => {
 
     if (!isMuted && !hasCountdown) {
       try {
-        const sound = mainSoundRef.current;
-        if (sound) {
-          await sound.setPositionAsync(0);
-          await sound.playAsync();
-        } else {
-          // If sound isn't loaded, try loading it again
-          await loadSounds();
-          if (mainSoundRef.current) {
-            await mainSoundRef.current.playAsync();
-          }
+        await loadSounds(); // Reload sounds before playing
+        if (mainSoundRef.current) {
+          await mainSoundRef.current.setPositionAsync(0);
+          await mainSoundRef.current.playAsync();
         }
       } catch (error) {
         console.error('Error playing main sound:', error);
@@ -176,7 +168,11 @@ export const Timer: React.FC = () => {
 
     if (!isMuted) {
       try {
-        await countdownSoundRef.current?.playAsync();
+        await loadSounds(); // Reload sounds before playing
+        if (countdownSoundRef.current) {
+          await countdownSoundRef.current.setPositionAsync(0);
+          await countdownSoundRef.current.playAsync();
+        }
       } catch (error) {
         console.error('Error playing countdown sound:', error);
       }

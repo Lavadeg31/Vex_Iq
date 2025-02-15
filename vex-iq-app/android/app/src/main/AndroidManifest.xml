@@ -27,7 +27,7 @@
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
         <data android:scheme="com.vexify.app"/>
-        <data android:scheme="exp+vexify"/>
+        <data android:scheme="exp+vex-iq-timer"/>
       </intent-filter>
     </activity>
   </application>

@@ -33,7 +33,7 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>exp+vexify</string>
+          <string>exp+vex-iq-timer</string>
         </array>
       </dict>
     </array>
