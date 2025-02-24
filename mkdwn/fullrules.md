@@ -1,7 +1,7 @@
 # VEX IQ (Page 1)
 
 VEX IQ
-Copyright 2024, VEX Robotics Inc.
+
 vexrobotics.com
 
 VEXIQ
@@ -18,7 +18,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 **Table of Contents**
 
@@ -54,7 +54,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 **Section 3**
 The Robot ....................................................................................34
@@ -89,7 +89,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 **Prefix**
 
@@ -149,7 +149,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 •   Revised the blue box of <SC4> to clarify intent
 •   Added a new bullet to <SC5> to clarify that each Preload Ball in a Teamwork Match can count for a
@@ -208,7 +208,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 **Quick Reference Guide**
 
@@ -258,7 +258,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 **Robot Rules**
 <R1> One Robot per Team
@@ -311,7 +311,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 **Robot Skills Challenge Rules**
 <RSC1> Standard rules apply in most cases
@@ -337,7 +337,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 **Section 1**
 **Introduction**
@@ -385,7 +385,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 **About the Game Manual - A Note from the GDC**
 This Game Manual and its appendices contain everything there is to know about this season's game,
@@ -422,7 +422,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 **Updates**
 This manual will have a series of "major" and "minor” updates over the course of the season. Each
@@ -473,7 +473,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 **The Q&A System**
 When first reviewing a new robotics game, it is natural to have questions about situations which may
@@ -525,7 +525,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 **Section 2**
 **The Game**
@@ -564,7 +564,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 **General Definitions**
 
@@ -617,7 +617,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 **Game Design Committee (GDC)** - The creators of VIQRC Rapid Relay, and authors of this Game Manual.
 The GDC is the only official source for rules clarifications and Q&A responses; see Section 1.
@@ -665,7 +665,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 **Team** - Two or more Students make up a Team.
 
@@ -718,7 +718,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 •   **Score Affecting** – A Violation which improves an Alliance's score at the end of a Match.
     Ο Multiple Violations within a Match can cumulatively become Score Affecting.
@@ -748,7 +748,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 Rule is
 Violated
@@ -804,7 +804,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 **Game-Specific Definitions**
 
@@ -853,7 +853,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 **Load** - The act of legally introducing a Ball into the Field. See <SG4>.
 
@@ -883,7 +883,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 **Pickup Zone** – An area of the Floor underneath the Goal Wall, bound by the Field Perimeter and the
 yellow PVC pipe that runs the length of the Field. The Pickup Zone refers to the Floor itself; it is not a
@@ -930,7 +930,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 **Switch** - One of four blue VEX IQ disks, and their supporting structures, found inside of Targets.
 Switches can be Cleared by Balls. See <SC4>.
@@ -962,7 +962,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 **Scoring**
 
@@ -1021,7 +1021,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 b. If there is a concern regarding the score of a Match, only the Drive Team Members from that
 Match, not an Adult, may share their questions with the Head Referee. See <T3>.
@@ -1077,7 +1077,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 <SC5> An Alliance receives credit for a Pass once both Robots independently contact a Ball before it
 is Scored or leaves the Field.
@@ -1131,7 +1131,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 <SC7> Rapid Relay is designed to be scored in "real-time" as the Match is being played. Passes and
 Goals should be recorded at the time they occur.
@@ -1172,7 +1172,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 **Scoring Examples**
 
@@ -1221,7 +1221,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 <SE4>
 1.  Robot A retrieves a Ball from the Loading Station and launches it down the Field.
@@ -1268,7 +1268,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 **Safety Rules**
 
@@ -1308,7 +1308,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 **General Game Rules**
 
@@ -1366,7 +1366,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 <G2> VIQRC is a student-centered program. Adults should not make decisions about the Robot's
 build, design, or gameplay, and should not provide an unfair advantage by providing 'help' that is beyond
@@ -1423,7 +1423,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 •   When in doubt, if there is no rule prohibiting an action, it is generally legal. However,
     if you have to ask whether a given action would violate <S1>, <G1>, or <T1> then
@@ -1479,7 +1479,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
     ii. For a given event, they may substitute in a Student from another Team to be their Loader for the
     duration of the event. This Student will effectively become a member of the new Team for that
     event, and cannot fill a role on the original Team (or on any other Teams) for the remainder of
@@ -1533,7 +1533,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 Note: Swapping one set of parts for another, or adding new pieces to a Robot mid-Match during
 a <G10> or <RSC8> interaction is considered a Violation of the intent and spirit of this rule. Re-
@@ -1589,7 +1589,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 Note: Drive Team Members are the only Team members that are allowed to be in the Driver
 Station during a Match. Adults (other than event staff) are not permitted to be in the Driver
@@ -1647,7 +1647,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 Significant Q&As:
 •   2174 - Teams are allowed to repair a Robot or reattach a piece during a Robot reset
@@ -1687,7 +1687,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 **Specific Game Rules**
 
@@ -1738,7 +1738,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 <SG2> Robot expansion is limited. Robots may not expand beyond the 23″ x 73" horizontal or 15" vertical
 starting size limits at any time during a Match. The 15" height limit is a "virtual ceiling," meaning that no part
@@ -1795,7 +1795,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 Figure SG-4: This Robot is breaking the plane of the Loading Zone while the Ball is being entered. This
 Ball would need to be removed from the Loading Zone, and legally reintroduced.
@@ -1838,7 +1838,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 <SG5> Loading during the Rapid Load Period. During the last fifteen (15) seconds of the Match,
 Loaders have the option to introduce Balls directly onto the Starting Zone (i.e., without using the
@@ -1889,7 +1889,7 @@ Version 3.0 - Released January 28, 2025
 32
 
 #VEX IQ (Page 41)
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 <SG6> Retrieving Balls from the Pickup Zone. Once a Goal is scored, that Ball will fall through
 the Goal Wall and into the Pickup Zone. This rule also applies to Balls that land in the Pickup Zone
@@ -1941,7 +1941,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 **Section 3**
 **The Robot**
@@ -1999,7 +1999,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 The intent of <R1a>, <R1b>, and <R1c> is to ensure an unambiguous level playing field
 for all Teams. Teams are welcome (and encouraged) to improve or modify their Robots
@@ -2057,7 +2057,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 e. Robots which have not passed inspection (i.e., that are in Violation of one or more Robot rules) will
 not be permitted to play in any Matches until they have done so. <T6> will apply to any Matches that
@@ -2105,7 +2105,7 @@ Version 3.0 - Released January 28, 2025
 36
 
 #VEX IQ (Page 45)
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 <R5> Prohibited items. The following types of mechanisms and components are NOT allowed:
 a. Those that could potentially damage Field Elements or Balls.
 b. Those that could potentially damage or entangle other Robots.
@@ -2157,7 +2157,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 i. Additional VEX IQ products that are released during the season are legal for use, unless oth-
 erwise noted on their product pages and/or in the VEX IQ Robotics Competition Legal Parts
@@ -2213,7 +2213,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 <R9> Officially registered Team numbers must be displayed on Robot License Plates. To participate
 in an official VEX IQ Robotics Competition Event, a Team must first register on robotevents.com and
@@ -2265,7 +2265,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 c. The only legal method of driving the Robot during Teamwork Challenge Matches and Driving
 Skills Matches is the VEX IQ Controller.
@@ -2372,7 +2372,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 **Section 4**
 **The Event**
@@ -2479,7 +2479,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 <T2> Head Referees must be qualified. VEX IQ Head Referees must have the following qualifications:
 
@@ -2535,7 +2535,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 <T4> The Event Partner has ultimate authority regarding all non-gameplay decisions during an event.
 The Game Manual is intended to provide a set of rules for successfully playing VIQRC Rapid Relay; it is not
@@ -2591,7 +2591,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
     ii. Field Elements detaching or moving beyond normal tolerances, not as a result of Robot
     interactions.
@@ -2647,7 +2647,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 b. Elevating the playing field off of the Floor (common heights are 10" to 24" [254mm to 609.6mm]).
 c. Using off-the-shelf PVC to replace a damaged or missing Pickup Zone pipe.
@@ -2701,7 +2701,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 <T17> Teams are ranked by their average Qualification Match scores.
 
@@ -2789,7 +2789,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 **Section 5 - Robot Skills**
 
@@ -2833,7 +2833,7 @@ Version 3.0 - Released January 28, 2025
 50
 
 #VEX IQ (Page 59)
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 **Robot Skills Challenge Rules**
 <RSC1> Standard rules apply in most cases. All rules from previous sections apply to the Robot Skills
 Matches, unless otherwise specified.
@@ -2883,7 +2883,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 Note: In both Driving Skills Matches and Autonomous Coding Skills Matches, any Driver who is
 not currently operating the Robot may also serve as a Loader (i.e., a Team may have two Loaders
 at any given time).
@@ -2940,7 +2940,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 <RSC6> Skills Rankings Globally. Teams are ranked based on theirRobot Skills Match scores globally
 using the following tiebreakers:
@@ -2996,7 +2996,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 b. During an Autonomous Coding Skills Match, Drivers may move freely around the Field, and are
 not restricted to the Driver Station when not handling their Robot.
@@ -3049,7 +3049,7 @@ Version 3.0 - Released January 28, 2025
 54
 
 # VEX IQ (Page 63)
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 <RSC10> Skills Stop Time. If a Team wishes to end their Robot Skills Match early, they may elect to
 record a Skills Stop Time. This is used as a tiebreaker for Robot Skills Challenge rankings. A Skills Stop
@@ -3104,7 +3104,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 Appendix A - Field Overview
 [image of field dimensions]
 Description: Appendix A- Zones
@@ -3177,7 +3177,7 @@ ROBOTICS
 COMPETITION
 RAPID RELAY
 
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 **Appendix B**
 **Student-Friendly Appendix**
@@ -3238,7 +3238,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 **How Do You Play Rapid Relay?**
 
@@ -3305,7 +3305,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 **Versions of the Game**
 
@@ -3364,7 +3364,7 @@ VEX IQ
 ROBOTICS
 COMPETITION
 RAPID RELAY
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 **Important Scoring Rules**
 
@@ -3398,7 +3398,7 @@ Version 3.0 - Released January 28, 2025
 65
 
 #VEX IQ (Page 74)
-VEX IQ Robotics Competition Rapid Relay - Game Manual
+
 
 **Specific Game Rules**
 
