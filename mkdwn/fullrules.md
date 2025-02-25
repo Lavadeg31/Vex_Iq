@@ -23,25 +23,25 @@ RAPID RELAY
 **Table of Contents**
 
 **Prefix**
-Changelog ..............................................................................................iv
-Quick Reference Guide........................................................................vi
+Changelog iv
+Quick Reference Guidevi
 
 **Section 1**
-Introduction......................................................................................... 1
-About the Game Manual - A Note from the GDC ....... 2
-Updates ................................................................................................. 3
-The Q&A System.................................................................................. 4
+Introduction. 1
+About the Game Manual - A Note from the GDC . 2
+Updates . 3
+The Q&A System 4
 
 **Section 2**
-The Game............................................................................................ 5
-Field Overview................................................................................... 5
-General Definitions............................................................................. 6
-Game-Specific Definitions ............................................................ 11
-Scoring............................................................................................... 15
-Scoring Examples ............................................................................. 19
-Safety Rules ......................................................................................21
-General Game Rules ......................................................................22
-Specific Game Rules........................................................................29
+The Game 5
+Field Overview. 5
+General Definitions. 6
+Game-Specific Definitions  11
+Scoring. 15
+Scoring Examples . 19
+Safety Rules 21
+General Game Rules 22
+Specific Game Rules29
 
 VEX IQ
 Copyright 2025, VEX Robotics Inc.
@@ -57,26 +57,26 @@ RAPID RELAY
 
 
 **Section 3**
-The Robot ....................................................................................34
-Inspection Rules .........................................................................34
+The Robot 34
+Inspection Rules .34
 
 **Section 4**
-The Event .....................................................................................42
-Tournament Definitions .............................................................42
-Tournament Rules.......................................................................43
+The Event .42
+Tournament Definitions .42
+Tournament Rules.43
 
 **Section 5 - Robot Skills**
-Robot Skills Challenge Definitions ........................................... 50
-Robot Skills Challenge Rules .................................................... 51
+Robot Skills Challenge Definitions . 50
+Robot Skills Challenge Rules  51
 
 **Appendix A - Field Overview**
 
 **Appendix B - Student-Friendly Appendix**
-Field Overview.............................................................................62
-Versions of the Game ................................................................64
-How to Earn Points ....................................................................64
-Important Scoring Rules ...........................................................65
-Rules .............................................................................................65
+Field Overview.62
+Versions of the Game 64
+How to Earn Points 64
+Important Scoring Rules .65
+Rules .65
 
 VEX IQ
 Copyright 2025, VEX Robotics Inc.
@@ -1329,20 +1329,20 @@ More information regarding the event Code of Conduct process can be found at the
 We all can contribute to creating a fun and inclusive event experience for all event attendees. Some
 examples include:
 
-When dealing with difficult and stressful situations, it is...
+When dealing with difficult and stressful situations, it is.
 •   Okay for Teams to be gracious and supportive when your Alliance partner makes a
     mistake.
 •   Not okay for Teams to harass, tease, or be disrespectful to your Alliance partner when a
     Match does not go your way.
 
-When a Team does not understand a Match ruling or score, it is...
+When a Team does not understand a Match ruling or score, it is.
 •   Okay for Drive Team Members to consult with a Head Referee to discuss a ruling per the
     process outlined in <T3> in a calm and respectful manner.
 •   Not okay for Drive Team Members to continue arguing with the Head Referee after a
     decision has been finalized, or for Adults to approach a Head Referee with ruling/scoring
     concerns.
 
-When Teams are getting ready for an upcoming Match, it is...
+When Teams are getting ready for an upcoming Match, it is.
 •   Okay for Teams in an Alliance to develop a game strategy that utilizes the strengths of
     both Robots to cooperatively solve the game.
 •   Not okay for one Team in an Alliance to ask another Team to sit in a corner during the
@@ -1377,15 +1377,15 @@ Some amount of Adult mentorship, teaching, and/or guidance is an expected and en
 VEX competitions. No one is born an expert in robotics! However, obstacles should always be viewed as
 teaching opportunities, not problems for an Adult to solve for the Team.
 
-When a mechanism falls off, it is...
+When a mechanism falls off, it is.
 •   Okay for an Adult to help a Student investigate why it failed, so it can be improved.
 •   Not okay for an Adult to investigate or put the Robot back together.
 
-When a Team encounters a complex programming concept, it is...
+When a Team encounters a complex programming concept, it is.
 •   Okay for an Adult to guide a Student through a flowchart to understand its logic.
 •   Not okay for an Adult to write a premade command for that Student to copy / paste.
 
-During Match play, it is...
+During Match play, it is.
 •   Okay for an Adult to provide cheerful, positive encouragement as a spectator.
 •   Not okay for an Adult to explicitly shout step-by-step commands from the audience.
 
@@ -1410,7 +1410,7 @@ Some examples may include:
     update.
 •   Understand the realities of the VEX IQ Robot construction system. For example, if a
     Robot could hover above the Field for a whole Match, that would create loopholes in
-    many of the rules. But... they can't. So... don't worry about it.
+    many of the rules. But. they can't. So. don't worry about it.
 
 VEX IQ
 Copyright 2025, VEX Robotics Inc.
