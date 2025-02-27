@@ -10,8 +10,39 @@
         "withoutCredentials": true,
         "gradleCommand": ":app:assembleRelease",
         "env": {
-          "ANDROID_NDK_HOME": "/usr/local/share/android-ndk"
+          "ANDROID_NDK_HOME": "/Users/larsini/Library/Android/sdk/ndk/26.1.10909125"
         }
+      }
+    },
+    "preview": {
+      "ios": {
+        "simulator": true,
+        "withoutCredentials": true
+      }
+    },
+    "development": {
+      "ios": {
+        "developmentClient": true,
+        "distribution": "internal",
+        "withoutCredentials": true
+      }
+    },
+    "production": {
+      "android": {
+        "buildType": "app-bundle",
+        "credentialsSource": "remote",
+        "env": {
+          "ANDROID_NDK_HOME": "/Users/larsini/Library/Android/sdk/ndk/26.1.10909125"
+        }
+      }
+    }
+  },
+  "submit": {
+    "production": {
+      "android": {
+        "serviceAccountKeyPath": "./pc-api-key.json",
+        "track": "internal",
+        "releaseStatus": "completed"
       }
     }
   }

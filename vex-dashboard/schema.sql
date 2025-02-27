@@ -7,7 +7,7 @@ CREATE TABLE users (
 
 CREATE TABLE scores (
   id SERIAL PRIMARY KEY,
-  user_id INTEGER REFERENCES users(id),
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   score INTEGER NOT NULL,
   balls INTEGER NOT NULL,
   switches INTEGER NOT NULL,

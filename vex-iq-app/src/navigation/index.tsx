@@ -7,6 +7,7 @@ import { ScoreCalculator } from '../components/ScoreCalculator';
 import { ScoreHistory } from '../screens/ScoreHistory';
 import { Statistics } from '../screens/Statistics';
 import { Profile } from '../screens/Profile';
+import { Rules } from '../components/Rules';
 import { theme } from '../theme';
 import { GeometricBackground } from '../components/GeometricBackground';
 import { View, Platform } from 'react-native';
@@ -92,6 +93,16 @@ export const Navigation = () => {
                 title: 'Calculator',
                 tabBarIcon: ({ focused }) => (
                   <TabBarIcon focused={focused} name="calculator-variant-outline" />
+                ),
+              }}
+            />
+            <Tab.Screen
+              name="Rules"
+              component={Rules}
+              options={{
+                title: 'Rules',
+                tabBarIcon: ({ focused }) => (
+                  <TabBarIcon focused={focused} name="book-open-variant" />
                 ),
               }}
             />

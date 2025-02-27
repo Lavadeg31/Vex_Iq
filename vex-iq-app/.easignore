@@ -30,4 +30,13 @@ docs
 # Debug files
 npm-debug.log*
 yarn-debug.log*
-yarn-error.log* 
+yarn-error.log*
+
+# Ignore native project directories for EAS Build
+/android/
+/ios/
+
+# Ignore common development files
+.git/
+.github/
+__tests__/ 

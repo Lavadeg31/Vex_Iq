@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView, Platform } from 'react-native';
 import { TextInput, Button, Text, SegmentedButtons, Card, Divider } from 'react-native-paper';
 import { theme, styles as globalStyles } from '../theme';
 import { GeometricBackground } from './GeometricBackground';
@@ -136,7 +136,10 @@ export const ScoreCalculator: React.FC = () => {
   return (
     <View style={styles.wrapper}>
       <GeometricBackground />
-      <ScrollView style={styles.container}>
+      <ScrollView 
+        style={styles.container}
+        contentContainerStyle={styles.scrollContent}
+      >
         <Card style={[globalStyles.card, styles.modeCard]}>
           <Card.Content>
             <Text style={styles.modeTitle}>Game Mode</Text>
@@ -263,7 +266,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    paddingBottom: 100,
+  },
+  scrollContent: {
+    paddingBottom: Platform.OS === 'ios' ? 120 : 100, // Increased padding for bottom tab bar
   },
   modeCard: {
     marginBottom: 16,

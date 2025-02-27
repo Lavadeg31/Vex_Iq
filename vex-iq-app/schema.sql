@@ -40,8 +40,20 @@ CREATE TABLE sessions (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Create message_limits table
+CREATE TABLE message_limits (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER REFERENCES users(id) UNIQUE,
+  message_count INTEGER DEFAULT 0,
+  last_reset TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Create indexes
 CREATE INDEX scores_user_id_idx ON scores(user_id);
 CREATE INDEX scores_timestamp_idx ON scores(timestamp);
 CREATE INDEX sessions_token_idx ON sessions(token);
-CREATE INDEX sessions_expires_at_idx ON sessions(expires_at); 
+CREATE INDEX sessions_expires_at_idx ON sessions(expires_at);
+CREATE INDEX message_limits_user_id_idx ON message_limits(user_id);
+CREATE INDEX message_limits_last_reset_idx ON message_limits(last_reset); 

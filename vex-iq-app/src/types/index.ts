@@ -30,6 +30,13 @@ export interface Settings {
   updatedAt: string;
 }
 
+export interface MessageLimit {
+  id: string;
+  userId: string;
+  messageCount: number;
+  lastReset: string;
+}
+
 export interface TimerState {
   isRunning: boolean;
   timeLeft: number;
@@ -37,11 +44,13 @@ export interface TimerState {
 }
 
 export type RootStackParamList = {
+  Welcome: undefined;
   Login: undefined;
   Register: undefined;
   Home: undefined;
   Timer: undefined;
   ScoreCalculator: undefined;
+  Rules: undefined;
   History: undefined;
   Profile: undefined;
   Settings: undefined;
