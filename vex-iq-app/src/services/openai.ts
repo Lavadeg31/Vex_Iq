@@ -34,10 +34,10 @@ export const getChatResponse = async (
       model: MODELS[modelKey],
       messages,
       // Use different settings for fine-tuned model
-      max_tokens: isFinetuned ? 4000 : (isAdmin ? undefined : MAX_TOKENS), // Increased for fine-tuned model
-      temperature: isFinetuned ? 0.2 : 0.7, // Lower temperature for more deterministic responses
+      max_tokens: isFinetuned ? 100000 : (isAdmin ? undefined : MAX_TOKENS), // Increased for fine-tuned model
+      temperature: isFinetuned ? 0.9 : 1, // Lower temperature for more deterministic responses
       // Match playground defaults for fine-tuned models
-      top_p: isFinetuned ? 0.9 : undefined,
+      top_p: isFinetuned ? 1 : undefined,
       presence_penalty: isFinetuned ? 0.1 : undefined, // Slight penalty to avoid repetition
       frequency_penalty: isFinetuned ? 0.1 : undefined, // Slight penalty to avoid repetition
     });
