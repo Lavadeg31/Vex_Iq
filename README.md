@@ -24,7 +24,7 @@
   <li>💡 <strong>October 17, 2024:</strong> Added LED's and partial autonomous support.</li>
   <li><img src="https://drive.google.com/uc?export=view&id=1ZIPiKen6hNFqtu9KZxp5RYmaBFwr8djo" width="320" height="240" alt="Added LEDs and partial autonomous support"></li>
   <li><img src="https://drive.google.com/uc?export=view&id=1Z3xB95rD8FSyWe5R6VnV6L_ka7s4RHF7" width="320" height="240" alt="Added LEDs"></li>
-  <li>🎊 <strong>Feb 18, 2025:</strong> We got the invite to worlds and we are now starting to prepare for worlds by building a new robot.</li>
+  <li>🎊 <strong>Feb 18, 2025:</strong> We got the invite to worlds and we are now starting to prepare for worlds.</li>
 </ul>
 
 <h2>🛠️ Code Changes</h2>
