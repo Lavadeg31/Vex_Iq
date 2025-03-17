@@ -11,9 +11,23 @@
   },
   "expo": {
     "doctor": {
-      "skipValidations": ["app-config-synced"],
+      "skipValidations": [
+        "app-config-synced"
+      ],
       "reactNativeDirectoryCheck": {
-        "exclude": ["react-native-chart-kit", "jwt-decode", "base-64", "bcrypt", "date-fns", "dotenv", "jwt-encode", "openai", "pdf-parse", "pg", "puppeteer"],
+        "exclude": [
+          "react-native-chart-kit",
+          "jwt-decode",
+          "base-64",
+          "bcrypt",
+          "date-fns",
+          "dotenv",
+          "jwt-encode",
+          "openai",
+          "pdf-parse",
+          "pg",
+          "puppeteer"
+        ],
         "listUnknownPackages": false
       }
     }
@@ -60,6 +74,7 @@
   "devDependencies": {
     "@babel/core": "^7.23.9",
     "@babel/runtime": "^7.23.9",
+    "@types/expo": "^32.0.13",
     "@types/react": "~18.3.12",
     "sharp": "^0.33.2",
     "typescript": "^5.3.3"
