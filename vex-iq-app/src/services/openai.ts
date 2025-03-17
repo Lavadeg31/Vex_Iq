@@ -11,6 +11,43 @@ const MODELS = {
   'ft_model': 'ft:gpt-4o-mini-2024-07-18:personal::B51ts1qH'
 } as const;
 
+// Array of waiting messages to display while the AI is thinking
+const WAITING_MESSAGES = [
+  "Please wait while I think about that...",
+  "Generating a response for you...",
+  "Processing your request...",
+  "Looking up information...",
+  "Analyzing your question...",
+  "Thinking...",
+  "Crafting a thoughtful response...",
+  "Working on your answer...",
+  "Just a moment while I generate a response..."
+];
+
+/**
+ * Returns a random waiting message
+ */
+export const getWaitingMessage = (): string => {
+  const randomIndex = Math.floor(Math.random() * WAITING_MESSAGES.length);
+  return WAITING_MESSAGES[randomIndex];
+};
+
+/**
+ * Returns a progress message that indicates the AI is still working
+ * @param seconds Number of seconds elapsed
+ */
+export const getProgressMessage = (seconds: number): string => {
+  if (seconds < 5) {
+    return "Starting to process your request...";
+  } else if (seconds < 10) {
+    return "Working on your response...";
+  } else if (seconds < 20) {
+    return "This is taking a bit longer than usual, but I'm still working on it...";
+  } else {
+    return "Still processing. This might take a moment for complex questions...";
+  }
+};
+
 export const getChatResponse = async (
   messages: Message[], 
   modelKey: keyof typeof MODELS = '4o_mini',
@@ -33,8 +70,8 @@ export const getChatResponse = async (
     const completion = await openai.chat.completions.create({
       model: MODELS[modelKey],
       messages,
-      // Use different settings for fine-tuned model
-      max_tokens: isFinetuned ? 100000 : (isAdmin ? undefined : MAX_TOKENS), // Increased for fine-tuned model
+      // Use different settings for fine-tuned model but ensure max_tokens doesn't exceed model limits
+      max_tokens: isFinetuned ? 16000 : (isAdmin ? undefined : MAX_TOKENS), // Reduced to stay under model's limit of 16384
       temperature: isFinetuned ? 0.9 : 1, // Lower temperature for more deterministic responses
       // Match playground defaults for fine-tuned models
       top_p: isFinetuned ? 1 : undefined,
