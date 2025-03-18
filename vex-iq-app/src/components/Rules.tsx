@@ -127,7 +127,7 @@ export const Rules: React.FC = () => {
   const waitingTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Check if user is admin from the database
-  const isAdmin = user?.email === 'vandegriendlars+vexify@gmail.com';
+  const isAdmin = user?.email === 'vandegriendlars+vexify@gmail.com' || user?.email === 'vandegriendlars@gmail.com' || user?.email === 'st-1211688@isp.edu.pa';
 
   useEffect(() => {
     const loadRules = async () => {
