@@ -16,6 +16,14 @@ const nextConfig = {
       }
     })
     return config
+  },
+  // Enable Vercel Speed Insights
+  speedInsights: {
+    enabled: true,
+  },
+  // Enable Vercel Analytics
+  analytics: {
+    enabled: true,
   }
 }
 
