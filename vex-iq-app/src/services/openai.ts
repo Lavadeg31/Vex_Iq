@@ -1,4 +1,4 @@
-import { openai, MAX_TOKENS } from '../config/openai';
+import { openai, gemini, MAX_TOKENS } from '../config/openai';
 
 interface Message {
   role: 'system' | 'user' | 'assistant';
@@ -8,7 +8,8 @@ interface Message {
 const MODELS = {
   '4o': 'gpt-4o',
   '4o_mini': 'gpt-4o-mini',
-  'ft_model': 'ft:gpt-4o-mini-2024-07-18:personal::B51ts1qH'
+  'ft_model': 'ft:gpt-4o-mini-2024-07-18:personal::B51ts1qH',
+  'gemini': 'gemini-2.0-flash'
 } as const;
 
 // Array of waiting messages to display while the AI is thinking
@@ -54,11 +55,12 @@ export const getChatResponse = async (
   isAdmin: boolean = false
 ): Promise<string> => {
   try {
-    console.log('Making OpenAI API call with messages:', messages);
+    console.log('Making API call with messages:', messages);
     console.log('Using model:', MODELS[modelKey]);
     
     // For the fine-tuned model, use specific settings to match the playground
     const isFinetuned = modelKey === 'ft_model';
+    const isGemini = modelKey === 'gemini';
     
     // Log detailed information for the fine-tuned model
     if (isFinetuned) {
@@ -66,8 +68,15 @@ export const getChatResponse = async (
       console.log('System prompt length:', messages[0]?.content?.length || 0);
       console.log('User query length:', messages[messages.length - 1]?.content?.length || 0);
     }
+
+    if (isGemini) {
+      console.log('USING GEMINI MODEL WITH GROUNDING');
+    }
     
-    const completion = await openai.chat.completions.create({
+    // Choose the appropriate client based on the model
+    const client = isGemini ? gemini : openai;
+    
+    const completion = await client.chat.completions.create({
       model: MODELS[modelKey],
       messages,
       // Use different settings for fine-tuned model but ensure max_tokens doesn't exceed model limits
@@ -77,18 +86,28 @@ export const getChatResponse = async (
       top_p: isFinetuned ? 1 : undefined,
       presence_penalty: isFinetuned ? 0.1 : undefined, // Slight penalty to avoid repetition
       frequency_penalty: isFinetuned ? 0.1 : undefined, // Slight penalty to avoid repetition
+      // Gemini-specific parameters
+      ...(isGemini && {
+        grounding: true, // Enable grounding for Gemini
+        grounding_sources: [
+          {
+            type: "text",
+            content: messages[0]?.content || "" // Use system message as grounding context
+          }
+        ]
+      })
     });
 
-    console.log('OpenAI API response status:', completion.choices?.[0]?.finish_reason);
+    console.log('API response status:', completion.choices?.[0]?.finish_reason);
     console.log('Response length:', completion.choices?.[0]?.message?.content?.length || 0);
 
     if (!completion.choices || completion.choices.length === 0) {
-      throw new Error('No response from OpenAI API');
+      throw new Error('No response from API');
     }
 
     return completion.choices[0]?.message?.content || 'I apologize, but I couldn\'t generate a response.';
   } catch (error) {
-    console.error('OpenAI API Error:', error);
+    console.error('API Error:', error);
     if (error instanceof Error) {
       if (error.message.includes('API key')) {
         return 'I apologize, but there seems to be an issue with the API configuration. Please try again later.';
@@ -97,7 +116,7 @@ export const getChatResponse = async (
         return 'I apologize, but I\'m having trouble connecting to the server. Please check your internet connection and try again.';
       }
       if (error.message.includes('rate limit')) {
-        return 'I apologize, but we\'ve hit the OpenAI rate limit. Please try again in a moment.';
+        return 'I apologize, but we\'ve hit the API rate limit. Please try again in a moment.';
       }
       if (error.message.includes('content filter')) {
         return 'I apologize, but the request was flagged by the content filter. Please rephrase your question.';

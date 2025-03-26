@@ -18,7 +18,8 @@ interface Message {
 const MODELS = {
   '4o': 'gpt-4o',
   '4o_mini': 'gpt-4o-mini',
-  'ft_model': 'ft:gpt-4o-mini-2024-07-18:personal::B51ts1qH'
+  'ft_model': 'ft:gpt-4o-mini-2024-07-18:personal::B51ts1qH',
+  'gemini': 'gemini-2.0-flash'
 } as const;
 
 type ModelKey = keyof typeof MODELS;
@@ -495,6 +496,13 @@ Give a detailed answer that:
                   setMenuVisible(false);
                 }} 
                 title="Fine-tuned GPT-4o Mini" 
+              />
+              <Menu.Item 
+                onPress={() => {
+                  setSelectedModel('gemini');
+                  setMenuVisible(false);
+                }} 
+                title="Gemini" 
               />
             </Menu>
           </View>
