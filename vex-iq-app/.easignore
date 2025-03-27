@@ -39,4 +39,17 @@ yarn-error.log*
 # Ignore common development files
 .git/
 .github/
-__tests__/ 
+__tests__/
+
+# Ignore development files
+.expo
+node_modules
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+web-report/ 
