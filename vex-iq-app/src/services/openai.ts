@@ -76,27 +76,54 @@ export const getChatResponse = async (
     // Choose the appropriate client based on the model
     const client = isGemini ? gemini : openai;
     
-    const completion = await client.chat.completions.create({
+    // Validate messages array
+    if (!messages || messages.length === 0) {
+      throw new Error('No messages provided');
+    }
+    
+    // Ensure messages are properly formatted
+    const validatedMessages = messages.filter(msg => {
+      return msg && typeof msg.content === 'string' && 
+             ['user', 'system', 'assistant'].includes(msg.role);
+    });
+    
+    if (validatedMessages.length === 0) {
+      throw new Error('No valid messages provided');
+    }
+    
+    // Create options with only valid properties for the API
+    const apiOptions = {
       model: MODELS[modelKey],
-      messages,
-      // Use different settings for fine-tuned model but ensure max_tokens doesn't exceed model limits
-      max_tokens: isFinetuned ? 16000 : (isAdmin ? undefined : MAX_TOKENS), // Reduced to stay under model's limit of 16384
-      temperature: isFinetuned ? 0.9 : 1, // Lower temperature for more deterministic responses
-      // Match playground defaults for fine-tuned models
-      top_p: isFinetuned ? 1 : undefined,
-      presence_penalty: isFinetuned ? 0.1 : undefined, // Slight penalty to avoid repetition
-      frequency_penalty: isFinetuned ? 0.1 : undefined, // Slight penalty to avoid repetition
-      // Gemini-specific parameters
-      ...(isGemini && {
-        grounding: true, // Enable grounding for Gemini
+      messages: validatedMessages,
+      max_tokens: isFinetuned ? 16000 : (isAdmin ? undefined : MAX_TOKENS),
+      temperature: isFinetuned ? 0.9 : 1,
+    };
+    
+    // Add fine-tuned specific parameters only when using that model
+    if (isFinetuned) {
+      Object.assign(apiOptions, {
+        top_p: 1,
+        presence_penalty: 0.1,
+        frequency_penalty: 0.1,
+      });
+    }
+    
+    // Add Gemini-specific parameters only for Gemini
+    if (isGemini && validatedMessages[0]?.content) {
+      Object.assign(apiOptions, {
+        grounding: true,
         grounding_sources: [
           {
             type: "text",
-            content: messages[0]?.content || "" // Use system message as grounding context
+            content: validatedMessages[0].content
           }
         ]
-      })
-    });
+      });
+    }
+    
+    console.log('Sending API request with options:', JSON.stringify(apiOptions));
+    
+    const completion = await client.chat.completions.create(apiOptions);
 
     console.log('API response status:', completion.choices?.[0]?.finish_reason);
     console.log('Response length:', completion.choices?.[0]?.message?.content?.length || 0);
@@ -108,6 +135,8 @@ export const getChatResponse = async (
     return completion.choices[0]?.message?.content || 'I apologize, but I couldn\'t generate a response.';
   } catch (error) {
     console.error('API Error:', error);
+    
+    // Handle specific error cases
     if (error instanceof Error) {
       if (error.message.includes('API key')) {
         return 'I apologize, but there seems to be an issue with the API configuration. Please try again later.';
@@ -124,7 +153,12 @@ export const getChatResponse = async (
       if (error.message.includes('context window')) {
         return 'I apologize, but your question is too complex for the current context window. Please try asking a more specific question.';
       }
+      if (error.message.includes('400') || error.message.includes('status code')) {
+        return 'I apologize, but there was an error processing your request. This might be due to the complexity of your question or an issue with the service. Please try a simpler question or try again later.';
+      }
     }
-    throw new Error('Failed to get response from AI assistant');
+    
+    // Generic error message as a fallback
+    return 'I apologize, but I encountered an error while processing your request. Please try again with a simpler question or check back later.';
   }
 }; 
