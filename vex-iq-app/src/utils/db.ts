@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { Score, User, Settings, AuthResponse } from '../types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { SUPABASE_URL, SUPABASE_ANON_KEY } from '../config/supabase';
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from '../config/expo-supabase';
 import * as Crypto from 'expo-crypto';
 import encode from 'jwt-encode';
 import { jwtDecode } from 'jwt-decode';
@@ -15,6 +15,11 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     persistSession: true,
     detectSessionInUrl: false,
   },
+  global: {
+    headers: {
+      'apikey': SUPABASE_ANON_KEY
+    }
+  }
 });
 
 // Helper function to hash passwords

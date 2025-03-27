@@ -52,4 +52,7 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
-web-report/ 
+web-report/
+
+# Additional ignore patterns
+.env 

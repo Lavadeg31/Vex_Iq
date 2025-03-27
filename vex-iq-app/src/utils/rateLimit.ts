@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import { SUPABASE_URL, SUPABASE_ANON_KEY } from '../config/supabase';
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from '../config/expo-supabase';
 import { MessageLimit } from '../types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -10,6 +10,11 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     persistSession: true,
     detectSessionInUrl: false,
   },
+  global: {
+    headers: {
+      'apikey': SUPABASE_ANON_KEY
+    }
+  }
 });
 
 const MESSAGE_LIMIT = 10;
