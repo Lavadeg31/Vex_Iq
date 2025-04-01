@@ -1,4 +1,4 @@
-import { openai, gemini, MAX_TOKENS } from '../config/openai';
+/h/import { openai, gemini, MAX_TOKENS } from '../config/openai';
 
 interface Message {
   role: 'system' | 'user' | 'assistant';
@@ -44,6 +44,10 @@ export const getProgressMessage = (seconds: number): string => {
     return "Working on your response...";
   } else if (seconds < 20) {
     return "This is taking a bit longer than usual, but I'm still working on it...";
+  } else if (seconds < 25) {
+    return "Erm I think the servers are cooked";
+  } else if (seconds < 30) {
+    return "Just Quit";
   } else {
     return "Still processing. This might take a moment for complex questions...";
   }
