@@ -45,11 +45,29 @@ export const getProgressMessage = (seconds: number): string => {
   } else if (seconds < 20) {
     return "This is taking a bit longer than usual, but I'm still working on it...";
   } else if (seconds < 25) {
-    return "Erm I think the servers are cooked";
+    return "Erm, I think the servers are cooked...";
   } else if (seconds < 30) {
-    return "Just Quit";
+    return "Just Quit.";
+  } else if (seconds < 40) {
+    return "Seriously though, still going...";
+  } else if (seconds < 50) {
+    return "Ok I think my code is cooked";
+  } else if (seconds < 60) {
+    return "I'm considering a career change...";
+  } else if (seconds < 70) {
+    return "Still here? Well, that's dedication.";
+  } else if (seconds < 80) {
+    return "I swear, I'm not doing this to annoy you.";
+  } else if (seconds < 90) {
+    return "Maybe try turning it off and on again?";
+  } else if (seconds < 100) {
+    return "I might need a coffee after this...";
+  } else if (seconds < 110) {
+    return "Almost there! (Probably.)";
+  } else if (seconds < 120) {
+    return "Just kidding, I have absolutely no idea.";
   } else {
-    return "Still processing. This might take a moment for complex questions...";
+    return "Okay, fine, you win. This request is immortal.";
   }
 };
 
